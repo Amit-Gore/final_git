@@ -1,5 +1,7 @@
-
- var app1 =  angular.module("app",[]); 
+/*
+ * Amit:Please take a look
+ * */
+var app1 =  angular.module("app",[]); 
 var mainApp = angular.module('mainModule', ['ngRoute','ui.bootstrap','angularUtils.directives.dirPagination','ngAnimate']);
 var myModule= angular.module('MyServiceModuleOne', ['app']);
 
