@@ -25,6 +25,7 @@ $gender="male";
  $db->connect();
  $db->insert('userregistration',array('oauth_provider'=>'healthserve','username'=> $mobilenumber,'FirstName'=> $firstname,'LastName'=> $lastname,
 			 'password'=> $password,'gender'=>$gender,'contactNumber'=>$mobilenumber,'OTP'=>$OTP));
+ 
  $res=$db->getResult();
  
  $db->disconnect();

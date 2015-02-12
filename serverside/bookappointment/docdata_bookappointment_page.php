@@ -7,7 +7,7 @@
  */
  error_reporting(0);
 ini_set('display-errors','on');
-include_once("search/../DoctorSearchModuleFunctions.php");
+include_once("../search/DoctorSearchModuleFunctions.php");
 include_once("../mysql_crud.php");
 
 # The request is a JSON request.
