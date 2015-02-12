@@ -1,4 +1,4 @@
-<div class="page page-form" >
+<div class="container" >
   <style>
     .btn-circle {
       width: 50px;
@@ -12,10 +12,8 @@
   </style>
   
   <div class="row" >
-	<form ng-controller="validateCtrl" name="myForm" novalidate name="myForm" novalidate><!-- ng-controller="validateCtrl" -->
+	<form ng-controller="validateCtrl" name="myForm" novalidate ><!-- ng-controller="validateCtrl" -->
     <div class="col-md-7 col-md-offset-2"  data-ng-controller="CollapseDemoCtrl" >
-      
-        
         
         <div class="panel">
           <div class="panel-body"  >
@@ -26,16 +24,16 @@
                 <!-- profile panel -->
                 <div class="panel panel-profile">
                   <div class="panel-heading text-center bg-default">
-                   
+					
+				   
+				   
                                           <p>
                                             Select Date
                                           </p>
-                                          <div class="input-group ui-datepicker" data-ng-controller="DatepickerDemoCtrl">
-                                            
-                                            <input type="text" 
+                                          <div class="input-group ui-datepicker" >
+                                            <input type="date" 
                                             class="form-control"
-                                            datepicker-popup="{{format}}"  
-											ng-model="myForm.Sch_date"
+                                            ng-model="myForm.Sch_date"
 											is-open="opened"
 											min="minDate"
                                             max="'2015-06-22'"
@@ -55,6 +53,8 @@
                                           
                                           <br>
                                           <br>
+										  
+										  
                                           <div class="row">
                                             <p>
                                               Select Time 
@@ -64,9 +64,11 @@
                                                 From
                                               </p>
                                               <div data-ng-controller="TimepickerDemoCtrl" >
-                                                <div ng-model="myForm.mytime1" ng-change="changed()" name="time1" style="display:inline-block;">
-                                                  <timepicker class="ui-timepicker" required >
-                                                  </timepicker>
+                                                <div   name="time1" style="display:inline-block;">
+                                                 <!--  <timepicker class="ui-timepicker" required >
+                                                  </timepicker> -->
+												  <input type="time" class="form-control"	ng-model="myForm.mytime1" ng-required="true" 
+														>
                                                 </div>
                                                 
                                               </div>
@@ -80,9 +82,9 @@
                                                 To
                                               </p>
                                               <div  data-ng-controller="TimepickerDemoCtrl" >
-                                                <div ng-model="myForm.mytime2" ng-change="changed()" name="time2" style="display:inline-block;">
-                                                  <timepicker class="ui-timepicker" required>
-                                                  </timepicker>
+                                                <div  name="time2" style="display:inline-block;">
+                                                  <input type="time" class="form-control"	ng-model="myForm.mytime2" ng-required="true" 
+														>
                                                 </div>
                                                 
                                               </div>
@@ -137,212 +139,25 @@
                                           </div>
                                       </div>
                                   </div>
-                                  <div style="text-align:center">
+								  
+                                 <!--  <div style="text-align:center">
                                     <a class="btn btn-primary btn-circle" ng-click="slot1 = !slot1"  >
                                       <i tooltip-placement="top" tooltip="Add Another Slot 1" tooltip-append-to-body="true" class="fa fa-plus fa-2x">
                                       </i>
                                     </a>
-                                  </div>
+                                  </div> -->
                           </div>
                       </div>
               </div>
               </div>
-              
-              
-              <div class="panel " collapse="!slot1">
-                
-              <div class="panel-body" >
-                <div class="row"  >
-                  
-                    <div class="col-md-12">
-                      <!-- profile panel -->
-                      <div class="panel panel-profile">
-                        <div class="panel-heading text-center bg-default">
-                                          <br>
-                                          <div class="row">
-                                            <p>
-                                              Select Time
-                                            </p>
-                                            <div class="col-md-6">
-                                              <p>
-                                                From
-                                              </p>
-                                              <div  data-ng-controller="TimepickerDemoCtrl">
-                                                <div ng-model="myForm.mytime3" ng-change="changed()" name="time3" style="display:inline-block;">
-                                                  <timepicker class="ui-timepicker"  >
-                                                  </timepicker>
-                                                </div>
-                                                
-                                              </div>
-                                             
-                                            </div>
-                                            
-                                            <div class="col-md-6">
-                                              <p>
-                                                To
-                                              </p>
-                                              <div data-ng-controller="TimepickerDemoCtrl" >
-                                                <div ng-model="myForm.mytime4" ng-change="changed()" name="time4" style="display:inline-block;">
-                                                  <timepicker class="ui-timepicker" required>
-                                                  </timepicker>
-                                                </div>
-                                                
-                                              </div>
-                                              
-                                            </div>
-                                          </div>
-                                          <br>
-                                          <br>
-                                          <div class="row">
-                                            <div class="col-md-6">
-                                              <p>
-                                                Average Time per Patients
-                                              </p>
-                                              <span class="ui-select" >
-                                                <select required ng-model="myForm.selected3">
-                                                  <option>
-                                                    10 Min
-                                                  </option>
-                                                  <option>
-                                                    15 Min
-                                                  </option>
-                                                  <option>
-                                                    20 Min
-                                                  </option>
-                                                  <option>
-                                                    30 Min
-                                                  </option>
-                                                  <option>
-                                                    60 Min
-                                                  </option>
-                                                </select>
-                                              </span>
-                                            </div>
-                                            
-                                            <div class="col-md-6">
-                                              <p>
-                                                Location
-                                              </p>
-                                              <span class="ui-select" >
-                                                <select required ng-model="myForm.selected4">
-                                                  <option>
-                                                    Aundh
-                                                  </option>
-                                                  <option>
-                                                    Koregaon Park
-                                                  </option>
-                                                </select>
-                                              </span>
-                                            </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div style="text-align:center;">
-                                    <a class="btn btn-primary btn-circle" ng-click="slot2 = !slot2"  >
-                                      <i tooltip-placement="top" tooltip="Add Another Slot 2" tooltip-append-to-body="true" class="fa fa-plus fa-2x">
-                                      </i>
-                                    </a>
-                                  </div>
-  </div>
-                          </div>
-                      </div>
-              </div>
-              
-              
-              <div class="panel " collapse="!slot2">
-               
-               <div class="panel-body"  >
-                 <div class="row"   >
-                    <div class="col-md-12">
-                       <!-- profile panel -->
-                       <div class="panel panel-profile">
-                         <div class="panel-heading text-center bg-default">
-                                          <br>
-                                          <div class="row">
-                                            <p>
-                                              Select Time 
-                                            </p>
-                                            <div class="col-md-6">
-                                              <p>
-                                                From
-                                              </p>
-                                              <div data-ng-controller="TimepickerDemoCtrl">
-                                                <div ng-model="myForm.mytime5" ng-change="changed()" name="time5" style="display:inline-block;">
-                                                  <timepicker class="ui-timepicker" required >
-                                                  </timepicker>
-                                                </div>
-                                                
-                                              </div>
-                                              
-                                            </div>
-                                            
-                                            <div class="col-md-6">
-                                              <p>
-                                                To
-                                              </p>
-                                              <div  data-ng-controller="TimepickerDemoCtrl">
-                                                <div ng-model="myForm.mytime6" ng-change="changed()" name="time6" style="display:inline-block;">
-                                                  <timepicker class="ui-timepicker" required>
-                                                  </timepicker>
-                                                </div>
-                                                
-                                              </div>
-                                              
-                                            </div>
-                                          </div>
-                                          <br>
-                                          <br>
-                                          <div class="row">
-                                            <div class="col-md-6">
-                                              <p>
-                                                Average Time per Patients
-                                              </p>
-                                              <span class="ui-select" >
-                                                <select required ng-model="myForm.selected5">
-                                                  <option>
-                                                    10 Min
-                                                  </option>
-                                                  <option>
-                                                    15 Min
-                                                  </option>
-                                                  <option>
-                                                    20 Min
-                                                  </option>
-                                                  <option>
-                                                    30 Min
-                                                  </option>
-                                                  <option>
-                                                    60 Min
-                                                  </option>
-                                                </select>
-                                              </span>
-                                            </div>
-                                            
-                                            <div class="col-md-6">
-                                              <p>
-                                                Location
-                                              </p>
-                                              <span class="ui-select" >
-                                                <select required ng-model="myForm.selected6">
-                                                  <option>
-                                                    Aundh
-                                                  </option>
-                                                  <option>
-                                                    Koregaon Park
-                                                  </option>
-                                                </select>
-                                              </span>
-                                            </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                 
-  </div>
-                          </div>
-                      </div>
-               </div>
-               
-               
+              <section>
+				<div id="space-for-buttons">
+					
+				
+				</div>
+				<addbuttonsbutton></addbuttonsbutton>
+			 </section>
+             
                <!-- Repeat panel -->
                <div class="panel">
                  <div class="panel-body"  >
@@ -362,10 +177,10 @@
                                  <p>
                                    Select Date From
                                  </p>
-                                 <div class="input-group ui-datepicker" data-ng-controller="DatepickerDemoCtrl">
-                                   <input type="text" 
+                                 <div class="input-group ui-datepicker" >
+                                   <input type="date" 
                                    class="form-control"
-                                   datepicker-popup="{{format}}"
+                                   
                                    ng-model="myForm.dt1"
                                    is-open="opened"
                                    min="minDate"
@@ -384,10 +199,10 @@
                                  <p>
                                    Select Date To
                                  </p>
-                                 <div class="input-group ui-datepicker" data-ng-controller="DatepickerDemoCtrl">
-                                   <input type="text" 
+                                 <div class="input-group ui-datepicker" >
+                                   <input type="date" 
                                    class="form-control"
-                                   datepicker-popup="{{format}}"
+                                 
                                    ng-model="myForm.dt2"
                                    is-open="opened"
                                    min="minDate"
@@ -465,10 +280,10 @@
 								 <p>
                                    Select Date From
                                  </p>
-                                 <div class="input-group ui-datepicker" data-ng-controller="DatepickerDemoCtrl">
-                                   <input type="text" 
+                                 <div class="input-group ui-datepicker">
+                                   <input type="date" 
                                    class="form-control"
-                                   datepicker-popup="{{format}}"
+                                   
                                    ng-model="myForm.dt3"
                                    is-open="opened"
                                    min="minDate"
@@ -487,10 +302,10 @@
                                  <p>
                                    Select Date To
                                  </p>
-                                 <div class="input-group ui-datepicker" data-ng-controller="DatepickerDemoCtrl">
-                                   <input type="text" 
+                                 <div class="input-group ui-datepicker" >
+                                   <input type="date" 
                                    class="form-control"
-                                   datepicker-popup="{{format}}"
+                                   
                                    ng-model="myForm.dt4"
                                    is-open="opened"
                                    min="minDate"
@@ -716,10 +531,10 @@
                                  <p>
                                    Select Date From
                                  </p>
-                                 <div class="input-group ui-datepicker" data-ng-controller="DatepickerDemoCtrl">
-                                   <input type="text" 
+                                 <div class="input-group ui-datepicker" >
+                                   <input type="date" 
                                    class="form-control"
-                                   datepicker-popup="{{format}}"
+                                   
                                    ng-model="myForm.dt5"
                                    is-open="opened"
                                    min="minDate"
@@ -738,10 +553,10 @@
                                  <p>
                                    Select Date To
                                  </p>
-                                 <div class="input-group ui-datepicker" data-ng-controller="DatepickerDemoCtrl">
-                                   <input type="text" 
+                                 <div class="input-group ui-datepicker">
+                                   <input type="date" 
                                    class="form-control"
-                                   datepicker-popup="{{format}}"
+                                  
                                    ng-model="myForm.dt6"
                                    is-open="opened"
                                    min="minDate"
