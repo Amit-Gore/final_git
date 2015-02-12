@@ -1,10 +1,10 @@
 
  var app1 =  angular.module("app",[]); 
-var mainApp = angular.module('mainModule', ['ngRoute','ui.bootstrap','angularUtils.directives.dirPagination','ngAnimate']);
+var app = angular.module('mainModule', ['ngRoute','ui.bootstrap','angularUtils.directives.dirPagination','ngAnimate']);
 var myModule= angular.module('MyServiceModuleOne', ['app']);
 
 /*********************************Services Written by Amit Gore****************************************/
-mainApp.factory('search_to_book', function() {
+app.factory('search_to_book', function() {
  var doc_data = {}
  function set(data) {
    doc_data = data;
@@ -19,7 +19,7 @@ mainApp.factory('search_to_book', function() {
  }
 
 });
-/*mainApp.factory('Auth', function(){
+/*app.factory('Auth', function(){
 	var user;
 
 	return{
@@ -35,7 +35,7 @@ mainApp.factory('search_to_book', function() {
 /***********************************end of services*********************************************/
 
 /*** Configure the Routes*/
-mainApp.config(['$routeProvider', function ($routeProvider) {
+app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     // Home
 	.when("/", {
@@ -45,9 +45,9 @@ mainApp.config(['$routeProvider', function ($routeProvider) {
     	templateUrl: "webpage/search.html", 
     	controller: "doctor_search"
     		})
-    .when("/book_mainAppointment/:slot/:date/:doctor", {
+    .when("/book_appointment/:slot/:date/:doctor", {
     	templateUrl: "webpage/docPrimaryInfo.html", 
-    	controller: "book_mainAppointment"
+    	controller: "book_appointment"
     		})
     .when("/mobile_verification", {
     	templateUrl: "webpage/login/mobile.html", 
@@ -112,7 +112,7 @@ mainApp.config(['$routeProvider', function ($routeProvider) {
  * created a service (Auth) which will handle the user object and have a method to know if the user is logged or not.
  * */
 
-/*mainApp.run(['$rootScope', '$location','login', function ($rootScope, $location, Auth) {
+/*app.run(['$rootScope', '$location','login', function ($rootScope, $location, Auth) {
     $rootScope.$on('$routeChangeStart', function (event) {
 
         if (1) {
@@ -130,14 +130,14 @@ mainApp.config(['$routeProvider', function ($routeProvider) {
 /**
  * Controls the Blog
  */
-mainApp.controller('BlogCtrl', function (/* $scope, $location, $http */) {
+app.controller('BlogCtrl', function (/* $scope, $location, $http */) {
   console.log("Blog Controller reporting for duty.");
 });
 
 /**
  * Controls all other Pages
  */
-mainApp.controller('PageCtrl', function ( $scope, $location, $http, $routeParams ) {
+app.controller('PageCtrl', function ( $scope, $location, $http, $routeParams ) {
 	console.log("Page Controller reporting for duty.");
 
   // Activates the Carousel
@@ -158,7 +158,7 @@ mainApp.controller('PageCtrl', function ( $scope, $location, $http, $routeParams
  * So to check whether patient is logged in or not is being handled within this controller  
  * 
  * */
-mainApp.controller('mainController', function($scope,$http) {
+app.controller('mainController', function($scope,$http) {
   
   // set the default states for lions and cranes
   $scope.lions = false;
@@ -187,7 +187,7 @@ mainApp.controller('mainController', function($scope,$http) {
   
 });
 
-mainApp.controller('session_protected_page',function($scope,$rootScope,$location,$http){
+app.controller('session_protected_page',function($scope,$rootScope,$location,$http){
 
 $rootScope.referrar_url=$location.path();
 $scope.session_check_url= 'serverside/login/login_status.php';
@@ -226,7 +226,7 @@ $scope.session_check_url= 'serverside/login/login_status.php';
 /*
  * The below controller was used to test the login authentication method from stack-overflow,so 
  * commented to keep the reference 
- * mainApp.controller('mainCtrl', ['$scope', 'Auth', '$location', function ($scope, Auth, $location) {
+ * app.controller('mainCtrl', ['$scope', 'Auth', '$location', function ($scope, Auth, $location) {
 
 	  $scope.$watch(Auth.isLoggedIn, function (value, oldValue) {
 
@@ -243,7 +243,7 @@ $scope.session_check_url= 'serverside/login/login_status.php';
 	  }, true);
 }]);*/
 
-mainApp.controller('login',function($scope,$routeParams,$rootScope,$http){ //function as a dependency for login controller here
+app.controller('login',function($scope,$routeParams,$rootScope,$http){ //function as a dependency for login controller here
 	
 	/*$scope.check_session=function(){
 	   	
@@ -353,7 +353,7 @@ $scope.patientlogout=function(){
 
 });
 
-mainApp.controller('patient_registration',function($scope,$rootScope,$http,$location){
+app.controller('patient_registration',function($scope,$rootScope,$http,$location){
 	//alert($location.path());
 	$scope.registration_url= 'serverside/registration/patient_registration.php';
 	$scope.fbregistration_url= 'serverside/registration/fp_patient_registration.php';
@@ -446,7 +446,7 @@ mainApp.controller('patient_registration',function($scope,$rootScope,$http,$loca
 
 
 /**************************************************CONTROLLERS RELATED TO SEARCH RESULT PAGE*********************************************************/
-mainApp.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$location){
+app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$location){
 	
 	var doc_name = $routeParams.param11;
 	
@@ -600,16 +600,16 @@ mainApp.controller('doctor_search',function($scope,$routeParams,$rootScope,$http
 
 
 /*
- * Book mainAppointment Related controller
+ * Book appointment Related controller
  * Author:Amit Gore
  * */
-mainApp.controller('book_mainAppointment',function($scope,$routeParams,$rootScope,$http){
+app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http){
 	
 	
 	$scope.slot = $routeParams.slot;
 	$scope.date=$routeParams.date;
 	$scope.doc_id=$routeParams.doctor;
-	$scope.fetch_data_url= 'serverside/bookmainAppointment/docdata_bookmainAppointment_page.php';
+	$scope.fetch_data_url= 'serverside/bookappointment/docdata_bookappointment_page.php';
 	
 	$http.post($scope.fetch_data_url,{"data" : $scope.doc_id}).
 	success(function(data,status){
@@ -625,19 +625,19 @@ mainApp.controller('book_mainAppointment',function($scope,$routeParams,$rootScop
 	});
 	
 	/*
-	 * Book mainAppointment function definations
+	 * Book appointment function definations
 	 * 
 	 * 
 	 * */
-	$scope.mainAppointment_related = {};
-	$scope.save_to_database_url='serverside/bookmainAppointment/save_mainAppointment.php';
+	$scope.appointment_related = {};
+	$scope.save_to_database_url='serverside/bookappointment/save_appointment.php';
 	//defining submit form function
-	$scope.mainAppointment_related.submitForm=function(){
+	$scope.appointment_related.submitForm=function(){
 		console.log("Submitting the form");
 		var dataObject = {
-				patientname : $scope.mainAppointment_related.patientname
-				,Reason : $scope.mainAppointment_related.Reason
-				,mainApp_date : $scope.date
+				patientname : $scope.appointment_related.patientname
+				,Reason : $scope.appointment_related.Reason
+				,app_date : $scope.date
 				,slot : $scope.slot
 				,doc_id : $scope.doc_id
 				};
@@ -668,7 +668,7 @@ mainApp.controller('book_mainAppointment',function($scope,$routeParams,$rootScop
 
 // form validations
 
-mainApp.controller('formValidation', function($scope) {
+app.controller('formValidation', function($scope) {
 
 	// function to submit the form after all validation has occurred			
 	$scope.submitForm = function(isValid) {
@@ -684,7 +684,7 @@ mainApp.controller('formValidation', function($scope) {
 
 // logform
 
-mainApp.controller('FormCtrl', ['$scope', function($scope) {
+app.controller('FormCtrl', ['$scope', function($scope) {
   // hide error messages until 'submit' event
   $scope.submitted = false;
   // hide success message
@@ -696,7 +696,7 @@ mainApp.controller('FormCtrl', ['$scope', function($scope) {
   };
 }])
 
-mainApp.directive('shakeThat', ['$animate', function($animate) {
+app.directive('shakeThat', ['$animate', function($animate) {
 
   return {
     require: '^form',
@@ -708,7 +708,7 @@ mainApp.directive('shakeThat', ['$animate', function($animate) {
       // listen on submit event
       element.on('submit', function() {
         // tell angular to update scope
-        scope.$mainApply(function() {
+        scope.$apply(function() {
           // everything ok -> call submit fn from controller
           if (form.$valid) return scope.submit();
           // show error messages on submit
@@ -729,7 +729,7 @@ mainApp.directive('shakeThat', ['$animate', function($animate) {
 
 
 
-mainApp.controller('staticpages',function($scope){
+app.controller('staticpages',function($scope){
 	
 	$scope.static_page = [
 	{
@@ -756,14 +756,14 @@ mainApp.controller('staticpages',function($scope){
 });
 
 // for static pages
-mainApp.controller('speciality',function($scope,$filter){
+app.controller('speciality',function($scope,$filter){
 
 	$scope.specialitys = ['Endocrinology','Diebetology','Nephrology','Urology','Joint replacement','Spine Surgery','Rheumatology','Neurology','Paed. Neurology','Neuro Surgery','Cardiology','Cardiac Surgery','Oncology','Onco Surgery','Dermatology','Maxillo Facial Surgeon','Retina Surgeon','Gastroenterology','Gastro. Surgeon','Heamatology','Hapatologist','Barriatric Surgery','Orthodontist','Vascular Surgery','Endoscopic Surgery']
 	;
 
 });
 
-mainApp.controller('location',function($scope,$filter){
+app.controller('location',function($scope,$filter){
 
 	$scope.locations = 
 		  ['Aundh','Alandi','Akhurdi','Ambegoan','Baner','Balewadi','Bavdhan','Chandani Chawk','Kothrud','Karve Road','Nal Stop','Ganesh Nager','Sinhgad Road','Vadgoan','Anand Nagar','Swargate','Camp','Koregoan Park','Viman Nagar','Shaniwar Wada','Deccan']
@@ -771,13 +771,13 @@ mainApp.controller('location',function($scope,$filter){
 
 });
 
-mainApp.controller('clinic',function($scope,$filter){
+app.controller('clinic',function($scope,$filter){
 
 	$scope.clinic =  ['HealthServe Community Clinic','Aditya Birla Clinic','Noble Hospital','Ruby Hall Clinic','Jehangir Hospital','Apollo Hospital','Deenanath Mangeshkar Hospital','Sancheti Hospital','Karve Childrens Hospital']	;
 
 });
 
-mainApp.filter('mySort', function() {
+app.filter('mySort', function() {
     return function(input) {
       return input.sort();
     }
@@ -786,7 +786,7 @@ mainApp.filter('mySort', function() {
   
   
  /***************HEADER CONTROLLERS (PRASHANT)*******************/
-		mainApp.controller("header",["$scope",function($scope){
+		app.controller("header",["$scope",function($scope){
 			$scope.unread_messages = "2";
 			$scope.unread_mails = "5";
 			$scope.unread_notifications = "5";
@@ -798,7 +798,7 @@ mainApp.filter('mySort', function() {
 		
 		
 		
-		mainApp.controller("NavCtrl", ["$scope", "taskStorage", "filterFilter", function($scope, taskStorage, filterFilter) {
+		app.controller("NavCtrl", ["$scope", "taskStorage", "filterFilter", function($scope, taskStorage, filterFilter) {
             var tasks;
             return tasks = $scope.tasks = taskStorage.get(), $scope.taskRemainingCount = filterFilter(tasks, {
                 completed: !1
@@ -807,7 +807,7 @@ mainApp.filter('mySort', function() {
             })
         }])
 		/************************************************************PRASHANT DASHBOARD CONTROLLERS (04 FEB 2015 )***********************************************************************/
-		mainApp.controller("DashboardCtrl", ["$scope", function($scope) {
+		app.controller("DashboardCtrl", ["$scope", function($scope) {
 			$scope.p_name='Patient Name';
 			$scope.p_reason='Stress';
 			$scope.p_date='26 Jan` 2015';
@@ -850,7 +850,7 @@ mainApp.filter('mySort', function() {
 		
 		/************************************************************PRASHANT DASHBOARD CONTROLLERS (04 FEB 2015 )***********************************************************************/
 		/************************************************************PRASHANT DASHBOARD REQUESTS CONTROLLERS (04 FEB 2015 )***********************************************************************/
-		mainApp.controller("patient_request",["$scope", function($scope){
+		app.controller("patient_request",["$scope", function($scope){
 			$scope.requestedP_name="Patient Name";
 			$scope.requestedP_date="26 jan 2015";
 			$scope.requestedP_time="1:00 - 2:00 PM";
@@ -862,7 +862,7 @@ mainApp.filter('mySort', function() {
 		/************************************************************PRASHANT DASHBOARD REQUESTS CONTROLLERS (04 FEB 2015 )***********************************************************************/
 		
 		
-		mainApp.controller("DatepickerDemoCtrl", ["$scope", function($scope) {
+		app.controller("DatepickerDemoCtrl", ["$scope", function($scope) {
             return $scope.today = function() {
                 return $scope.dt = new Date
             }, $scope.today(), $scope.showWeeks = !0, $scope.toggleWeeks = function() {
@@ -884,7 +884,7 @@ mainApp.filter('mySort', function() {
             }, $scope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "shortDate"], $scope.format = $scope.formats[0]
         }])
 		/**************Time picker controller*****************/	
-		mainApp.controller("TimepickerDemoCtrl", ["$scope", function($scope) {
+		app.controller("TimepickerDemoCtrl", ["$scope", function($scope) {
             return $scope.mytime = new Date, $scope.hstep = 1, $scope.mstep = 15, $scope.options = {
                 hstep: [1, 2, 3],
                 mstep: [1, 5, 10, 15, 25, 30]
@@ -901,11 +901,11 @@ mainApp.filter('mySort', function() {
         }])
 		/**************Time picker controller*****************/	
 		
-		mainApp.controller("CollapseDemoCtrl", ["$scope", function($scope) {
+		app.controller("CollapseDemoCtrl", ["$scope", function($scope) {
             return $scope.isCollapsed = !1}])
 		
 		
-		mainApp.controller('validateCtrl',["$scope", function($scope){
+		app.controller('validateCtrl',["$scope", function($scope){
 			$scope.count = 0;
 			
 			$scope.submit=function(){
@@ -946,7 +946,7 @@ mainApp.filter('mySort', function() {
 		}])
 
 //Directive that returns an element which adds buttons on click which show an alert on click
-mainApp.directive("addbuttonsbutton", function(){
+app.directive("addbuttonsbutton", function(){
 	return {
 		restrict: "E",
 		template: "<div style='text-align:center;'><a class='btn btn-primary btn-circle' addbuttons ><i tooltip-placement='top' tooltip='Add Another Slot' tooltip-append-to-body='true' class='fa fa-plus fa-2x'> </i></a> </div><br>"
@@ -954,7 +954,7 @@ mainApp.directive("addbuttonsbutton", function(){
 });
 
 //Directive for adding buttons on click that show an alert on click
-mainApp.directive("addbuttons", function($compile){
+app.directive("addbuttons", function($compile){
 	return function(scope, element, attrs){
 		element.bind("click", function(){
 			scope.count++;
