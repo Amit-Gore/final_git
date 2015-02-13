@@ -19,12 +19,12 @@
  if(crypt($password,$res[0]['password'])==$res[0]['password'] )
  {
  	   
-	   /*$_SESSION = array();
+	   $_SESSION = array();
 	   $_SESSION['doctor']['userType']='doctor';
 	   $_SESSION['doctor']['doc_id']=$res[0]['doc_id'];
 	   $_SESSION['doctor']['DFirstName']=$res[0]['FirstName'];
 	   $_SESSION['doctor']['DLastName']=$res[0]['LastName'];
-	   $_SESSION['doctor']['DocImage']=$res[0]['DocImage'];*/
+	   $_SESSION['doctor']['DocImage']=$res[0]['DocImage'];
 	   
 	   echo"1";
  	

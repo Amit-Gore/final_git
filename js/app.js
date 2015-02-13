@@ -286,7 +286,8 @@ $scope.doctorlogin=function(){
 							 console.log(dataFromServer);
 							 if(dataFromServer=="1")
 								 {
-								 alert("true");
+								 //alert("true");
+								 window.location.replace('#/DoctDashBoard');
 								 }
 							 else alert("false");
 					   	})
@@ -808,41 +809,55 @@ app.filter('mySort', function() {
             })
         }])
 		/************************************************************PRASHANT DASHBOARD CONTROLLERS (04 FEB 2015 )***********************************************************************/
-		app.controller("DashboardCtrl", ["$scope", function($scope) {
-			$scope.p_name='Patient Name';
-			$scope.p_reason='Stress';
-			$scope.p_date='26 Jan` 2015';
-			$scope.p_time='Evening';
+		app.controller("DashboardCtrl", ["$scope","$http", function($scope,$http) {
+			$scope.session_check_url= 'serverside/login/doctor/doctor_login_status.php';
+			$scope.fetch_dashboard_info_url='serverside/dashboards/doctor_dashboard/dashboard_home_related/wrapperfile.php';
+			
+			
+			$http.post($scope.session_check_url)
+			
+					.success(function(dataFromServer,status,headers,config)
+							{
+								 console.log(dataFromServer);
+								 $scope.user_session=dataFromServer;
+								 $scope.init();
+								 if(!($scope.user_session))
+									 {
+									 alert("not logged in");
+									 
+									 }
+								 //Auth.setUser(dataFromServer);
+							})
+					
+					.error(function(data,status,headers,config){
+						
+						alert('failure in ajax request:login status check');
+						
+					});
 		
-			/*****PATIENT HISTORY****/
-			$scope.patient_historys =
-			[
-			{
-				"name" :"HealthServe",
-				"reason" :"Nothing Just Tp",
-				"date" :"1 Feb 2015"
+
+			/*Author:Amit Gore
+			 * Usage Reasoning: At doctor dashboard,by calling this function dashboard gets the data to show
+			 * 					(basically to initialize the dashboard with data like : Appointments for today etc)
+			 * */
+			$scope.init=function(){
+				var dataObject = {
+					doc_id : $scope.user_session.doctorID
+				};
+				$http.post($scope.fetch_dashboard_info_url,dataObject,{})
+				.success(function(dataFromServer, status, headers, config) {
+					  //window.location.replace('#/mobile_verification');
+			          console.log(dataFromServer);
+			          $scope.dashboard_data=dataFromServer;
+			          console.log($scope.dashboard_data);
+			       })
+			    
+			    .error(function(data, status, headers, config) {
+			          alert("failed to fetch data");
+			       });
 				
-			},
-			{
-				"name" :" Healthcare",
-				"reason" :"Just Tp",
-				"date" :"2 Feb 2015"
 				
-			},
-			{
-				"name" :" Healthcare",
-				"reason" :"Just Tp",
-				"date" :"2 Feb 2015"
-				
-			}
-			
-			]
-			/*****PATIENT HISTORY****/
-			$scope.d_enquired='67';
-			$scope.d_booked='43';
-			$scope.d_rejected='12';
-			$scope.d_cancelled='12';
-			
+			     }//init function ends
 			
 		}])	
 			
