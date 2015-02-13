@@ -437,7 +437,7 @@ function SearchByName2($search_string,$offset,$rec_limit)
 						foreach($relTbl as $key => $value)
 						{
 						//echo"<br>";
-						$resultArray[$i]['doc_calandar']=FetchCalandar($res[$key]['doc_id']);
+						//$resultArray[$i]['doc_calandar']=FetchCalandar($res[$key]['doc_id']);
 						$resultArray[$i]['doc_id']=$res[$key]['doc_id'];
 						$resultArray[$i]['usedSlot']=$res[$key]['usedSlot'];
 						$resultArray[$i]['AppointmentDate']=$res[$key]['AppointmentDate'];

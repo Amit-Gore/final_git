@@ -555,14 +555,13 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 	}
 	
 	
-/*	$scope.show_calandar = function(doc_id){
+	$scope.show_calandar = function(doc_id){
 		$scope.url='serverside/search/search_result_calandar.php';
-		//alert(doc_id);
-		
+	    //alert(doc_id);
 		//Creating the http post request here
 		$http.post($scope.url,{"data" :doc_id}).
 		success(function(data,status){
-			//alert('success');
+			alert('success');
 			var chutiya = doc_id;
 			$scope.status=status;
 			$scope.slots=data;///check this and if not done upload files and send the link to abhishek
@@ -574,7 +573,7 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 			$scope.data = data||"Request failed";
 			$scope.status = status;
 		});
-	}*/
+	}
 	
 	
 	

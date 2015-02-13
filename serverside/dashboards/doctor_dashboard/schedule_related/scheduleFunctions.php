@@ -5,8 +5,10 @@
  * To change the template for this generated file go to
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
- include_once('dates_related_function.php');
- include_once('../../../mysql_crud.php');
+ include_once("dates_related_function.php");
+ //echo getcwd() ;exit();
+ //include_once("../../../mysql_crud.php");
+ include_once("C:xampp/htdocs/angularFiles/final_git/serverside/mysql_crud.php");
  //echo date("d");exit();
  
   $doc_id=3;
@@ -37,7 +39,7 @@
   #daywise_date_range($repeat['from'],$repeat['to'],$repeat['dayArray']);
   #print_r($repeat);exit();
  
-  storeSchedule($doc_id,$slots,$repeat);exit();
+  #storeSchedule($doc_id,$slots,$repeat);exit();
   #overwriteSchedule($doc_id,$slots,$TriggeringDate); 
   #fetchScheduleSingleDoc($doc_id);
   #fetchScheduleMultipleDoc($doc_id_array);
@@ -95,6 +97,20 @@
 	 	    	#print_r($slots[$slots_key[$i]]);
 	 	    	$to_exploded=explode(':',$slots[$slots_key[$i]]['to']);
 	 	    	$from_exploded=explode(':',$slots[$slots_key[$i]]['from']);
+	 	    	
+	 	    	/*
+	 	    	 * Usage reasoning: We need to store the start and end time in mins so that calculations
+	 	    	 *                  get easy at the time of generating slots
+	 	    	 * */
+	 	    	$slots[$slots_key[$i]]['from_inMins']=$from_exploded[0]*60;
+	 	    	$slots[$slots_key[$i]]['from_inMins']+=$from_exploded[1];
+	 	    	
+	 	    	$slots[$slots_key[$i]]['to_inMins']=$to_exploded[0]*60;
+	 	    	$slots[$slots_key[$i]]['to_inMins']+=$to_exploded[1];
+	 	    	/*ENDS
+	 	    	 * */
+	 	    	
+	 	    	
 	 	    	
 	 	    	$hr_difference=$to_exploded[0]-$from_exploded[0];
 	 	    	$min_difference=abs($to_exploded[1]-$from_exploded[1]);
@@ -299,6 +315,9 @@
   * */
  function availableSchedule($doc_id,$window=3,$offset=0)
  {
+ 	date_default_timezone_set('Asia/Kolkata');
+	$current_hour=date('H');
+ 	
  	$window_clone=$window;
  	$db=new Database();
  	$db->connect();
@@ -316,21 +335,120 @@
  	{
  	   /*echo "<br><br><br><br><br><br>";
  	   print_r($input_schedule[$available_dates[$i]]);*/
+ 	   if($available_dates[$i]<date("Y-m-d"))
+ 	   {
+ 	   	continue;
+ 	   }
  	   $date_window[$available_dates[$i]]=$input_schedule[$available_dates[$i]];
  	   $iterator_date_window[]=$available_dates[$i];
  	   
  	   $window_clone--;
  	   
  	}
+ 	#print_r($iterator_date_window);exit(); //iterator_date_window => Array ( [0] => 2015-02-11 [1] => 2015-02-12 [2] => 2015-02-13 )
+ 	#print_r($date_window[$iterator_date_window[0]]['numberofSuperSlots']);exit();//date_window contains all the slots data. Date would be an index for this array 
  	
- 	//print_r($date_window);
  	$temp_index_fetcher=array();
+ 	
+ 	$AvailableSlotsForWindow=array();//date as an index to this arrays
+ 	
  	for($i=0;$i<$window;$i++)
  	{
- 	  $temp_index_fetcher=array_keys($date_window[$iterator_date_window[$i]]);
- 	  $number_of_slots=count($temp_index_fetcher);// for particular date in this loop,we need to count for 
- 	  print_r($date_window[$iterator_date_window[$i]]['slot1']);exit();
+ 	  $temp_index_fetcher=array_keys($date_window[$iterator_date_window[$i]]);//$date_window[$iterator_date_window[$i]] contains dates for window of 3
+ 	  $numberofSuperSlots=$date_window[$iterator_date_window[$i]]['numberofSuperSlots'];
+ 	  //print_r($numberofSuperSlots);//$numberofSuperSlots contains the total number of slots doctor has defined for his particular day
+ 	  for($j=0;$j<$numberofSuperSlots;$j++)
+ 	  {
+ 	  	  #print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]);
+ 	  	 /*print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['from']);
+ 	  	 echo"&nbsp &nbsp";
+ 	  	 print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['from_inMins']);
+ 	  	 echo"&nbsp &nbsp";
+ 	  	 print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['to']);
+ 	  	 echo"&nbsp &nbsp";
+ 	  	  print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['to_inMins']);
+ 	  	 echo"&nbsp &nbsp";
+ 	  	 print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['avgTimePerPatient']);
+ 	  	 print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['sequentialSlots']);
+ 	  	 print_r($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['TotalSlots']);
+ 	  	 echo"&nbsp &nbsp";*/
+ 	  	 
+ 	  	 $totalnumberof_sequential_slots=$date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['TotalSlots'];
+ 	  	 for($k=0;$k<$totalnumberof_sequential_slots;$k++)
+ 	  	 {
+ 	  	 	if($date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['sequentialSlots'][$k])
+ 	  	 	{
+ 	  	 		/*usage reasoning: Only to reduce typing effort for the long variables
+ 	  	 		 * */
+ 	  	 		$from_time=$date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['from_inMins'];
+ 	  	 		$avgtime_per_patient=$date_window[$iterator_date_window[$i]][$temp_index_fetcher[$j]]['avgTimePerPatient'];
+ 	  	 		
+ 	  	 		
+ 	  	 		$SlotFromTime=$from_time+$k*$avgtime_per_patient; //$k start from 0
+ 	  	 		$SlotToTime=$SlotFromTime+$avgtime_per_patient;
+ 	  	 		
+ 	  	 		$SlotFromTimeHr=floor($SlotFromTime/60);
+ 	  	 		$SlotToTimeHr=floor($SlotToTime/60);
+ 	  	 		
+ 	  	 		/*
+ 	  	 		 * Usage reasoning: $current_hour represents the current hour of the day,so even if the slot is available
+ 	  	 		 * 					we need to check whether it pasts the current time or not
+ 	  	 		 * 
+ 	  	 		 * */
+ 	  	 		if($SlotToTimeHr<=$current_hour and $iterator_date_window[$i]== date("Y-m-d") ) // if it is to the past then dont add it to  available slot array
+ 	  	 		continue;
+ 	  	 		
+ 	  	 		
+ 	  	 		if(!$SlotToTimeHr||!$SlotFromTimeHr)
+ 	  	 		echo "ERROR:CHECK available_schedule function in scheduleFunctions.php";
+ 	  	
+ 	  	 		
+ 	  	 		$SlotFromTimeMin=$SlotFromTime%60;
+ 	  	 		$SlotToTimeMin=($SlotToTime)%60;
+ 	  	 		
+ 	  	 		
+ 	  	 		if(!$SlotToTimeMin)
+ 	  	 		$SlotToTimeMin="00";
+ 	  	 		if(!$SlotFromTimeMin)
+ 	  	 		$SlotFromTimeMin="00";
+ 	  	 		
+ 	  	 		$SlotFromTime=$SlotFromTimeHr.":".$SlotFromTimeMin;
+ 	  	 		$SlotToTime=$SlotToTimeHr.":".$SlotToTimeMin;
+ 	  	 		$TimeSlot=$SlotFromTime."-".$SlotToTime;
+ 	  	 		
+ 	  	 		$SlotDistinctionType=PartitionSlots($SlotFromTimeHr);
+ 	  	 		/*echo"<br>";
+ 	  	 		echo $TimeSlot;
+ 	  	 		echo"<br>";*/
+ 	  	 		#exit();
+ 	  	 		
+ 	  	 		$AvailableSlotsForWindow[$iterator_date_window[$i]][$SlotDistinctionType][]=$TimeSlot;
+ 	  	 	}
+ 	  	 }
+ 	  	 
+ 	  	 
+ 	  }
+ 	  //print_r($AvailableSlotsForWindow[$iterator_date_window[$i]]); // prints slots for each date
+ 	  //echo"<br><br><br>";
+ 	  //exit();
  	}
+ 	//print_r($AvailableSlotsForWindow);//prints slots for one window
+ 	return $AvailableSlotsForWindow;
+ }
+ 
+ 
+ function PartitionSlots($hourtime)
+ {
+ 	if($hourtime <=11)
+ 	$return="Morning";
+ 	if($hourtime>11 and $hourtime<=15)
+ 	$return="Afternoon";
+ 	if($hourtime>15 and $hourtime<=18)
+ 	$return="Evening";
+ 	if($hourtime>18 and $hourtime<=22)
+ 	$return="Night";
+ 	
+ 	return $return;
  	
  }
  
