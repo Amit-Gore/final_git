@@ -93,7 +93,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/preview", {
 		templateUrl: "webpage/priview.html",
 		controller: "BlogCtrl"})
-	
+	.when("/test", {
+		templateUrl: "webpage/test.html",
+		controller: "BlogCtrl"})
 	
 	//.when("/primary_info", {templateUrl: "webpage/about.html", controller: "PageCtrl"})
     .when("/about", {templateUrl: "webpage/about.html", controller: "PageCtrl"})
@@ -570,6 +572,7 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 			$scope.slots=data;//check this and if not done upload files and send the link to abhishek
 			//$scope.slots.splice(1,0,doc_id);
 			$scope.result= data;
+  			
 		}).
 		error(function(data,status){
 			alert('Failure');
