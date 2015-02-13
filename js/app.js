@@ -495,7 +495,7 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 					});
 					marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
 					bounds.extend( marker.position);
-					map.fitBounds(bounds.extend);
+					// map.fitBounds(bounds.extend);
 					//console.log(bounds);	
 					google.maps.event.addListener(marker, 'click', function(){
 						infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
@@ -567,7 +567,7 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 			alert('success');
 			var chutiya = doc_id;
 			$scope.status=status;
-			$scope.slots=data;///check this and if not done upload files and send the link to abhishek
+			$scope.slots=data;//check this and if not done upload files and send the link to abhishek
 			//$scope.slots.splice(1,0,doc_id);
 			$scope.result= data;
 		}).

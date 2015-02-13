@@ -1,5 +1,5 @@
 
-<div ng-controller="doctor_search"  >
+<div  >
 		  <!-- <p>{{cards}} is the search result</p> -->
 		  </div>
 
@@ -222,14 +222,17 @@
 									</thead>
 									<tbody >
 										
-										<tr ng-repeat="slot in card.doc_calandar">
+										<tr ng-repeat="(key , prop) in slots">
 										
 										<!--  <center><span style="font-size:12px;border-radius:10px;padding:7px;margin:2px"> {{slot.formatted_date}}  </span> </center>-->
-										<td><center><span style="font-size:12px;border-radius:10px;padding:7px;margin:2px"> {{slot.day}}  </span> <br> <span style="font-weight:900;font-size:20px;padding-left:4px"> {{slot.date}} </span> <br><span style="font-size:15px;"> {{slot.month}} </span> </center></td>
+										<td><center><span style="font-size:12px;border-radius:10px;padding:7px;margin:2px"> {{key}}  </span> <br> <span style="font-weight:900;font-size:20px;padding-left:4px"> {{slot.date}} </span> <br><span style="font-size:15px;"> {{slot.month}} </span> </center></td>
 										
 										<td>
 										
-										<a ng-if="slot.0=='0'"  class="not_available">9:00 - 10:00  Am </a>
+										<a ng-repeat="(id , prop) in prop.Morning" ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available" ><span ng-show="{prop}"> {{prop}} <span> <br></a>
+										
+										
+										<!-- <a ng-if="slot.0=='0'"  class="not_available">9:00 - 10:00  Am </a>
 										<a ng-if="slot.0=='1'"  ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}" class="available">9:00 - 10:00 Am  </a>
 										<br>
 										<a ng-if="slot.1=='0'"  class="not_available">10:00 - 11:00 Am </a>
@@ -237,12 +240,13 @@
 										<br>
 										<a ng-if="slot.2=='0'" href="#" class="not_available">11:00 - 12:00 noon </a>
 										<a ng-if="slot.2=='1'"  ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}" class="available">11:00 - 12:00 noon  </a>
-										
+										 -->
 										
 										</td>
 										<td >
+										<a ng-repeat="(id , prop) in prop.Afternoon" ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available" >{{prop}} <br></a>
 										
-										<a ng-if="slot.3=='0'"  class="not_available">12:00 - 1:00 Pm </a>
+										<!-- <a ng-if="slot.3=='0'"  class="not_available">12:00 - 1:00 Pm </a>
 										<a ng-if="slot.3=='1'" ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}"  class="available">12:00 - 1:00 Pm </a>
 										<br>
 										<a ng-if="slot.4=='0'"  class="not_available">1:00 - 2:00 Pm </a>
@@ -253,11 +257,15 @@
 										<br>
 										<a ng-if="slot.6=='0'"  class="not_available">3:00 - 4:00 Pm  </a>
 										<a ng-if="slot.6=='1'" ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}"  class="available">3:00 - 4:00 Pm </a>
-										
+										 -->
 										</td>
 										<td >
 										
-										<a ng-if="slot.7=='0'"  class="not_available">4:00 - 5:00 Pm </a>
+										
+										<a ng-repeat="(id , prop) in prop.Evening" ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available"  >{{prop}} <br></a>
+										
+										
+										<!-- <a ng-if="slot.7=='0'"  class="not_available">4:00 - 5:00 Pm </a>
 										<a ng-if="slot.7=='1'" ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}"  class="available">4:00 - 5:00 Pm </a>
 										<br>
 										<a ng-if="slot.8=='0'"  class="not_available">5:00 - 6:00 Pm </a>
@@ -265,16 +273,19 @@
 										<br>
 										<a ng-if="slot.9=='0'" class="not_available">6:00 - 7:00 Pm</a>
 										<a ng-if="slot.9=='1'" ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}"  class="available">6:00 - 7:00 Pm </a>
-										
+										 -->
 										</td>
 										<td >
 										
-										<a ng-if="slot.10=='0'" class="not_available">7:00 - 8:00 Pm</a>
+										<a ng-repeat="(id , prop) in prop.Night"  ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available" >{{prop}} <br></a>
+										
+										
+										<!-- <a ng-if="slot.10=='0'" class="not_available">7:00 - 8:00 Pm</a>
 										<a ng-if="slot.10=='1'" ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}"  class="available">7:00 - 8:00 Pm </a>
 										<br>
 										<a ng-if="slot.11=='0'"  class="not_available">8:00 - 9:00 Pm</a>
 										<a ng-if="slot.11=='1'" ng-href="#/book_appointment/0/{{slot.standard_date}}/{{card.doc_id}}"  class="available">8:00 - 9:00 Pm</a>
-										
+										 -->
 										</td>
 										
 										

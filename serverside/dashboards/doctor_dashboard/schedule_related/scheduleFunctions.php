@@ -8,7 +8,7 @@
  include_once("dates_related_function.php");
  //echo getcwd() ;exit();
  //include_once("../../../mysql_crud.php");
- include_once("C:xampp/htdocs/angularFiles/final_git/serverside/mysql_crud.php");
+ include_once("C:xampp/htdocs/final_git/serverside/mysql_crud.php");
  //echo date("d");exit();
  
   $doc_id=3;

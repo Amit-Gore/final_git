@@ -496,6 +496,7 @@ margin: 20px;
 .available
 {
 font-weight:600;
+cursor:pointer;
 }
 .not_available
 {
