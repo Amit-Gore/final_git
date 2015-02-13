@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container" ><br><br>
   <style>
     .btn-circle {
       width: 50px;
@@ -13,8 +13,8 @@
   
   <div class="row" >
 	<form ng-controller="validateCtrl" name="myForm" novalidate ><!-- ng-controller="validateCtrl" -->
-    <div class="col-md-7 col-md-offset-2"  data-ng-controller="CollapseDemoCtrl" >
-        
+    <div class="row"  data-ng-controller="CollapseDemoCtrl" >
+         <div class="col-md-7">
         <div class="panel">
           <div class="panel-body"  >
             <div class="row"   >
@@ -22,14 +22,11 @@
 				
 				
                 <!-- profile panel -->
-                <div class="panel panel-profile">
-                  <div class="panel-heading text-center bg-default">
-					
-				   
-				   
-                                          <p>
+                <div>
+                  <div>
+                                          <h4>
                                             Select Date
-                                          </p>
+                                          </h4>
                                           <div class="input-group ui-datepicker" >
                                             <input type="date" 
                                             class="form-control"
@@ -56,9 +53,9 @@
 										  
 										  
                                           <div class="row">
-                                            <p>
+                                            <h4>
                                               Select Time 
-                                            </p>
+                                            </h4>
                                             <div class="col-md-6">
                                               <p>
                                                 From
@@ -150,13 +147,11 @@
                       </div>
               </div>
               </div>
-              <section>
-				<div id="space-for-buttons">
-					
-				
-				</div>
-				<addbuttonsbutton></addbuttonsbutton>
-			 </section>
+             
+				<section>
+					<div id="space-for-buttons"></div>
+					<addbuttonsbutton></addbuttonsbutton>
+				</section>
              
                <!-- Repeat panel -->
                <div class="panel">
@@ -166,7 +161,7 @@
                        <div class="divider">
                        </div>
                        <h4 ng-click="sch = !sch" style="cursor:pointer;color:#292827;text-align:center">
-                         Repeat my schedule
+                         Repeat My Schedule For
                        </h4>
                        <br>
                        <div class="ui-tab-container" collapse="!sch">
@@ -231,7 +226,7 @@
                                </p>
                                <dd>
                                  <label class="ui-checkbox">
-                                   <input ng-model="myForm.sunday" ng-true-value="1"  ng-init="0" type="checkbox"  >
+                                   <input ng-model="myForm.sunday"  ng-true-value="1"  ng-init="0" type="checkbox"  >
                                    <span>
                                      Sunday
                                    </span>
@@ -593,11 +588,7 @@
 						
 						    <div style="text-align:center">
                                 <button class="btn btn-info btn-circle" type="button">
-                                      <i tooltip-placement="top" tooltip="Preview Schedule" tooltip-append-to-body="true"  class="fa fa-eye fa-2x">
-                                      </i>
-                                </button>
-								<button class="btn btn-success btn-circle" type="submit" ng-click="submit()">
-                                      <i tooltip-placement="top" tooltip="Submit" tooltip-append-to-body="true"  class="fa fa-check fa-2x">
+                                      <i tooltip-placement="top" tooltip="Preview Schedule" tooltip-append-to-body="true" ng-click="preview = !preview "  class="fa fa-eye fa-2x">
                                       </i>
                                 </button>
 								
@@ -606,15 +597,119 @@
 						
 					</div>
                </div>
+               </div>
                <!-- Form End panel -->
-			   
-			   
-			   
-			   
-              </form>
-              
-              </div>
-          </div>
+		
+		
+			  
+		<div class="col-md-5" collapse="!preview" >  
+			<div class="panel">
+				<div class="panel-body">
+				<h4 style="text-align:center"><b>Date : {{myForm.Sch_date}}</b></h4>
+				</div>	
+			</div>
+			
+			<div class="panel">
+				<div class="panel-body">
+					<h4 style="text-align:center"><b>Slots</b></h4>
+					<table class="table table-hover">
+						<thead>
+						<th>Slot</th>
+						<th>Avg Time</th>
+						<th>Location</th>
+						</thead>
+						<tbody>
+						<tr>
+							<td>
+							<h5 ng-show="myForm.mytime1"> {{myForm.mytime1}} - {{myForm.mytime2}}</h5>
+							<h5 ng-show="myForm.mytimefrom1"> {{myForm.mytimefrom1}} - {{myForm.mytimeto1}}</h5>
+							<h5 ng-show="myForm.mytimefrom2"> {{myForm.mytimefrom2}} - {{myForm.mytimeto2}}</h5>
+							<h5 ng-show="myForm.mytimefrom3"> {{myForm.mytimefrom3}} - {{myForm.mytimeto3}}</h5>
+							<h5 ng-show="myForm.mytimefrom4"> {{myForm.mytimefrom4}} - {{myForm.mytimeto4}}</h5>
+							<h5 ng-show="myForm.mytimefrom5"> {{myForm.mytimefrom5}} - {{myForm.mytimeto5}}</h5>
+							<h5 ng-show="myForm.mytimefrom6"> {{myForm.mytimefrom6}} - {{myForm.mytimeto6}}</h5>
+							<h5 ng-show="myForm.mytimefrom7"> {{myForm.mytimefrom7}} - {{myForm.mytimeto7}}</h5>
+							<h5 ng-show="myForm.mytimefrom8"> {{myForm.mytimefrom8}} - {{myForm.mytimeto8}}</h5>
+							<h5 ng-show="myForm.mytimefrom9"> {{myForm.mytimefrom9}} - {{myForm.mytimeto9}}</h5>
+							</td>
+							<td>
+							<h5 > {{myForm.selected1}} </h5>
+							<h5 > {{myForm.selectedpatient1}} </h5>
+							<h5 > {{myForm.selectedpatient2}} </h5>
+							<h5 > {{myForm.selectedpatient3}} </h5>
+							<h5 > {{myForm.selectedpatient4}} </h5>
+							<h5 > {{myForm.selectedpatient5}} </h5>
+							<h5 > {{myForm.selectedpatient6}} </h5>
+							<h5 > {{myForm.selectedpatient7}} </h5>
+							<h5 > {{myForm.selectedpatient8}} </h5>
+							<h5 > {{myForm.selectedpatient9}} </h5>
+							</td>
+							<td>
+							<h5> {{myForm.selected2}} </h5>
+							<h5> {{myForm.selectedlocation1}} </h5>
+							<h5> {{myForm.selectedlocation2}} </h5>
+							<h5> {{myForm.selectedlocation3}} </h5>
+							<h5> {{myForm.selectedlocation4}} </h5>
+							<h5> {{myForm.selectedlocation5}} </h5>
+							<h5> {{myForm.selectedlocation6}} </h5>
+							<h5> {{myForm.selectedlocation7}} </h5>
+							<h5> {{myForm.selectedlocation8}} </h5>
+							<h5> {{myForm.selectedlocation9}} </h5>
+							</td>
+						</tr>
+						
+						</tbody>
+					</table>
+				</div>	
+			</div>
+			
+			<div class="panel">
+				<div class="panel-body">
+				<h4 style="text-align:center"><b>Repeating My Schedule For </b></h4>
+				<hr>
+				<h5 ><b>Daily </b> <br><br> From : {{myForm.dt1}} - To : {{myForm.dt2}}</h5>
+				
+				
+				<h5 ><b>Weekly </b> <br><br>Selected Days : <span ng-if="myForm.sunday">Sunday </span>  <span ng-if="myForm.monday"> Monday </span>  <span ng-if="myForm.tuesday"> Tuesday </span> <span ng-if="myForm.wednesday"> Wednesday </span> <span ng-if="myForm.thursday"> Thursday </span> <span ng-if="myForm.friday"> Friday </span> <span ng-if="myForm.satureday"> Saturday </span><br><br> From : {{myForm.dt3}} - To : {{myForm.dt4}}</h5>
+				
+				
+				<h5 ><b>Monthly </b> <br><br>Selected Days : <span ng-if="myForm.m1">1 </span>  <span ng-if="myForm.m2"> 2 </span>  <span ng-if="myForm.m3"> 3 </span> <span ng-if="myForm.m4"> 4 </span> <span ng-if="myForm.m5"> 5 </span> <span ng-if="myForm.m6"> 6 </span> <span ng-if="myForm.m7"> 7 </span> <span ng-if="myForm.m8"> 8 </span> <span ng-if="myForm.m8"> 8 </span> <span ng-if="myForm.m9"> 9 </span> <span ng-if="myForm.m10"> 10 </span> <span ng-if="myForm.m11"> 11 </span> <span ng-if="myForm.m12"> 12 </span> <span ng-if="myForm.m13"> 13 </span> <span ng-if="myForm.m14"> 14 </span> <span ng-if="myForm.m15"> 15 </span> <span ng-if="myForm.m16">16 </span>  <span ng-if="myForm.m17"> 17 </span>  <span ng-if="myForm.m18"> 18 </span> <span ng-if="myForm.m19"> 19 </span> <span ng-if="myForm.m20"> 20 </span> <span ng-if="myForm.m21"> 21 </span> <span ng-if="myForm.m22"> 22 </span> <span ng-if="myForm.m23"> 23 </span> <span ng-if="myForm.m24"> 24 </span> <span ng-if="myForm.m25"> 25 </span> <span ng-if="myForm.m26"> 26 </span> <span ng-if="myForm.m27"> 27 </span> <span ng-if="myForm.m28"> 28 </span> <span ng-if="myForm.m29"> 29 </span> <span ng-if="myForm.m30"> 30 </span> <span ng-if="myForm.m31"> 31 </span>  <br><br> From : {{myForm.dt5}} - To : {{myForm.dt6}}</h5>
+				
+				
+				</div>
+				
+				
+			</div>
+			
+				
+			
+		<div class="panel">
+           	<div class="panel-body">
+			    <div style="text-align:center">
+        			<button class="btn btn-success btn-circle" type="submit" ng-click="submit()">
+						<i tooltip-placement="top" tooltip="Submit" tooltip-append-to-body="true"  class="fa fa-check fa-2x">
+                        </i>
+                    </button>
+				</div>
+			</div>
+        </div>
+		
+			
+				
+		</div>	
+		
+		
+		
+		
+		
+		
+		</form>
+    </div>
+	
+	   
+	
+	
+   </div>
           
           
           

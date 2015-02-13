@@ -90,7 +90,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/Sch", {
 		templateUrl: "webpage/Schedule.html",
 		controller: "BlogCtrl"})
-	
+	.when("/preview", {
+		templateUrl: "webpage/priview.html",
+		controller: "BlogCtrl"})
 	
 	
 	//.when("/primary_info", {templateUrl: "webpage/about.html", controller: "PageCtrl"})
@@ -902,8 +904,22 @@ app.filter('mySort', function() {
 		
 		app.controller("CollapseDemoCtrl", ["$scope", function($scope) {
             return $scope.isCollapsed = !1}])
+		/**********************Go Easy***********************************/
 		
 		
+		// app.service('schedule',['$scope', function($scope){
+			// $scope.setSchedule = function(a)
+			// {
+				// return data;
+			// };
+			
+		// ]});
+		
+		
+		
+		
+		
+		/**********************Go Easy***********************************/
 		app.controller('validateCtrl',["$scope", function($scope){
 			$scope.count = 0;
 			
@@ -936,7 +952,7 @@ app.filter('mySort', function() {
 				
 				Repeatmonthly_StartDate : $scope.myForm.dt5,
 				Repeatmonthly_Day : [$scope.myForm.m1,$scope.myForm.m2,$scope.myForm.m3,$scope.myForm.m4,$scope.myForm.m5,$scope.myForm.m6,$scope.myForm.m7, $scope.myForm.m8,$scope.myForm.m9,$scope.myForm.m10,$scope.myForm.m11,$scope.myForm.m12,$scope.myForm.m13,$scope.myForm.m14, $scope.myForm.m15,$scope.myForm.m16,$scope.myForm.m17,$scope.myForm.m18,$scope.myForm.m19,$scope.myForm.m20,$scope.myForm.m21,  $scope.myForm.m22,$scope.myForm.m23,$scope.myForm.m24,$scope.myForm.m25,$scope.myForm.m26,$scope.myForm.m27,$scope.myForm.m28, $scope.myForm.m29,$scope.myForm.m30,$scope.myForm.m31],
-				Repeatmonthly_EndDate : $scope.myForm.dt6,
+				Repeatmonthly_EndDate : $scope.myForm.dt6
 				
 				};
 				console.log(dataObject);
@@ -957,7 +973,7 @@ app.directive("addbuttons", function($compile){
 	return function(scope, element, attrs){
 		element.bind("click", function(){
 			scope.count++;
-			angular.element(document.getElementById('space-for-buttons')).append($compile("<div><div class='panel-body' ><div class='row' ><div class='col-md-12'> <!-- profile panel --> <div class='panel panel-profile'> <div class='panel-heading text-center bg-default'> <br> <div class='row'> <p> Select Time Slot No "+scope.count+"  </p> <div class='col-md-6'> <p> From </p> <div data-ng-controller='TimepickerDemoCtrl'> <div  name='time3' style='display:inline-block;'> <input type='time' class='form-control' ng-model='myForm.mytimefrom"+scope.count+"' ng-required='true' > </div></div> </div> <div class='col-md-6'> <p> To </p> <div data-ng-controller='TimepickerDemoCtrl' > <div  name='time"+scope.count+"' style='display:inline-block;'> <input type='time' class='form-control' ng-model='myForm.mytimeto"+scope.count+"' ng-required='true' > </div> </div> </div> </div> <br> <br> <div class='row'> <div class='col-md-6'> <p> Average Time per Patients </p> <span class='ui-select' > <select required ng-model='myForm.selected"+scope.count+"'> <option> 10 Min </option> <option> 15 Min </option> <option> 20 Min </option> <option> 30 Min </option> <option> 60 Min </option> </select> </span> </div> <div class='col-md-6'> <p> Location </p> <span class='ui-select' > <select required ng-model='myForm.selected"+scope.count+"'> <option> Aundh </option> <option> Koregaon Park </option> </select> </span> </div> </div> </div> </div> ")
+			angular.element(document.getElementById('space-for-buttons')).append($compile("<div><div class='panel-body' ><div class='row' ><div class='col-md-12'> <!-- profile panel --> <div class='panel panel-profile'> <div class='panel-heading text-center bg-default'> <br> <div class='row'> <p> Select Time Slot No "+scope.count+"  </p> <div class='col-md-6'> <p> From </p> <div data-ng-controller='TimepickerDemoCtrl'> <div  name='time3' style='display:inline-block;'> <input type='time' class='form-control' ng-model='myForm.mytimefrom"+scope.count+"' ng-required='true' > </div></div> </div> <div class='col-md-6'> <p> To </p> <div data-ng-controller='TimepickerDemoCtrl' > <div  name='time"+scope.count+"' style='display:inline-block;'> <input type='time' class='form-control' ng-model='myForm.mytimeto"+scope.count+"' ng-required='true' > </div> </div> </div> </div> <br> <br> <div class='row'> <div class='col-md-6'> <p> Average Time per Patients </p> <span class='ui-select' > <select required ng-model='myForm.selectedpatient"+scope.count+"'> <option> 10 Min </option> <option> 15 Min </option> <option> 20 Min </option> <option> 30 Min </option> <option> 60 Min </option> </select> </span> </div> <div class='col-md-6'> <p> Location </p> <span class='ui-select' > <select required ng-model='myForm.selectedlocation"+scope.count+"'> <option> Aundh </option> <option> Koregaon Park </option> </select> </span> </div> </div> </div> </div> ")
 		(scope));
 		});
 	};
