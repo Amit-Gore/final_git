@@ -8,7 +8,7 @@
  include_once("dates_related_function.php");
  //echo getcwd() ;exit();
  //include_once("../../../mysql_crud.php");
- include_once("C:xampp/htdocs/final_git/serverside/mysql_crud.php");
+ include_once("C:xampp/htdocs/angularFiles/final_git/serverside/mysql_crud.php");
  //echo date("d");exit();
  
   $doc_id=3;
@@ -421,8 +421,22 @@
  	  	 		echo $TimeSlot;
  	  	 		echo"<br>";*/
  	  	 		#exit();
+ 	  	 		/*
+ 	  	 		 * usage reasoning:giving every slot a unique index for the ease at bookappointment procedure
+ 	  	 		 * */
+ 	  	 		$uniqueIndex=$temp_index_fetcher[$j].':'.$k;
  	  	 		
- 	  	 		$AvailableSlotsForWindow[$iterator_date_window[$i]][$SlotDistinctionType][]=$TimeSlot;
+ 	  	 		$AvailableSlotsForWindow[$iterator_date_window[$i]][$SlotDistinctionType][$uniqueIndex]=$TimeSlot;
+ 	  	 		
+ 	  	 		/*Usage Reasoning
+ 	  	 		 * "2015-02-15" date format change
+ 	  	 		 * "front end's requirement by prashant"
+ 	  	 		 * */
+ 	  	 		 $columndate=date("d M D",strtotime($iterator_date_window[$i]));
+ 	  	 		 $formatted_dates=explode(" ",$columndate);
+				 $AvailableSlotsForWindow[$iterator_date_window[$i]]['date']=$formatted_dates[0];
+				 $AvailableSlotsForWindow[$iterator_date_window[$i]]['month']=$formatted_dates[1];
+				 $AvailableSlotsForWindow[$iterator_date_window[$i]]['day']=$formatted_dates[2];
  	  	 	}
  	  	 }
  	  	 
