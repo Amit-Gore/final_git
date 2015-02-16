@@ -8,10 +8,19 @@
  include_once("dates_related_function.php");
  //echo getcwd() ;exit();
  //include_once("../../../mysql_crud.php");
+<<<<<<< HEAD
  include_once("C:xampp/htdocs/final_git/serverside/mysql_crud.php");
  //echo date("d");exit();
+=======
+ include_once("C:xampp/htdocs/final_git/serverside/mysql_crud.php");
+ include_once('C:xampp/htdocs/final_git/serverside/notifications/NotificationModuleFunctions.php');
+ include_once("C:xampp/htdocs/final_git/serverside/PHPMailer/PHPMailerAutoload.php");
+ include_once('C:xampp/htdocs/final_git/serverside/dashboards/doctor_dashboard/dashboard_home_related/DoctorDashboardEssentialFunctions.php');
+ include_once('C:xampp/htdocs/final_git/serverside/bookappointment/AppointmentModuleFunctions.php');
+>>>>>>> origin/master
  
-  $doc_id=3;
+ /*
+ $doc_id=3;
   $doc_id_array=array(1,2);
   $TriggeringDate="2015-02-15";
   $dateArray=array("2015-02-15");
@@ -43,14 +52,13 @@
   #overwriteSchedule($doc_id,$slots,$TriggeringDate); 
   #fetchScheduleSingleDoc($doc_id);
   #fetchScheduleMultipleDoc($doc_id_array);
-  availableSchedule($doc_id);
+  #availableSchedule($doc_id);
    
  //print_r(monthly_date_range($repeat['from'],$repeat['to'],$repeat['month_dayArray']));exit();
  
  
  
- 
- 
+ */
  
  
  
@@ -465,6 +473,69 @@
  	return $return;
  	
  }
+ 
+ 
+  /*
+  * Function Description:
+  * This function is being called from save_appointment.php file to book an appointment
+  * for the specific doctor.
+  * 
+  * Parameters:
+  * @patientID:Patient Id
+  * @docID:Doctor Id
+  * @reason:Appointment Reason
+  * @slotID:used only for backend ease,we need to update josn text(which holds doctor schedule) 
+  *        inside the database table. Ex. "slot1:0"
+  * @slot: slot's string representation Ex: "9:30-9:40"
+  * */
+  //bookAppointment(122,3,"Amit","Fever","2015-02-17","slot1:0","9:30-9:40");
+ function bookAppointment($patientID,$docID,$patientName,$reason,$app_date,$slotID,$slot)
+ {
+ 	$app_date=date('Y-m-d',strtotime($app_date));
+ 	$Tempslot=explode(":",$slotID);
+	$slot_type=$Tempslot[0];
+	$slot_index=$Tempslot[1];
+	$db=new Database();
+ 	$db->connect();
+ 	$db->select('doctor_info','schedule,DisplayName',NULL,'doc_id="'.$docID.'"');
+	$doctor_schedule_displayname=$db->getResult();
+	$schedule=json_decode($doctor_schedule_displayname[0]['schedule']);
+	$schedule=get_object_vars($schedule);//issue occured while accessing the schedule with index $app_date
+										 //http://stackoverflow.com/questions/16589313/php-error-cannot-use-object-of-type-stdclass-as-array-array-and-object-issues
+	
+	 $schedule[$app_date]->$slot_type->sequentialSlots[$slot_index]=0; //change the slot from 'available' to 'unavailable'state
+
+	 
+	 
+	 
+	 $schedule=json_encode($schedule);
+	 $db->connect();
+	 $db->sql("UPDATE doctor_info SET schedule='$schedule' WHERE doc_id=$docID");
+	 $db->select('userregistration','display_name,user_email,gender,contactNumber',NULL,'userID="'.$patientID.'" and email_activation_status=1 and OTPverified=1');
+	 $result=$db->getResult();
+	  
+	 
+	 StoreToAppointmentInfo($docID,$patientID,$app_date,$slot,$slotID,$reason,1,$patientName);//store into appointment_info table
+	  
+	 
+	 
+	 
+	 
+	 /*Notification related function calls
+	  * */
+	  if(isset($result[0]['contactNumber']))
+	  SMSNotify_AppointmentStatus($result[0]['contactNumber'],$slot,$app_date,$doctor_schedule_displayname[0]['DisplayName'],"Waiting for doctor's confirmation..");
+	  
+	  if(isset($result[0]['user_email']))
+	  {
+	  $subject="Your request for appointment has been noted.";	
+	  StatusChangeVerification($result[0]['user_email'],$doctor_schedule_displayname[0]['DisplayName'],$slot,$app_date,$subject,"Waiting for Doctor Confirmation");
+	  }
+	  UpdateAppointmentStatistics('enquired',$docID);
+	  
+	 
+ }
+ 
  
   /*
   * 
