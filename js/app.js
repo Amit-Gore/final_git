@@ -653,6 +653,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 	$scope.slot = $routeParams.slot;
 	$scope.date=$routeParams.date;
 	$scope.doc_id=$routeParams.doctor;
+	$scope.slot_id=$routeParams.slotid;
 	$scope.fetch_data_url= 'serverside/bookappointment/docdata_bookappointment_page.php';
 	
 	$http.post($scope.fetch_data_url,{"data" : $scope.doc_id}).
@@ -683,14 +684,15 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 				,Reason : $scope.appointment_related.Reason
 				,app_date : $scope.date
 				,slot : $scope.slot
+				,slot_id:$scope.slot_id
 				,doc_id : $scope.doc_id
 				};
 		console.log(dataObject);
 		$http.post($scope.save_to_database_url,dataObject,{})
 		.success(function(dataFromServer, status, headers, config) {
 			  //alert("success");
-			  //window.location.replace('#/mobile_verification');
-	          console.log(dataFromServer);
+			  window.location.replace('#/thankyou');
+	          //console.log(dataFromServer);
 	       })
 	    
 	    .error(function(data, status, headers, config) {
