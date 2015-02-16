@@ -27,7 +27,7 @@
 							</div>
 
 							
-							<h5 class="pro-deg" style="font-size:14px;">{{doc_data.0.degree}}</h5>
+							<h6 class="pro-deg">{{doc_data.0.degree | uppercase}}</h6>
 							<p class="green">{{doc_data.0.about}}</p>
 							</div>
 							<div class="col-md-4">
@@ -41,8 +41,7 @@
 						</div>
 					</div>
 					<!-- dorp down -->
-
-					<div class="[ panel1 panel1-default ] panel1-google-plus"  collapse="!dropdown" >
+					<div class="[ panel1 panel1-default ] panel1-google-plus"  ng-show="dropdown" >
 						<!-- <h5> {{card.name}}<h5>
 						<h5 class="text-right">{{card.fees | currency :"":2}}</h5>
 						<a href="#/primary_info" type="button" class="btn btn-primary btn-xs"  ><span style="color:white" class="fa fa-send"></span> Book Appointment </a></p> -->
@@ -98,9 +97,8 @@
 							
 							</div>
 							<div class="col-md-4">
-							<h4><img ng-src="images/doctorproicons/timings.png" /> Clinic Timing </h4>		
-							<h5 style="font-weight:900"> 9:00 Am - 9:00 Pm</h5>
-							<p>( Monday - Sunday )</p>
+							<h4><img ng-src="images/doctorproicons/timings.png" /> Timings </h4>		
+							<p></p>
 							</div>
 							<div class="col-md-4">
 							<h4><img ng-src="images/doctorproicons/fees.png" /> Fees Details</h4>
@@ -108,19 +106,6 @@
 							</div>
 						</div>
 					</div>
-					
-					<div class="[ panel1 panel1-default ] panel1-google-plus">
-						<div class="card1" >
-							<iframe
-  width="600"
-  height="450"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v3/place?key=AIzaSyD2V-pJhcyvWKVq4hmiiab_98HpBydwaiI
-    &location=19.0800,74.7300">
-</iframe>
-						 </div> 
-					</div>
-					
 					
 					<div class="[ panel1 panel1-default ] panel1-google-plus">
 						<div class="row doc_ser">
@@ -263,7 +248,6 @@
 								</div>
 								<div class="form-group" ng-class="{'has-error': form.Reason.$invalid && submitted}">
 								  <label for="Reason" class="control-label">Appointment reason </label>
-								 
 								  <input
 									type="text"
 									class="form-control"

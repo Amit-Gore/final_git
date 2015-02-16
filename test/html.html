@@ -1,0 +1,12 @@
+<div ng-controller="myCtrl">
+    <b>Category:</b>
+    <div ng-repeat="cat in getArea()">
+        <b><input type="checkbox" ng-model="filter[cat]" /> {{cat}}</b>
+    </div>
+    <hr />
+    <div ng-repeat="w in filtered=(Cards | filter:filterByArea)">
+        {{w.name}} ({{w.locations}})
+    </div>
+    <hr />
+    Number of results: {{filtered.length}}
+</div>

@@ -93,9 +93,11 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/preview", {
 		templateUrl: "webpage/priview.html",
 		controller: "BlogCtrl"})
-	.when("/test", {
-		templateUrl: "webpage/test.html",
+	.when("/thankyou", {
+		templateUrl: "webpage/thankyou.html",
 		controller: "BlogCtrl"})
+		
+		
 	
 	//.when("/primary_info", {templateUrl: "webpage/about.html", controller: "PageCtrl"})
     .when("/about", {templateUrl: "webpage/about.html", controller: "PageCtrl"})
@@ -517,6 +519,44 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 						
 						
 				
+			
+			
+			  $scope.filter = {};
+
+				$scope.getArea = function () {
+					return ($rootScope.cards || []).map(function (w) {
+						return w.area;
+					}).filter(function (w, idx, arr) {
+						return arr.indexOf(w) === idx;
+					});
+				};
+				
+				$scope.getSpeciality = function () {
+					return ($rootScope.cards || []).map(function (w) {
+						return w.speciality;
+					}).filter(function (w, idx, arr) {
+						return arr.indexOf(w) === idx;
+					});
+				};
+				
+				
+				$scope.filterByArea = function (a) {
+					return $scope.filter[a.area] || noFilter($scope.filter);
+				};
+				
+				function noFilter(filterObj) {
+					for (var key in filterObj) {
+						if (filterObj[key]) {
+							return false;
+						}
+					}
+					return true;
+				} 	
+				
+				
+				
+				
+				
 				
 			}).
 			error(function(data,status){
@@ -572,7 +612,6 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 			$scope.slots=data;//check this and if not done upload files and send the link to abhishek
 			//$scope.slots.splice(1,0,doc_id);
 			$scope.result= data;
-  			
 		}).
 		error(function(data,status){
 			alert('Failure');
@@ -812,6 +851,9 @@ app.filter('mySort', function() {
             })
         }])
 		/************************************************************PRASHANT DASHBOARD CONTROLLERS (04 FEB 2015 )***********************************************************************/
+		
+		
+		
 		app.controller("DashboardCtrl", ["$scope","$http", function($scope,$http) {
 			$scope.session_check_url= 'serverside/login/doctor/doctor_login_status.php';
 			$scope.fetch_dashboard_info_url='serverside/dashboards/doctor_dashboard/dashboard_home_related/wrapperfile.php';
