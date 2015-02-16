@@ -75,9 +75,6 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/forgotp", {
 		templateUrl: "webpage/login/forgotp.html",
 		controller: "PageCtrl"})
-	.when("/doc", {
-		templateUrl: "webpage/login/doc.html",
-		controller: "PageCtrl"})	
 	.when("/morelocation", {
 		templateUrl: "webpage/more/morelocation.html",
 		controller: "BlogCtrl"})
@@ -99,9 +96,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/thankyou", {
 		templateUrl: "webpage/thankyou.html",
 		controller: "BlogCtrl"})
-	.when("/patient", {
-		templateUrl: "webpage/thankyou.html",
-		controller: "BlogCtrl"})	
+		
 		
 	
 	//.when("/primary_info", {templateUrl: "webpage/about.html", controller: "PageCtrl"})
@@ -609,7 +604,6 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 		$scope.url='serverside/search/search_result_calandar.php';
 	    //alert(doc_id);
 		//Creating the http post request here
-		 $scope.loading = true;
 		$http.post($scope.url,{"data" :doc_id}).
 		success(function(data,status){
 			alert('success');
@@ -618,7 +612,6 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 			$scope.slots=data;//check this and if not done upload files and send the link to abhishek
 			//$scope.slots.splice(1,0,doc_id);
 			$scope.result= data;
-			  $scope.loading = false;
 		}).
 		error(function(data,status){
 			alert('Failure');
@@ -1048,21 +1041,7 @@ app.directive("addbuttons", function($compile){
 	};
 });
 
-app.directive('loading', function () {
-      return {
-        restrict: 'E',
-        replace:true,
-        template: '<div style="margin:30px;" ><img src="images/ajax-loader.gif" />LOADING...</div>',
-        link: function (scope, element, attr) {
-              scope.$watch('loading', function (val) {
-                  if (val)
-                      $(element).show();
-                  else
-                      $(element).hide();
-              });
-        }
-      }
-  })		
+		
 		
 		
 		
