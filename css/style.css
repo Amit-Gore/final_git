@@ -439,6 +439,7 @@
 	}
 
 		ul li {
+			content: "\f0fe";
 			padding-left: 0.5em;
 		}
 
