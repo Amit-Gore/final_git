@@ -45,7 +45,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     	templateUrl: "webpage/search.html", 
     	controller: "doctor_search"
     		})
-    .when("/book_appointment/:slot/:date/:doctor", {
+    .when("/book_appointment/:date/:doctor/:slot/:slotid/", {
     	templateUrl: "webpage/docPrimaryInfo.html", 
     	controller: "book_appointment"
     		})

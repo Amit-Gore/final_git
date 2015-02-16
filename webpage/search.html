@@ -235,20 +235,20 @@
 										  <td>
 											<center>
 											  <span style="font-size:12px;border-radius:10px;padding:7px;margin:2px">
-												{{key}}  
+												{{prop.day}}  
 											  </span>
 											  <br>
 											  <span style="font-weight:900;font-size:20px;padding-left:4px">
-												{{slot.date}} 
+												{{prop.date}} 
 											  </span>
 											  <br>
 											  <span style="font-size:15px;">
-												{{slot.month}} 
+												{{prop.month}} 
 											  </span>
 											</center>
 										  </td>
 										  <td>
-											<a ng-repeat="(id , prop) in prop.Morning" ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available" >
+											<a ng-repeat="(id , prop) in prop.Morning" ng-href="#/book_appointment/{{key}}/{{card.doc_id}}/{{prop}}/{{id}}" class="available" >
 											  <span>
 												{{prop}} 
 												<span>
@@ -256,19 +256,19 @@
 												</a>
 										  </td>
 										  <td >
-												<a ng-repeat="(id , prop) in prop.Afternoon" ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available" >
+												<a ng-repeat="(id , prop) in prop.Afternoon" ng-href="#/book_appointment/{{key}}/{{card.doc_id}}/{{prop}}/{{id}}" class="available" >
 												  {{prop}} 
 												  <br>
 												</a>
 										  </td>
 										  <td >
-												<a ng-repeat="(id , prop) in prop.Evening" ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available"  >
+												<a ng-repeat="(id , prop) in prop.Evening" ng-href="#/book_appointment/{{key}}/{{card.doc_id}}/{{prop}}/{{id}}" class="available"  >
 												 {{prop}} 
 												 <br>
 												</a>
 										  </td>
 										  <td >
-												<a ng-repeat="(id , prop) in prop.Night"  ng-href="#/book_appointment/{{id}}/{{key}}/{{card.doc_id}}" class="available" >
+												<a ng-repeat="(id , prop) in prop.Night" ng-href="#/book_appointment/{{key}}/{{card.doc_id}}/{{prop}}/{{id}}" class="available" >
 												  {{prop}} 
 												  <br>
 												</a>
