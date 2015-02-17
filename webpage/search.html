@@ -156,7 +156,7 @@
 							     <svg  height='100' width='100'>
 									<g>
 									  <circle cx='50' cy='50' r='40' stroke='black' stroke-width='0' fill='SteelBlue' /></circle>
-									  <text x='50' y='60' style='text-anchor: middle' font-family='Palatino Linotype' font-weight='900' font-size='34' fill='white' >{{card.FirstName | limitTo: 1}}</text>
+									  <text x='50' y='60' style='text-anchor: middle' font-weight='900' font-size='27' fill='white' >{{card.FirstName | limitTo: 1}}{{card.LastName | limitTo: 1}}</text>
 									</g>
 								</svg>
 							    </div>
@@ -193,7 +193,7 @@
 									<div class="row">
 									<div class="col-md-5 col-sm-5 col-lg-5">	
 										
-										<p style="text-align:justify"><i class="fa fa-h-square fa-x"></i> {{card.hospital}}</p>		
+										<p style="text-align:justify"><i class="fa fa-h-square fa-x"></i> <!-- {{card.hospital}} --> Community Clinic  </p>		
 										
 									</div>
 									<div class="col-md-7 col-sm-7 col-lg-7">	
@@ -225,12 +225,13 @@
 						 <div style="height:320px;width:100%;padding:1px;padding-top:-1px;"> 
 						
 							<div class="table-container"  > <!-- Adding other controller here:Amit -->
-								<div class="sliding-window" >
+								<div>
 								<table class="table table-responsive table-hover">
 									  <thead>
 										<img class="img-responsive" src="images/Timestrip.png" />
 									  </thead>
 									  <tbody >
+										<center><loading></loading><center>
 										<tr ng-repeat="(key , prop) in slots">
 										  <td>
 											<center>

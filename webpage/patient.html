@@ -1,0 +1,73 @@
+<div class="container" data-ng-controller="patient_DashboardCtrl">
+	<br><br><br>
+    <div class="row">
+		<div class="col-md-3">
+                    <section class="panel panel-box">
+                        <div class="panel-top bg-facebook">
+							<svg  height='100' width='100'>
+									<g>
+									  <circle cx='50' cy='50' r='50' stroke='black' stroke-width='0' fill='SteelBlue' /></circle>
+									  <text x='50' y='60' style='text-anchor: middle' font-weight='900' font-size='27' fill='white' >{{Fname | limitTo: 1}}{{Lname | limitTo: 1}}</text>
+									</g>
+							</svg>
+							<br><br>
+							<p class="size-h4">{{Fname}} {{Lname}}</p>
+                        </div>
+                        <!-- <div class="list-justified-container">
+                            <ul class="list-justified text-center">
+                                <li>
+                                    <p class="size-h4">Patient Name</p>
+                                    <p class="text-muted">Reason : {{p_reason}}</p>
+                                </li>
+                                
+                            </ul>
+                        </div> -->
+                    </section>
+        </div>
+        <div class="col-md-9">
+			
+			<div class="row">
+               <!--  <div class="col-md-5">
+                </div> -->
+				
+				
+				<div class="col-md-4" ng-repeat="appointment in p_details" >	
+					<div class="row">
+						<div class="col-sm-12" >
+							<div class="panel mini-box">
+								<div class="box-info" ng-controller="patient_request">
+									<p class="size-h3" style="text-align:center" > <i class="fa fa-heartbeat" style="color:rgb(67,185,123)"></i>&nbsp;<br>{{appointment.doc_name}} </p><hr>
+									<p class="text-muted" style="color:black;text-align:center"><b>-: Appointment Details :-</b> <br><br> Date : {{appointment.A_date}} <br> Time : {{appointment.A_time}} <br> <span>Reason :</span>  {{appointment.A_reason}}</p>
+									<br><center><button class="btn btn-danger btn-xs" data-ng-click="alert('warning')">Cancel Appointment</button></center>
+								</div>
+							</div>                    
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class="col-md-5">
+					<section class="panel panel-box info-box" >
+								<div class="panel-left panel-item1 bg-warning" >
+									<i class="fa fa-warning text-large stat-icon"></i>
+								</div>
+								<div class="panel-right panel-item1 bg-reverse">
+									<p class="size-h4 no-margin"><a href="#" style="text-decoration:none;">Update Schedule</a></p>
+									<p class="size-h5 no-margin" style="color: #9F6000;"><span>Out of slots for next month</span></p>
+								</div>
+					</section>
+				</div>	 -->
+				
+            </div>
+			
+			
+            
+          
+        </div>
+		<!-- <div class="col-md-5"></div> -->
+        
+    </div>
+
+
+
+</div>
+  

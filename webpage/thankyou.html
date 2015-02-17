@@ -1,6 +1,7 @@
+<div ng-controller="session_protected_page">
 <!-- Page Content -->
 <!-- Page Content -->
-<div class="container">
+<div class="container" ng-controller="book_appointment" ng-controller="doctor_search">
 
    
     <div class="row" style="margin-top:40px;">
@@ -16,10 +17,10 @@
 					<center><h3 style="margin:10px;padding:2px;padding:5px;"><span style="color:#43b97b"class="fa fa-heartbeat fa-2x"></span>Your Appointment Details<h3></center><br>
 				
 					<div style="border:1px solid #f6f6f6;border-radius:15px;padding:25px;margin:5px;margin-bottom:20px">
-					<h5>Patient Name :	<span style="font-weight:600;padding-left:20px;color:#5b5957"> Amit Gore </span></h5><br>
-					<h5>Appointment  : 	<span style="font-weight:600;padding-left:20px;color:#5b5957"> Reason </span></h5><br>
-					<h5>Date    : 	<span style="font-weight:600;padding-left:20px;color:#5b5957"> 28 - Jan - 2015 </span></h5><br>
-					<h5>Time : 	<span style="font-weight:600;padding-left:20px;color:#5b5957"> 9:00 - 10:00 Pm </span></h5><br>
+					<h5>Patient Name :	<span style="font-weight:600;padding-left:20px;color:#5b5957"> {{patientname}} </span></h5><br>
+					<h5>Appointment  : 	<span style="font-weight:600;padding-left:20px;color:#5b5957"> {{appointmentreason}} </span></h5><br>
+					<h5>Date    : 	<span style="font-weight:600;padding-left:20px;color:#5b5957"> {{date}} </span></h5><br>
+					<h5>Time : 	<span style="font-weight:600;padding-left:20px;color:#5b5957"> {{slot}} </span></h5><br>
 					<h5>Status : 	<span style="font-weight:600;padding-left:20px;color:#b94346"> Waiting For Doctor Confirmation </span></h5>
 					</div>
 				</div>
@@ -27,7 +28,7 @@
 					<div style="border:1px solid #f6f6f6;border-radius:15px;padding:5px;margin:5px;margin-bottom:20px">
 					<center>
 					<img src="images/doctor4.png" title=""/>
-					<h4 style="margin:5px;padding:2px;">Dr. Sujit Jagtap</h4>
+					<h4 style="margin:5px;padding:2px;">{{doc_name}}</h4>
 					<p style="color:#43b97b;margin-bottom:5px;font-weight:600">Clinic Details</p>
 					<p>101, Kaware Heights, Vasant Talkies Road, Maliwada, Ahmednagar, Maharashtra 414001</p>
 					</center>
@@ -57,3 +58,4 @@
 
 </div>
 <!-- /.container -->
+</div>

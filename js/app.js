@@ -93,10 +93,18 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/preview", {
 		templateUrl: "webpage/priview.html",
 		controller: "BlogCtrl"})
-	.when("/thankyou", {
-		templateUrl: "webpage/thankyou.html",
+	// .when("/thankyou", {
+		// templateUrl: "webpage/thankyou.html",
+		// controller: "BlogCtrl"})
+	.when("/patientDashboard", {
+		templateUrl: "webpage/patient.html",
 		controller: "BlogCtrl"})
-		
+	
+	
+	 .when("/thankyou/:date/:slot/:patientname/:appointmentreason/:doc_name/", {
+    	 templateUrl: "webpage/thankyou.html", 
+    	 controller: "book_appointment"
+    	 })	
 		
 	
 	//.when("/primary_info", {templateUrl: "webpage/about.html", controller: "PageCtrl"})
@@ -604,14 +612,16 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 		$scope.url='serverside/search/search_result_calandar.php';
 	    //alert(doc_id);
 		//Creating the http post request here
+		 $scope.loading = true;
 		$http.post($scope.url,{"data" :doc_id}).
 		success(function(data,status){
-			alert('success');
+			// alert('success');
 			var chutiya = doc_id;
 			$scope.status=status;
 			$scope.slots=data;//check this and if not done upload files and send the link to abhishek
 			//$scope.slots.splice(1,0,doc_id);
 			$scope.result= data;
+			 $scope.loading = false;
 		}).
 		error(function(data,status){
 			alert('Failure');
@@ -691,8 +701,8 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 		$http.post($scope.save_to_database_url,dataObject,{})
 		.success(function(dataFromServer, status, headers, config) {
 			  //alert("success");
-			  window.location.replace('#/thankyou');
-	          //console.log(dataFromServer);
+			 // window.location.replace('#/thankyou');
+	          // console.log(dataFromServer);
 	       })
 	    
 	    .error(function(data, status, headers, config) {
@@ -912,6 +922,36 @@ app.filter('mySort', function() {
 			
 		
 		/************************************************************PRASHANT DASHBOARD CONTROLLERS (04 FEB 2015 )***********************************************************************/
+		/************************************************************PRASHANT DASHBOARD CONTROLLERS (17 FEB 2015 )***********************************************************************/
+		
+			app.controller("patient_DashboardCtrl",["$scope", function($scope){
+				
+				$scope.Fname ='Amit';
+				$scope.Lname='Gore',
+				
+				$scope.p_details=[
+				{
+					'doc_name': ' Sujit Jagtap',
+					'A_date': '17- Feb, 2015',
+					'A_time' : '1:00 - 3:00',
+					'A_reason': 'Personal'	
+				},
+				{
+					'doc_name': ' varsha Jagtap',
+					'A_date': '18- Feb, 2015',
+					'A_time' : '1:00 - 3:00',
+					'A_reason': 'Personal'	
+				}
+				]
+				
+			}]);	
+		
+		
+		
+		
+		
+		/************************************************************PRASHANT DASHBOARD CONTROLLERS (17 FEB 2015 )***********************************************************************/
+				
 		/************************************************************PRASHANT DASHBOARD REQUESTS CONTROLLERS (04 FEB 2015 )***********************************************************************/
 		app.controller("patient_request",["$scope", function($scope){
 			$scope.requestedP_name="Patient Name";
@@ -1041,6 +1081,21 @@ app.directive("addbuttons", function($compile){
 	};
 });
 
+app.directive('loading', function () {
+      return {
+        restrict: 'E',
+        replace:true,
+        template: '<div style="margin:30px;" ><img src="images/loader.GIF" />LOADING...</div>',
+        link: function (scope, element, attr) {
+              scope.$watch('loading', function (val) {
+                  if (val)
+                      $(element).show();
+                  else
+                      $(element).hide();
+              });
+        }
+      }
+  })		
 		
 		
 		
