@@ -102,7 +102,7 @@ Status: '.$status.'<br>
     //$mail->AltBody = 'AltBody';
     if (!$mail->send()) {
         
-		//echo "Mailer Error: " . $mail->ErrorInfo;
+		echo "Mailer Error: " . $mail->ErrorInfo;
 		return false;
     } else {
         return true;

@@ -24,8 +24,6 @@
  * @author Chris Ryan <unknown@example.com>
  * @author Marcus Bointon <phpmailer@synchromedia.co.uk>
  */
-error_reporting(0); 
- 
 class SMTP
 {
     /**
