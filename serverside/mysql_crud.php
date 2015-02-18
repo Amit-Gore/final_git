@@ -80,7 +80,7 @@ class Database
     public function sql($sql)
     {
         //echo"Inside sql function";
-		#echo $sql;
+		//echo $sql;
 		#exit();
 		$query         = @mysql_query($sql);
         #exit();

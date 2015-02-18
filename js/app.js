@@ -101,9 +101,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 		controller: "BlogCtrl"})
 	
 	
-	 .when("/thankyou/:date/:slot/:patientname/:appointmentreason/:doc_name/", {
+	 .when("/thankyou/:appID/:docID", {
     	 templateUrl: "webpage/thankyou.html", 
-    	 controller: "book_appointment"
+    	 controller: "ThankYouPage"
     	 })	
 		
 	
@@ -642,8 +642,36 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/
 
 
+/*
+  ThankYouPage related controller 
+*/
+app.controller('ThankYouPage',function($scope,$routeParams,$rootScope,$http){
+	$scope.ID = $routeParams.appID;
+	$scope.ID2= $routeParams.docID;
+	$scope.fetch_data_url= 'serverside/bookappointment/thankyou_DataFetch.php';
+    
+	var dataObject = {
+				app_id:$scope.ID
+				,doc_id : $scope.ID2
+				};
+	$http.post($scope.fetch_data_url,dataObject,{})
+		.success(function(dataFromServer, status, headers, config) {
+			  //alert("success");
+			 // window.location.replace('#/thankyou');
+	            console.log(dataFromServer);
+				$scope.thankyoupageData=dataFromServer;
+				//window.location.replace('#/thankyou/'+dataFromServer+'/'+doctor_id);
+				//redirecttoThankYou(dataFromServer);
+	       })
+	    
+	    .error(function(data, status, headers, config) {
+	          alert("Submitting form failed!");
+	       });
+		
+	
+	
 
-
+});
 
 
 
@@ -686,6 +714,9 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 	 * */
 	$scope.appointment_related = {};
 	$scope.save_to_database_url='serverside/bookappointment/save_appointment.php';
+	$scope.thankyou_page_data='serverside/bookappointment/thankyou_DataFetch.php';
+	
+
 	//defining submit form function
 	$scope.appointment_related.submitForm=function(){
 		console.log("Submitting the form");
@@ -697,12 +728,15 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 				,slot_id:$scope.slot_id
 				,doc_id : $scope.doc_id
 				};
+		var doctor_id= $scope.doc_id;
 		console.log(dataObject);
 		$http.post($scope.save_to_database_url,dataObject,{})
 		.success(function(dataFromServer, status, headers, config) {
 			  //alert("success");
 			 // window.location.replace('#/thankyou');
-	          // console.log(dataFromServer);
+	            console.log(dataFromServer);
+				window.location.replace('#/thankyou/'+dataFromServer+'/'+doctor_id);
+				//redirecttoThankYou(dataFromServer);
 	       })
 	    
 	    .error(function(data, status, headers, config) {
