@@ -510,7 +510,7 @@
 	 $result=$db->getResult();
 	  
 	 
-	 StoreToAppointmentInfo($docID,$patientID,$app_date,$slot,$slotID,$reason,1,$patientName);//store into appointment_info table
+	 $app_ID=StoreToAppointmentInfo($docID,$patientID,$app_date,$slot,$slotID,$reason,1,$patientName);//store into appointment_info table
 	  
 	 
 	 
@@ -527,7 +527,7 @@
 	  StatusChangeVerification($result[0]['user_email'],$doctor_schedule_displayname[0]['DisplayName'],$slot,$app_date,$subject,"Waiting for Doctor Confirmation");
 	  }
 	  UpdateAppointmentStatistics('enquired',$docID);
-	  
+	  return $app_ID;
 	 
  }
  

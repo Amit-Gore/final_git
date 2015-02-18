@@ -27,11 +27,13 @@ This module contains functions which basically
 					  ,'Reason'=>$Reason
 					  ,'PatientName'=>$p_name
 					  ,'AppointmentStatus'=>$AppointmentStatus));
-					 
-		  $res = $db->getResult();
-		   #print_r($res);exit();
+          $db->sql("SELECT LAST_INSERT_ID() FROM appointment_info");
+          $res=$db->getResult();
+		  $app_ID=$res[0];
+		  echo $app_ID;		  
+		  
 		  $db->disconnect();
-		  return $res;
+		  return $app_ID;
 	      //extendible: If appointment has been booked,run the mail script to patient
 		  //And notify the Doctor
 	 #}

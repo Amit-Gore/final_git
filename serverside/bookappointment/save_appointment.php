@@ -18,9 +18,8 @@ $app_slot=htmlspecialchars($objData->slot);
 $app_slot_id=htmlspecialchars($objData->slot_id);
 $doc_id=htmlspecialchars($objData->doc_id); 
 $patient_ID=$_SESSION['patient']['patientID'];
-echo $patientname;
-bookAppointment($patient_ID,$doc_id,$patientname,$Reason,$app_date,$app_slot_id,$app_slot);
+$app_ID=bookAppointment($patient_ID,$doc_id,$patientname,$Reason,$app_date,$app_slot_id,$app_slot);
 
-//print_r("SUCCESS");
+return $app_ID;
 
 ?>
