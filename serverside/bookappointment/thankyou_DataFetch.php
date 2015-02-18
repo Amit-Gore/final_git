@@ -21,4 +21,5 @@ $db->select('appointment_info','appointment_info.AppointmentDate , appointment_i
 $res_app=$db->getResult();
 $appointmentData=json_encode($res_app[0]);
 print_r($appointmentData);
+
 ?>
