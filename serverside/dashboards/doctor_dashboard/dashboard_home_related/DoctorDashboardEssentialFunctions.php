@@ -65,7 +65,7 @@ function FetchAppointmentsForConfirmation($doc_id)
 function TodayFetchConfirmedAppointments($doc_id)
 {
 	$db=new Database();
-		 $db->select('appointment_info','AppointmentId,PatientId,AppointmentDate,AppointmentSlot,Reason',NULL,
+		 $db->select('appointment_info','AppointmentId,PatientName,PatientId,AppointmentDate,AppointmentSlot,Reason',NULL,
 					 'DoctorId='.$doc_id.' AND AppointmentDate =CURDATE() AND AppointmentStatus=2',NULL);
             $res = $db->getResult();
 			//print_r($res);

@@ -699,57 +699,6 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 		//alert('success');
 		$scope.status=status;
 		$scope.doc_data = data;
-				
-		var mapOptions = {
-					zoom: 9,
-					center: new google.maps.LatLng(18.5203,73.8567),
-					mapTypeId: google.maps.MapTypeId.ROADMAP,
-					mapTypeControl: false,
-							 mapTypeControlOptions: {
-							 style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
-							 },
-							 navigationControl: true,
-							 navigationControlOptions: {
-							 style: google.maps.NavigationControlStyle.SMALL
-							 }
-				}
-				
-				var bounds = new google.maps.LatLngBounds();
-				
-				$scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-				$scope.markers = [];
-				
-				var infoWindow = new google.maps.InfoWindow();
-				var createMarker = function (info){
-					
-					var marker = new google.maps.Marker({
-						map: $scope.map,
-						position: new google.maps.LatLng(info.lat, info.lng),
-						
-						title: info.city
-					});
-					marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-					bounds.extend( marker.position);
-					// map.fitBounds(bounds.extend);
-					//console.log(bounds);	
-					google.maps.event.addListener(marker, 'click', function(){
-						infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-						infoWindow.open($scope.map, marker);
-					});
-					
-					$scope.markers.push(marker);
-					
-				}  
-				
-				console.log($scope.doc_data);
-				
-				for (i = 0; i < $scope.doc_data.length; i++)
-				{
-					createMarker($scope.doc_data[i]);
-				}
-				
-
 		
 	}).
 	error(function(data,status){
@@ -1113,15 +1062,12 @@ app.filter('mySort', function() {
 			$scope.submit=function(){
 				console.log("inside form");
 				// var Weekly_CheckBoxes = {;$scope.myForm.sunday,};
-			
 				var dataObject = {
 				Sch_date : $scope.myForm.Sch_date,
 				slot_StartTime1: $scope.myForm.mytime1,
 				slot_EndTime1: $scope.myForm.mytime2,
 				slot_AvgPatientTime1: $scope.myForm.selected1,
 				slot_Location1: $scope.myForm.selected2,
-				
-				
 				
 				slot_StartTime2: $scope.myForm.mytime3,
 				slot_EndTime2: $scope.myForm.mytime4,
