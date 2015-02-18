@@ -1,0 +1,200 @@
+<div class="container" >
+	<div class="row" id="contentHolder" style="margin-top:50px;">
+				<!-- left profile  -->
+				<div class="col-md-8">
+					
+					
+				</div>
+				<!-- Right profile  -->
+				<div class="col-md-4">
+				<!-- <h4 style="text-align:left">Showing <strong>1002</strong> Results found for <strong>Dr. doctor name </strong> </h4><br> -->
+					
+					<div class="[ panel1 panel1-default ] panel1-google-plus">
+						<div class="bookappointment">
+						<h3 style="text-align:center;">Doctor Registration</h3>
+						</div>
+						<!-- booking form -->
+						<div class="bo1" ng-controller="formValidation">
+						    <div ng-controller="doctor_registration">
+							<form name="form" shake-that submitted="submitted">
+								
+								<div class="form-group" ng-class="{'has-error': form.email.$invalid && submitted}">
+								  <label for="email" class="control-label">Email Address </label>
+								  <input
+									type="email"
+									class="form-control"
+									id="email"
+									name="email"
+									placeholder="e.g doctor@healthserve.in"
+									ng-model="doctor_reg.email"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								
+								<div class="form-group" ng-class="{'has-error': form.fname.$invalid && submitted}">
+								  <label for="fname" class="control-label">First Name </label>
+								  <input
+									type="text"
+									class="form-control"
+									id="fname"
+									name="fname"
+									placeholder="Your First Name"
+									ng-model="doctor_reg.fname"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								<div class="form-group" ng-class="{'has-error': form.lname.$invalid && submitted}">
+								  <label for="lname" class="control-label">Last Name </label>
+								  <input
+									type="text"
+									class="form-control"
+									id="lname"
+									name="lname"
+									placeholder="Your Last Name"
+									ng-model="doctor_reg.lname"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								<div class="form-group" ng-class="{'has-error': form.gender.$invalid && submitted}">
+								  <label for="gender" class="control-label">Select Gender </label>
+								  <select
+									type="text"
+									class="form-control"
+									
+									ng-model="doctor_reg.gender"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+									<option>male</option>
+									<option>female</option>
+									</select>
+								</div>
+								
+								
+								 
+								<div class="form-group" ng-class="{'has-error': form.address.$invalid && submitted}">
+								  <label for="address" class="control-label">Address </label>
+								  <textarea	row="5" colomn="15" type="text"	class="form-control"placeholder="Address"	ng-model="doctor_reg.address"		ng-model-options="{updateOn: 'blur'}"
+									required></textarea>
+								</div>
+								
+								
+								<div class="form-group" ng-class="{'has-error': form.about.$invalid && submitted}">
+								  <label for="about" class="control-label">About You </label>
+								  <textarea	row="5" colomn="15" type="text"	class="form-control"placeholder="about"	ng-model="doctor_reg.about"		ng-model-options="{updateOn: 'blur'}"
+									required></textarea>
+								</div>
+								
+								
+								<div class="form-group" ng-class="{'has-error': form.photo.$invalid && submitted}">
+								  <label for="photo" class="control-label">Upload Picture </label>
+								  <input
+									type="file"
+									class="form-control"
+									ng-model="doctor_reg.photo"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								
+								<div class="form-group" ng-class="{'has-error': form.contact.$invalid && submitted}">
+								  <label for="contact" class="control-label">Contact Number</label>
+								  <input
+									type="number"
+									class="form-control"
+									id="contact"
+									name="contact"
+									placeholder="+91 9912212929"
+									ng-model="doctor_reg.contact"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								<div class="form-group" ng-class="{'has-error': form.degree.$invalid && submitted}">
+								  <label for="degree" class="control-label">Last Degree</label>
+								  <input
+									type="text"
+									class="form-control"
+									id="degree"
+									name="degree"
+									placeholder="e.g MD, MBBS "
+									ng-model="doctor_reg.degree"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								<div class="form-group" ng-class="{'has-error': form.speciality.$invalid && submitted}">
+								  <label for="speciality" class="control-label">speciality</label>
+								  <input
+									type="text"
+									class="form-control"
+									id="speciality"
+									name="speciality"
+									placeholder="e.g skin , dentist"
+									ng-model="doctor_reg.speciality"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								<div class="form-group" ng-class="{'has-error': form.experience.$invalid && submitted}">
+								  <label for="experience" class="control-label">experience</label>
+								  <input
+									type="number"
+									class="form-control"
+									id="experience"
+									name="experience"
+									placeholder="e.g 3 years skin "
+									ng-model="doctor_reg.experience"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								
+								
+								
+								<div class="form-group" ng-class="{'has-error': form.fees.$invalid && submitted}">
+								  <label for="fees" class="control-label">fees</label>
+								  <input
+									type="number"
+									class="form-control"
+									id="fees"
+									name="fees"
+									ng-model="doctor_reg.fees"
+									ng-model-options="{updateOn: 'blur'}"
+									required>
+								</div>
+								
+								<br>
+								<center><button alt="submit" ng-click="submitForm()" class="btn btn-primary btn-sm"><span class="fa fa-paper-plane"></span> Sign Up</button></center>
+							</form>
+							</div>
+							<br><br>
+							
+								<h5 style="text-align:center">Already a user?<a href="#/doctor" class="green" style="font-weight:900"> Login</a></h5><br>
+							<!-- <hr>
+							
+							<div style="margin:30px;">
+								<a class="btn btn-block btn-social btn-facebook" >
+									<i class="fa fa-facebook"></i> Sign in with Facebook
+								</a>
+								<br>
+								<a class="btn btn-block btn-social btn-twitter">
+									 <i class="fa fa-twitter"></i> Sign in with Twitter
+								</a>
+								<br>
+								<a class="btn btn-block btn-social btn-google-plus" >
+									<i class="fa fa-google-plus"></i> Sign in with Google
+								</a>	
+							</div> -->
+							
+							
+						</div>
+					
+
+					
+					</div>
+				</div>
+	</div>
+</div>

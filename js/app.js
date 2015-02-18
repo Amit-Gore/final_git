@@ -60,6 +60,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when("/new_user", {
 		templateUrl: "webpage/login/new_user.html", 
 		controller: "PageCtrl"})
+	.when("/new_user_doctor", {
+		templateUrl: "webpage/login/Doctor_registration.html", 
+		controller: "PageCtrl"})
 	.when("/mobilenumber", {
 		templateUrl: "webpage/Registration/MobileUpdate.html", 
 		controller: "patient_registration"})	
@@ -1185,7 +1188,36 @@ app.directive('loading', function () {
       }
   })		
 		
+
+
+
+app.controller("doctor_registration",["$scope",function($scope){
+
+
+	$scope.submitForm = function(){
+	
+	var doctor_data = {
+	
+		email : $scope.doctor_reg.email,
+		firstname : $scope.doctor_reg.fname,
+		lastname : $scope.doctor_reg.lname,
+		gender : $scope.doctor_reg.gender,
+		address : $scope.doctor_reg.address,
+		about : $scope.doctor_reg.about,
+		photo : $scope.doctor_reg.photo,
+		contact_no : $scope.doctor_reg.contact,
+		last_degree : $scope.doctor_reg.degree,
+		speciality : $scope.doctor_reg.speciality,
+		experience : $scope.doctor_reg.experience,
+		fees : $scope.doctor_reg.fees
 		
+	
+	};
+	
+	console.log(doctor_data);
+		}
+
+}]);		
 		
 		
   
