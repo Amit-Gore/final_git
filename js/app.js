@@ -1113,7 +1113,7 @@ app.filter('mySort', function() {
 			$scope.submit=function(){
 				console.log("inside form");
 				// var Weekly_CheckBoxes = {;$scope.myForm.sunday,};
-			
+			   
 				var dataObject = {
 				Sch_date : $scope.myForm.Sch_date,
 				slot_StartTime1: $scope.myForm.mytime1,
