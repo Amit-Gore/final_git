@@ -98,7 +98,7 @@
                                                 Average Time per Patients
                                               </p>
                                               <span class="ui-select" >
-                                                <select required ng-model="myForm.selected1">
+                                                <select class="form-control" required ng-model="myForm.selected1">
                                                   <option>
                                                     10 Min
                                                   </option>
@@ -123,7 +123,7 @@
                                                 Location
                                               </p>
                                               <span class="ui-select" >
-                                                <select required ng-model="myForm.selected2">
+                                                <select  class="form-control" required ng-model="myForm.selected2">
                                                   <option>
                                                     Aundh
                                                   </option>
@@ -221,10 +221,12 @@
                            <tab heading="Weekly">
                              
                              <div>
-                               <p>
-                                 Select Day
-                               </p>
-                               <dd>
+								<h4  style="color:rgb(67,185,123);text-align:center;cursor:pointer"	>
+                                    <i class="fa fa-calendar-o fa-2x"></i>
+										Select Days
+								</h4>
+							   <br>
+							   <dd style="text-align:center">
                                  <label class="ui-checkbox">
                                    <input ng-model="myForm.sunday"  ng-true-value="1"  ng-init="0" type="checkbox"  >
                                    <span>
@@ -268,6 +270,7 @@
                                    </span>
                                  </label>
                                </dd>
+							   <br>
                              </div>
                              <br>
                              <div class="row">
@@ -323,8 +326,15 @@
                              <div class="row">
 								
 							 
-                               <div class="col-md-12">
-								<dd>
+                               <div class="col-md-6">
+									
+								<h4 ng-click="dates = !dates" style="color:rgb(67,185,123);text-align:center;cursor:pointer"	>
+                                    <i class="fa fa-calendar fa-2x"></i>
+										Select Dates
+									</h4>
+							   <br>
+							   
+								<dd collapse="!dates">
                                  <label class="ui-checkbox">
                                   <input type="checkbox" ng-model="myForm.m1" ng-init="0" ng-true-value="1"   >
                                    <span>
@@ -512,17 +522,227 @@
                                    </span>
                                  </label>
                                </dd>
-							   
-							   
-							   
-							   
-							   
-							   
-							   
+							
+									<br><br>
+							   </div>
+                            
 
+
+							   <div class="col-md-6">
+							   
+								<h4 ng-click="days = !days" style="color:rgb(67,185,123);text-align:center;cursor:pointer"	>
+                                    <i class="fa fa-calendar-o fa-2x"></i>
+										Select Days
+								</h4>
+									<br>
+								<dd collapse="!days">
+									<span style="color:rgb(67,185,123)"	>
+                                     W1 &nbsp;&nbsp;
+                                   </span>
+                                 <label class="ui-checkbox">
+                                  <input type="checkbox" ng-model="myForm.mo1" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     M
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                  <input type="checkbox" ng-model="myForm.t1"  ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                  <input type="checkbox" ng-model="myForm.w1" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     W
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                  <input type="checkbox" ng-model="myForm.th1" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                    T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.f1" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     F
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.s1" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     S
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.sun1" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                   </span>
+                                     Sun
+                                 </label><br>
+								 <span style="color:rgb(67,185,123)"	>
+                                     W2 &nbsp;&nbsp;
+                                   </span>
+								 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.mo2" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     M
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.t2"ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.w2" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     W
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                  <input type="checkbox" ng-model="myForm.th2" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.f2" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     F
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.s2" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     S
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                  <input type="checkbox" ng-model="myForm.sun2" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     Sun
+                                   </span>
+                                 </label><br>
+								 <span style="color:rgb(67,185,123)"	>
+                                     W3 &nbsp;&nbsp;
+                                   </span>
+								 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.mo3" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     M
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.t3" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.w3" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     W
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.th3" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.f3" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     F
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.s3" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     S
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.sun3" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     Sun
+                                   </span>
+                                 </label><br>
+								 <span style="color:rgb(67,185,123)"	>
+                                     W4 &nbsp;&nbsp;
+                                   </span>
+								 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.mo4" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     M
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.t4" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.w4" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     W
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.th4" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.f4"  ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     F
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.s4" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     S
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.sun4" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     Sun
+                                   </span>
+                                 </label><br><br><br><br>
+								 <!-- <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="myForm.m29" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     M
+                                   </span>
+                                 </label>
+								 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.m30" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     T
+                                   </span>
+                                 </label>
+								 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="myForm.m31" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     W
+                                   </span> -->
+                                 </label>
+                               </dd>
+							   
 							   
 							   </div>
-                               <div class="col-md-6">
+
+
+							</div>
+							<div class="row">		
+							   <div class="col-md-6">
                                  <p>
                                    Select Date From
                                  </p>
@@ -673,7 +893,12 @@
 				<h5 ><b>Weekly </b> <br><br>Selected Days : <span ng-if="myForm.sunday">Sunday </span>  <span ng-if="myForm.monday"> Monday </span>  <span ng-if="myForm.tuesday"> Tuesday </span> <span ng-if="myForm.wednesday"> Wednesday </span> <span ng-if="myForm.thursday"> Thursday </span> <span ng-if="myForm.friday"> Friday </span> <span ng-if="myForm.satureday"> Saturday </span><br><br> From : {{myForm.dt3}} - To : {{myForm.dt4}}</h5>
 				
 				
-				<h5 ><b>Monthly </b> <br><br>Selected Days : <span ng-if="myForm.m1">1 </span>  <span ng-if="myForm.m2"> 2 </span>  <span ng-if="myForm.m3"> 3 </span> <span ng-if="myForm.m4"> 4 </span> <span ng-if="myForm.m5"> 5 </span> <span ng-if="myForm.m6"> 6 </span> <span ng-if="myForm.m7"> 7 </span> <span ng-if="myForm.m8"> 8 </span> <span ng-if="myForm.m8"> 8 </span> <span ng-if="myForm.m9"> 9 </span> <span ng-if="myForm.m10"> 10 </span> <span ng-if="myForm.m11"> 11 </span> <span ng-if="myForm.m12"> 12 </span> <span ng-if="myForm.m13"> 13 </span> <span ng-if="myForm.m14"> 14 </span> <span ng-if="myForm.m15"> 15 </span> <span ng-if="myForm.m16">16 </span>  <span ng-if="myForm.m17"> 17 </span>  <span ng-if="myForm.m18"> 18 </span> <span ng-if="myForm.m19"> 19 </span> <span ng-if="myForm.m20"> 20 </span> <span ng-if="myForm.m21"> 21 </span> <span ng-if="myForm.m22"> 22 </span> <span ng-if="myForm.m23"> 23 </span> <span ng-if="myForm.m24"> 24 </span> <span ng-if="myForm.m25"> 25 </span> <span ng-if="myForm.m26"> 26 </span> <span ng-if="myForm.m27"> 27 </span> <span ng-if="myForm.m28"> 28 </span> <span ng-if="myForm.m29"> 29 </span> <span ng-if="myForm.m30"> 30 </span> <span ng-if="myForm.m31"> 31 </span>  <br><br> From : {{myForm.dt5}} - To : {{myForm.dt6}}</h5>
+				<h5 ><b>Monthly </b> <br><br>
+				Selected Dates : <span ng-if="myForm.m1">1 </span>  <span ng-if="myForm.m2"> 2 </span>  <span ng-if="myForm.m3"> 3 </span> <span ng-if="myForm.m4"> 4 </span> <span ng-if="myForm.m5"> 5 </span> <span ng-if="myForm.m6"> 6 </span> <span ng-if="myForm.m7"> 7 </span> <span ng-if="myForm.m8"> 8 </span> <span ng-if="myForm.m8"> 8 </span> <span ng-if="myForm.m9"> 9 </span> <span ng-if="myForm.m10"> 10 </span> <span ng-if="myForm.m11"> 11 </span> <span ng-if="myForm.m12"> 12 </span> <span ng-if="myForm.m13"> 13 </span> <span ng-if="myForm.m14"> 14 </span> <span ng-if="myForm.m15"> 15 </span> <span ng-if="myForm.m16">16 </span>  <span ng-if="myForm.m17"> 17 </span>  <span ng-if="myForm.m18"> 18 </span> <span ng-if="myForm.m19"> 19 </span> <span ng-if="myForm.m20"> 20 </span> <span ng-if="myForm.m21"> 21 </span> <span ng-if="myForm.m22"> 22 </span> <span ng-if="myForm.m23"> 23 </span> <span ng-if="myForm.m24"> 24 </span> <span ng-if="myForm.m25"> 25 </span> <span ng-if="myForm.m26"> 26 </span> <span ng-if="myForm.m27"> 27 </span> <span ng-if="myForm.m28"> 28 </span> <span ng-if="myForm.m29"> 29 </span> <span ng-if="myForm.m30"> 30 </span> <span ng-if="myForm.m31"> 31 </span>  
+				<br>
+				Selected Days : <span ng-if="myForm.mo1">1st Monday </span>  <span ng-if="myForm.t1"> 1st Tuesday </span>  <span ng-if="myForm.w1"> 1st Wednesday </span> <span ng-if="myForm.th1"> 1st Thursday </span> <span ng-if="myForm.f1"> 1st Friday </span> <span ng-if="myForm.s1"> 1st Saturday </span> <span ng-if="myForm.sun1"> 1st Sunday </span> <span ng-if="myForm.mo2"> 2nd Monday </span> <span ng-if="myForm.t2"> 2nd Tuesday </span> <span ng-if="myForm.w2"> 2nd Wednesday </span> <span ng-if="myForm.th2"> 2nd Thursday </span> <span ng-if="myForm.f2"> 2nd Friday </span> <span ng-if="myForm.s2"> 2nd Saturday </span> <span ng-if="myForm.sun2"> 2nd Sunday </span> <span ng-if="myForm.mo3"> 3rd Monday </span> <span ng-if="myForm.t3"> 3rd Tuesday </span> <span ng-if="myForm.w3">3rd Wednesday </span>  <span ng-if="myForm.th3"> 3rd Thursday </span>  <span ng-if="myForm.f3"> 3rd Friday </span> <span ng-if="myForm.s3"> 3rd Saturday </span> <span ng-if="myForm.sun3"> 3rd Sunday </span> <span ng-if="myForm.mo4"> 4th Monday </span> <span ng-if="myForm.t4"> 4th Tuesday </span> <span ng-if="myForm.w4"> 4th Wednesday </span> <span ng-if="myForm.th4"> 4th Thursday </span> <span ng-if="myForm.f4"> 4th Friday </span> <span ng-if="myForm.s4"> 4th Saturday </span> <span ng-if="myForm.sun4"> 4th Sunday </span>   
+				
+				<br><br> From : {{myForm.dt5}} - To : {{myForm.dt6}}</h5>
 				
 				
 				</div>
