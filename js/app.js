@@ -233,6 +233,18 @@ $scope.session_check_url= 'serverside/login/login_status.php';
 	
 });
 
+
+/*----------------------------------------------CONTROLLERS WRITTEN BY AMIT GORE--------------------------------------------------------------------*/
+
+
+
+
+
+/*------------------------------------------------end of controllers WRITTEN BY AMIT GORE----------------------------------------------------------------*/
+
+
+
+
 // form validations
 
 app.controller('formValidation', function($scope) {

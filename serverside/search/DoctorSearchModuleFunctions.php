@@ -392,19 +392,13 @@ function SearchByName2($search_string,$offset,$rec_limit)
    if(strlen($search_string)>=1 && $search_string !==' ')
    {
 		 $db=new Database();
-		 $db->select('doctor_info','doctor_info.doc_id,count(doctor_info.doc_id) as usedSlot,
-									ai.AppointmentDate,ai.AppointmentSlot, doctor_info.FirstName,doctor_info.LastName,
-									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee,
-									sc.MonSlots ,sc.TuesSlots,sc.WedSlots,sc.ThurSlots,sc.FriSlots,sc.SatSlots,sc.SunSlots,
-									ai.AppointmentId',
-					        'doctor_schedule sc ON doctor_info.doc_id = sc.DoctorId 
-							LEFT JOIN appointment_info ai ON doctor_info.doc_id = ai.DoctorId 
-													   AND (ai.AppointmentDate BETWEEN CURDATE() AND CURDATE()+6)',
-					 ' FirstName LIKE "%'.$search_string.'%" OR LastName LIKE "%'.$search_string.'%" OR ss_name LIKE "%'.$search_string.'%" GROUP BY doctor_info.doc_id,ai.AppointmentDate,ai.AppointmentSlot LIMIT '.$offset.','.$rec_limit.'',NULL);
+		 $db->select('doctor_info','doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
+									',NULL,' FirstName LIKE "%'.$search_string.'%" OR LastName LIKE "%'.$search_string.'%" OR ss_name LIKE "%'.$search_string.'%" GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
             $res = $db->getResult();
 			//echo "<br><br><br><br>";
-			#print_r($res);
-			//exit();
+			//print_r($res);
+			exit();
 			if($res){
 					 $NumberofTuples= count($res, COUNT_RECURSIVE)/21;
 					 //echo $NumberofTuples;
