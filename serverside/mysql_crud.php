@@ -137,7 +137,7 @@ class Database
         if ($limit != null) {
             $q .= ' LIMIT ' . $limit;
         }
-        echo $q;
+        #echo $q;
         //exit();
         //echo"<br>";
         $this->myQuery = $q; // Pass back the SQL

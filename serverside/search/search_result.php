@@ -11,7 +11,7 @@ include_once("../mysql_crud.php");
 
 $data = file_get_contents("php://input");
 $objData = json_decode($data);
-$objData->data="jagtap";
+//$objData->data="jagtap";
 $resultArray=SearchByName2($objData->data,0,100);
 $resultArray=json_encode($resultArray);
 print_r($resultArray);

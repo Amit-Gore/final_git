@@ -578,7 +578,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 	
 
 });
->>>>>>> parent of 5267bf7... Controllers has been added to different files
+
 
 
 /*------------------------------------------------end of controllers WRITTEN BY AMIT GORE----------------------------------------------------------------*/
