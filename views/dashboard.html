@@ -21,10 +21,10 @@
 								<p class="size-h3">{{dashboard_data.statistics.booked}}</p>
 								<p class="text-muted">Booked</p>
 							</li>
-							<li>
+							 <li>
 								<p class="size-h3">{{dashboard_data.statistics.rejected}}</p>
 								<p class="text-muted">Rejected</p>
-							</li>
+							</li> 
 							<li>
 								<p class="size-h3">{{dashboard_data.statistics.cancelled}}</p>
 								<p class="text-muted">Cancelled</p>
@@ -41,7 +41,7 @@
 									<div class="box-info" ng-controller="patient_request">
 										<p class="size-h3"> <i class="fa fa-user"></i>&nbsp;	{{re.PatientName}} </p>
 										<p class="text-muted">{{re.AppointmentDate}} , {{re.AppointmentSlot}} <br> <span>Reason :</span>  {{re.Reason}}</p>
-										<hr><button class="btn btn-info btn-sm">Approve</button>&nbsp;<button class="btn btn-danger btn-sm" data-ng-click="alert('warning')">Reject</button>
+										<hr><button class="btn btn-info btn-sm" ng-click="approveAppointment(re.AppointmentId);">Approve</button>&nbsp;<button class="btn btn-danger btn-sm" ng-click="rejectAppointment(re.AppointmentId);">Reject</button>
 									</div>
 								</div>                    
 							</div>

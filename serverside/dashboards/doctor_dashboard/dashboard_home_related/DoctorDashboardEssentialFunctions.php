@@ -33,7 +33,7 @@ function UpdateSchedule($doc_id,$DayId,$AppCount,$AvailableSlots)
 function FetchDoctorData($doc_id)
 {
  $db=new Database();
-		 $db->select('doctor_info','enquired,booked,cancelled',NULL,
+		 $db->select('doctor_info','enquired,booked,cancelled,rejected',NULL,
 					 'doc_id='.$doc_id.'',NULL);
             $res= $db->getResult();
 			//print_r($res);
@@ -70,6 +70,17 @@ function TodayFetchConfirmedAppointments($doc_id)
             $res = $db->getResult();
 			//print_r($res);
 			return $res;
+}
+
+function FetchAllAppointmentData($doc_id)
+{
+	$db=new Database();
+		 $db->select('appointment_info','AppointmentId,PatientId,AppointmentDate,AppointmentSlot,Reason',NULL,
+					 'DoctorId='.$doc_id.'',NULL);
+            $res = $db->getResult();
+			//print_r($res);
+			return $res;
+	
 }
 
 function HistoryFetchAppointments($doc_id)

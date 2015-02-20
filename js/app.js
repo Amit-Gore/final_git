@@ -954,10 +954,11 @@ app.filter('mySort', function() {
 		
 		
 		
-		app.controller("DashboardCtrl", ["$scope","$http", function($scope,$http) {
+		app.controller("DashboardCtrl", ["$scope","$http","$route", function($scope,$http,$route) {
 			$scope.session_check_url= 'serverside/login/doctor/doctor_login_status.php';
 			$scope.fetch_dashboard_info_url='serverside/dashboards/doctor_dashboard/dashboard_home_related/wrapperfile.php';
-			
+			$scope.approve_url='serverside/dashboards/doctor_dashboard/dashboard_home_related/approveAppointment.php';
+			$scope.reject_url='serverside/dashboards/doctor_dashboard/dashboard_home_related/rejectAppointment.php';
 			
 			$http.post($scope.session_check_url)
 			
@@ -1004,6 +1005,53 @@ app.filter('mySort', function() {
 				
 			     }//init function ends
 			
+			/*Author:Amit Gore
+			 * Usage Reasoning: On doctor dashboard,
+			 * 					doctor either confirms the appointment or reject the appointment
+			 * */
+			$scope.approveAppointment=function(id){
+				var dataObject = {
+						app_id : id
+					};
+				$http.post($scope.approve_url,dataObject,{})
+				.success(function(dataFromServer, status, headers, config) {
+					  //console.log(dataFromServer);
+					  $route.reload();
+			       })
+			    
+			    .error(function(data, status, headers, config) {
+			          alert("failed to fetch data");
+			       });
+				
+				
+			     }//approveAppointment function ends
+			
+			
+			
+			
+			/*Author:Amit Gore
+			 * Usage Reasoning: On doctor dashboard,
+			 * 					doctor either confirms the appointment or reject the appointment
+			 * */
+			$scope.rejectAppointment=function(id){
+				var dataObject = {
+						app_id : id
+					};
+				$http.post($scope.reject_url,dataObject,{})
+				.success(function(dataFromServer, status, headers, config) {
+					  console.log(dataFromServer);
+					  $route.reload();
+			       })
+			    
+			    .error(function(data, status, headers, config) {
+			          alert("failed to fetch data");
+			       });
+				
+				
+			     }//rejectAppointment function ends
+			
+			
+			
 		}])	
 			
 			
@@ -1012,7 +1060,7 @@ app.filter('mySort', function() {
 		/************************************************************PRASHANT DASHBOARD CONTROLLERS (04 FEB 2015 )***********************************************************************/
 		/************************************************************PRASHANT DASHBOARD CONTROLLERS (17 FEB 2015 )***********************************************************************/
 		
-			app.controller("patient_DashboardCtrl",["$scope", function($scope){
+			app.controller("Patient_DashboardCtrl",["$scope","$http","$route", function($scope,$http,$route){
 				
 				$scope.Fname ='Amit';
 				$scope.Lname='Gore',
@@ -1032,7 +1080,81 @@ app.filter('mySort', function() {
 				}
 				]
 				
-			}]);	
+				
+			}]);
+		app.controller("patient_DashboardCtrl", ["$scope","$http","$route", function($scope,$http,$route) {
+			$scope.session_check_url= 'serverside/login/login_status.php';
+			$scope.cancel_url='serverside/dashboards/patient_dashboard/CancelAppointmentByPatient.php';
+			$scope.fetch_dashboard_info_url='serverside/dashboards/patient_dashboard/WrapperPatientDashboard.php';
+			$http.post($scope.session_check_url)
+			
+					.success(function(dataFromServer,status,headers,config)
+							{
+								 console.log(dataFromServer);
+								 $scope.user_session=dataFromServer;
+								 $scope.init();
+								 if(!($scope.user_session))
+									 {
+									 alert("not logged in");
+									 
+									 }
+								 //Auth.setUser(dataFromServer);
+							})
+					
+					.error(function(data,status,headers,config){
+						
+						alert('failure in ajax request:login status check');
+						
+					});
+		
+
+			/*Author:Amit Gore
+			 * Usage Reasoning: At patient dashboard,by calling this function dashboard gets the data to show
+			 * */
+			$scope.init=function(){
+				var dataObject = {
+					patient_id : $scope.user_session.patientID
+				};
+				$http.post($scope.fetch_dashboard_info_url,dataObject,{})
+				.success(function(dataFromServer, status, headers, config) {
+					  //window.location.replace('#/mobile_verification');
+			          //console.log(dataFromServer);
+			          $scope.dashboard_data=dataFromServer;
+			          //console.log($scope.dashboard_data);
+			       })
+			    
+			    .error(function(data, status, headers, config) {
+			          alert("failed to fetch data");
+			       });
+				
+				
+			     }//init function ends
+			
+			
+			/*Author:Amit Gore
+			 * Usage Reasoning: On patient dashboard,
+			 * 					patient might cancell the appointment
+			 * */
+			$scope.cancelAppointment=function(id){
+				var dataObject = {
+						app_id : id
+					};
+				$http.post($scope.cancel_url,dataObject,{})
+				.success(function(dataFromServer, status, headers, config) {
+					  console.log(dataFromServer);
+					  $route.reload();
+			       })
+			    
+			    .error(function(data, status, headers, config) {
+			          alert("failed to fetch data");
+			       });
+				
+				
+			     }//rejectAppointment function ends
+			
+			
+			
+		}])	
 		
 		
 		
