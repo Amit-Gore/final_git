@@ -8,11 +8,11 @@
  include_once("dates_related_function.php");
  //echo getcwd() ;exit();
  //include_once("../../../mysql_crud.php");
- include_once("C:xampp/htdocs/final_git/serverside/mysql_crud.php");
- include_once('C:xampp/htdocs/final_git/serverside/notifications/NotificationModuleFunctions.php');
- include_once("C:xampp/htdocs/final_git/serverside/PHPMailer/PHPMailerAutoload.php");
- include_once('C:xampp/htdocs/final_git/serverside/dashboards/doctor_dashboard/dashboard_home_related/DoctorDashboardEssentialFunctions.php');
- include_once('C:xampp/htdocs/final_git/serverside/bookappointment/AppointmentModuleFunctions.php');
+ #include_once("C:xampp/htdocs/angularFiles/final_git/serverside/mysql_crud.php");
+ include_once('C:xampp/htdocs/angularFiles/final_git/serverside/notifications/NotificationModuleFunctions.php');
+ include_once("C:xampp/htdocs/angularFiles/final_git/serverside/PHPMailer/PHPMailerAutoload.php");
+ include_once('C:xampp/htdocs/angularFiles/final_git/serverside/dashboards/doctor_dashboard/dashboard_home_related/DoctorDashboardEssentialFunctions.php');
+ include_once('C:xampp/htdocs/angularFiles/final_git/serverside/bookappointment/AppointmentModuleFunctions.php');
  
  /*
  $doc_id=3;

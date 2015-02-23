@@ -12,7 +12,7 @@
   </style>
   
   <div class="row" >
-	<form ng-controller="validateCtrl" name="myForm" novalidate ><!-- ng-controller="validateCtrl" -->
+	<form ng-controller="ScheduleForm" name="myForm" novalidate ><!-- ng-controller="validateCtrl" -->
     <div class="row"  data-ng-controller="CollapseDemoCtrl" >
          <div class="col-md-7">
         <div class="panel">
@@ -99,19 +99,19 @@
                                               </p>
                                               <span class="ui-select" >
                                                 <select class="form-control" required ng-model="myForm.selected1">
-                                                  <option>
+                                                  <option ng-value="15">
                                                     10 Min
-                                                  </option>
-                                                  <option>
+                                                  </option >
+                                                  <option ng-value="15">
                                                     15 Min
                                                   </option>
-                                                  <option>
+                                                  <option ng-value="20">
                                                     20 Min
                                                   </option>
-                                                  <option>
+                                                  <option ng-value="30">
                                                     30 Min
                                                   </option>
-                                                  <option>
+                                                  <option ng-value="60">
                                                     60 Min
                                                   </option>
                                                 </select>
@@ -124,12 +124,8 @@
                                               </p>
                                               <span class="ui-select" >
                                                 <select  class="form-control" required ng-model="myForm.selected2">
-                                                  <option>
-                                                    Aundh
-                                                  </option>
-                                                  <option>
-                                                    Koregaon Park
-                                                  </option>
+                                                  <option ng-value="Aundh">Aundh</option>
+                                                  <option ng-value="Koregaon Park">Koregaon Park</option>
                                                 </select>
                                               </span>
                                             </div>

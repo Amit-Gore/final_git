@@ -8,7 +8,7 @@
 					<h2 style="color:#FFF; text-shadow: 1px 0px #787878">Health Serve </h2> 
 					<div ng-controller="doctor_search">
 					
-					<form action="search()" >
+					<form>
 					<!-- <form method="post" action="#/search"> -->
 						<div class="col-lg-12 col-md-12 form-group" style="margin-bottom:40px;">
 							<center>
@@ -31,7 +31,7 @@
 							 -->
 							
 							<div class="col-md-1 col-sm-1 col-lg-1">
-							<input type="image" src="images/5.png" style="margin:2px;"alt="submit"  title="Search"/>
+							<input type="image" src="images/5.png" style="margin:2px;"alt="submit" ng-click="search()" title="Search"/>
 							</div>
 							</center>
 						</div>
