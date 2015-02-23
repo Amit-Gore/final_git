@@ -169,6 +169,12 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 	}
 	
 	
+	/*************Search by Speciality function  ***********/
+	
+	
+	// $scope.searchBySpeciality
+	
+	/*************Search by Speciality function ***********/
 	
 	
 });

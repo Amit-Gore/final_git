@@ -19,7 +19,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 		$scope.doc_data = data;
 				
 		var mapOptions = {
-					zoom: 9,
+					zoom: 14,
 					center: new google.maps.LatLng(18.5203,73.8567),
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
 					mapTypeControl: false,
@@ -45,9 +45,9 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 						map: $scope.map,
 						position: new google.maps.LatLng(info.lat, info.lng),
 						
-						title: info.city
+						title: 'Dr. '+info.FirstName +' '+ info.LastName
 					});
-					marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+					marker.content = '<div class="infoWindowContent">' + info.address + '</div>';
 					bounds.extend( marker.position);
 					// map.fitBounds(bounds.extend);
 					//console.log(bounds);	
@@ -89,6 +89,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 	//defining submit form function
 	$scope.appointment_related.submitForm=function(){
 		console.log("Submitting the form");
+		
 		var dataObject = {
 				patientname : $scope.appointment_related.patientname
 				,Reason : $scope.appointment_related.Reason
@@ -99,6 +100,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 				};
 		var doctor_id= $scope.doc_id;
 		console.log(dataObject);
+		$scope.loading = true;	
 		$http.post($scope.save_to_database_url,dataObject,{})
 		.success(function(dataFromServer, status, headers, config) {
 			  //alert("success");
@@ -106,6 +108,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 	            console.log(dataFromServer);
 				window.location.replace('#/thankyou/'+dataFromServer+'/'+doctor_id);
 				//redirecttoThankYou(dataFromServer);
+				$scope.loading = false;
 	       })
 	    
 	    .error(function(data, status, headers, config) {
