@@ -99,7 +99,7 @@ app.controller('ScheduleForm', function($scope,$http){
 			   TriggerringDate:$scope.myForm.Sch_date,
 			   repeat:{
 				   //type:$scope.myForm.repeatType,
-				   type:"d",
+				   type:$scope.type,
 				   from:$scope.myForm.dt1,
 				   to:$scope.myForm.dt2
 			   }

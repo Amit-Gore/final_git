@@ -21,7 +21,7 @@ app.controller('ThankYouPage',function($scope,$routeParams,$rootScope,$http){
 				//redirecttoThankYou(dataFromServer);
 				
 				var mapOptions = {
-					zoom: 14,
+					zoom: 12,
 					center: new google.maps.LatLng(18.5203,73.8567),
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
 					mapTypeControl: false,
@@ -68,7 +68,7 @@ app.controller('ThankYouPage',function($scope,$routeParams,$rootScope,$http){
 				{
 					createMarker($scope.thankyoupageData[i]);
 				}
-				
+				$scope.map.fitBounds(bounds);
 				
 	       })
 	    
