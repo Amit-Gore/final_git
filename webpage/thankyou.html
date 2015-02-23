@@ -14,7 +14,7 @@
             <div class="[ panel1 panel1-default ] panel1-google-plus">
 				<div class="row">
 				<div class="col-md-7" >
-					<center><h3 style="margin:10px;padding:2px;padding:5px;"><span style="color:#43b97b"class="fa fa-heartbeat fa-2x"></span>Your Appointment Details<h3></center><br>
+					<center><h3 style="margin:10px;padding:2px;padding:5px;"><span style="color:#43b97b"class="fa fa-heartbeat fa-2x"></span><br>Your Appointment Details<h3></center><br>
 				
 					<div style="border:1px solid #f6f6f6;border-radius:15px;padding:25px;margin:5px;margin-bottom:20px">
 					<h5>Patient Name :	<span style="font-weight:600;padding-left:20px;color:#5b5957"> {{thankyoupageData.PatientName}} </span></h5><br>
@@ -27,18 +27,27 @@
 				<div class="col-md-5">
 					<div style="border:1px solid #f6f6f6;border-radius:15px;padding:5px;margin:5px;margin-bottom:20px">
 					<center>
-					<img style="width:70px; height:70px" class="img-circle" ng-src="images/{{thankyoupageData.DocImage}}" title=""/>
+					<div ng-if="thankyoupageData.DocImage===null">
+							     <svg  height='100' width='100'>
+									<g>
+									  <circle cx='50' cy='50' r='40' stroke='black' stroke-width='0' fill='SteelBlue' /></circle>
+									  <text x='50' y='60' style='text-anchor: middle' font-family='Palatino Linotype' font-weight='900' font-size='34' fill='white' >{{thankyoupageData.DisplayName | limitTo: 1}}</text>
+									</g>
+								</svg>
+					</div>
+							
+					<img ng-if="thankyoupageData.DocImage!==null" style="width:70px; height:70px" class="img-circle" ng-src="images/{{thankyoupageData.DocImage}}" title=""/>
+					
+					
 					<h4 style="margin:5px;padding:2px;">{{thankyoupageData.DisplayName}}</h4>
 					<h5 style="margin:5px;padding:2px;">{{thankyoupageData.degree}}</h5>
 					<p style="color:#43b97b;margin-bottom:5px;font-weight:600">Clinic Details</p>
 					<p>{{thankyoupageData.address}},{{thankyoupageData.area}}</p>
 					</center>
 					
-					<div ng-controller="MapCtrlInfo">
-						<div id="map" style="height:200px;"></div>
-						<!-- <div id="class" ng-repeat="marker in markers | orderBy : 'title'">
-							 <!-- <a  ng-click="openInfoWindow($event, marker)">{{marker.title}}</a> 
-						</div> -->
+					<div >
+						<div id="map" style="height:180px;"></div>
+						
 					</div>	
 							
 					

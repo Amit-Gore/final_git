@@ -552,7 +552,7 @@ app.filter('mySort', function() {
 					  //window.location.replace('#/mobile_verification');
 			          //console.log(dataFromServer);
 			          $scope.dashboard_data=dataFromServer;
-			          //console.log($scope.dashboard_data);
+			          console.log($scope.dashboard_data);
 			       })
 			    
 			    .error(function(data, status, headers, config) {
