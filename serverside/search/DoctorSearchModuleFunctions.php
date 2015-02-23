@@ -398,7 +398,7 @@ function SearchByName2($search_string,$offset,$rec_limit)
             $res = $db->getResult();
 			//echo "<br><br><br><br>";
 			//print_r($res);
-			exit();
+			//exit();
 			if($res){
 					 $NumberofTuples= count($res, COUNT_RECURSIVE)/21;
 					 //echo $NumberofTuples;
@@ -433,9 +433,6 @@ function SearchByName2($search_string,$offset,$rec_limit)
 						//echo"<br>";
 						//$resultArray[$i]['doc_calandar']=FetchCalandar($res[$key]['doc_id']);
 						$resultArray[$i]['doc_id']=$res[$key]['doc_id'];
-						$resultArray[$i]['usedSlot']=$res[$key]['usedSlot'];
-						$resultArray[$i]['AppointmentDate']=$res[$key]['AppointmentDate'];
-						$resultArray[$i]['AppointmentSlot']=$res[$key]['AppointmentSlot'];
 						$resultArray[$i]['FirstName']=$res[$key]['FirstName'];
 						$resultArray[$i]['LastName']=$res[$key]['LastName'];
 						$resultArray[$i]['address']=$res[$key]['address'];
@@ -445,14 +442,6 @@ function SearchByName2($search_string,$offset,$rec_limit)
 						$resultArray[$i]['fee']=$res[$key]['fee'];
 						$resultArray[$i]['lat']=$res[$key]['lat'];
 						$resultArray[$i]['lng']=$res[$key]['lng'];
-						$resultArray[$i]['MonSlots']=$res[$key]['MonSlots'];
-						$resultArray[$i]['TuesSlots']=$res[$key]['TuesSlots'];
-						$resultArray[$i]['WedSlots']=$res[$key]['WedSlots'];
-						$resultArray[$i]['ThurSlots']=$res[$key]['ThurSlots'];
-						$resultArray[$i]['FriSlots']=$res[$key]['FriSlots'];
-						$resultArray[$i]['SatSlots']=$res[$key]['SatSlots'];
-						$resultArray[$i]['SunSlots']=$res[$key]['SunSlots'];
-						$resultArray[$i]['AppointmentId']=$res[$key]['AppointmentId'];
 						$i++;
 						}
 						//echo'<br><br><br>';

@@ -327,6 +327,7 @@
  	$db->select('doctor_info','schedule',NULL,'doc_id="'.$doc_id.'"');
 	$res=$db->getResult();
 	$input_schedule=$res[0]['schedule']; // got the schedule from database
+	#echo $input_schedule;exit();
 	$input_schedule=json_decode($input_schedule,true);//convert it to associative array
 	$Numberof_available_dates=count($input_schedule);
 	$available_dates=array_keys($input_schedule);
@@ -348,6 +349,7 @@
  	   $window_clone--;
  	   
  	}
+ 	#print_r($date_window);exit();
  	#print_r($iterator_date_window);exit(); //iterator_date_window => Array ( [0] => 2015-02-11 [1] => 2015-02-12 [2] => 2015-02-13 )
  	#print_r($date_window[$iterator_date_window[0]]['numberofSuperSlots']);exit();//date_window contains all the slots data. Date would be an index for this array 
  	

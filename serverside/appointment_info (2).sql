@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2015 at 11:02 AM
+-- Generation Time: Feb 23, 2015 at 08:06 AM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.27
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `appointment_info` (
   KEY `DoctorId` (`DoctorId`),
   KEY `PatientId` (`PatientId`),
   KEY `DoctorId_2` (`DoctorId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=132 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=136 ;
 
 --
 -- Dumping data for table `appointment_info`
@@ -77,7 +77,11 @@ INSERT INTO `appointment_info` (`AppointmentId`, `DoctorId`, `PatientId`, `Appoi
 (125, 8, 62, '2015-01-12', 'H', '', 'test', 'test', '1'),
 (126, 8, 104, '2015-01-16', 'J', '', 'Amit Gore', 'Fever', '1'),
 (130, 3, 122, '2015-02-17', '9:50-10:00', 'slot1:2', 'Prashant Panchal', 'Hagwan', '1'),
-(131, 3, 122, '2015-02-17', '12:10-12:20', 'slot1:16', 'Prashant Panchal', 'fever', '1');
+(131, 3, 122, '2015-02-17', '12:10-12:20', 'slot1:16', 'Prashant Panchal', 'fever', '1'),
+(132, 3, 122, '2015-02-20', '14:30-14:45', 'slot2:0', 'Varun Joshi', 'Testing', '2'),
+(133, 3, 122, '2015-02-20', '14:45-15:00', 'slot2:1', 'Amit Gore', 'Testing 2', '1'),
+(134, 3, 122, '2015-02-21', '9:30-9:40', 'slot1:0', 'Amit Gore', 'Lower back pain', '2'),
+(135, 3, 122, '2015-02-23', '14:30-14:45', 'slot2:0', 'Amit Gore', '23 Feb', '1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
