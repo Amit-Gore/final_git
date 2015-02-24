@@ -1,6 +1,7 @@
 /**************************************************CONTROLLERS RELATED TO SEARCH RESULT PAGE*********************************************************/
 app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$location){
 	
+	$scope.results;
 	var doc_name = $routeParams.param11;
 	
 	$scope.url= 'serverside/search/search_result.php'; // The url of php file which is intended to populate $scope with the help of AJAX call
@@ -12,6 +13,7 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 				//alert('success');
 				$scope.status=status;
 				$rootScope.cards = data;
+				console.log($rootScope.cards);
 				$scope.result= data;
 				
 				var mapOptions = {
@@ -127,7 +129,7 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 			$scope.status=status;
 			$rootScope.cards = data;
 			$scope.result= data;
-			//console.log($scope.data);
+			//console.log($rootScope.cards);
 			
 			window.location.replace('#/search/docname-'+$scope.keywords);
 			//window.location.replace('#/search');
@@ -153,16 +155,18 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 		 $scope.loading = true;
 		$http.post($scope.url,{"data" :doc_id}).
 		success(function(data,status){
-			// alert('success');
-			var chutiya = doc_id;
+			//alert('success');
+			$scope.doctor_id = doc_id;
 			$scope.status=status;
 			$scope.slots=data;//check this and if not done upload files and send the link to abhishek
 			//$scope.slots.splice(1,0,doc_id);
-			$scope.result= data;
+			//angular.extend($scope.results,data);
+			$scope.result=data; 
+			//$scope.results[doc_id].push(data);
 			 $scope.loading = false;
 		}).
 		error(function(data,status){
-			alert('Failure');
+			//alert('Failure');
 			$scope.data = data||"Request failed";
 			$scope.status = status;
 		});

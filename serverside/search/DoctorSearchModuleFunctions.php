@@ -4,8 +4,9 @@ require_once('../mysql_crud.php');
 include_once('search_result_helper.php');
 
 /*Requirement For FtechCalandar Function*/
-include_once('search_result_calandar/AppointmentModuleFunctions.php');
+//include_once('search_result_calandar/AppointmentModuleFunctions.php');
 include_once('search_result_calandar/PHPcustomefunctions.php');
+include_once('../dashboards/doctor_dashboard/schedule_related/scheduleFunctions.php');
 
 
 //error_reporting(E_ALL);
@@ -392,7 +393,7 @@ function SearchByName2($search_string,$offset,$rec_limit)
    if(strlen($search_string)>=1 && $search_string !==' ')
    {
 		 $db=new Database();
-		 $db->select('doctor_info','doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+		 $db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
 									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
 									',NULL,' FirstName LIKE "%'.$search_string.'%" OR LastName LIKE "%'.$search_string.'%" OR ss_name LIKE "%'.$search_string.'%" GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
             $res = $db->getResult();
@@ -431,8 +432,9 @@ function SearchByName2($search_string,$offset,$rec_limit)
 						foreach($relTbl as $key => $value)
 						{
 						//echo"<br>";
-						//$resultArray[$i]['doc_calandar']=FetchCalandar($res[$key]['doc_id']);
+						$resultArray[$i]['docCalandar']=availableSchedule($res[$key]['schedule'],3,0);
 						$resultArray[$i]['doc_id']=$res[$key]['doc_id'];
+						$resultArray[$i]['schedule']=$res[$key]['schedule'];
 						$resultArray[$i]['FirstName']=$res[$key]['FirstName'];
 						$resultArray[$i]['LastName']=$res[$key]['LastName'];
 						$resultArray[$i]['address']=$res[$key]['address'];

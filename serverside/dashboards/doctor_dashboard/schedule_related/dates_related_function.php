@@ -76,6 +76,28 @@ function monthly_date_range($first,$last,$MonthDayBool,$step = '+1 day',$output_
 	
 }
 
+$monthweekday_array=array();
+$monthweekday_array['first']=array(0,0,0,0,0,0,0);
+$monthweekday_array['second']=array(0,0,0,0,0,0,0);
+$monthweekday_array['third']=array(1,0,0,0,0,0,0);
+$monthweekday_array['fourth']=array(0,0,0,0,0,0,0);
+#print_r($monthweekday_array);
+
+function monthly_weekday_date_range($first,$last,$monthweekday_array,$output_format= 'Y-m-d')
+{
+	
+	$third_monday = new DateTime('third monday of this month');
+	
+
+	// if date has passed, get next month's third monday
+	if ($third_monday < new DateTime()) {
+	    $third_monday->modify('third monday of next month');
+	}
+	
+	echo $third_monday->format('l F d, Y');
+	
+}
+
 /*function hop_from_current_date($hop_by=1)
 {
 	
