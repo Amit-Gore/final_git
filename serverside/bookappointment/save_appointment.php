@@ -7,7 +7,7 @@
  */
 session_start();
 include_once('../mysql_crud.php');
-include_once('C:xampp/htdocs/angularFiles/final_git/serverside/dashboards/doctor_dashboard/schedule_related/scheduleFunctions.php');
+include_once('C:xampp/htdocs/final_git/serverside/dashboards/doctor_dashboard/schedule_related/scheduleFunctions.php');
 $data = file_get_contents("php://input");
 $objData = json_decode($data);
 

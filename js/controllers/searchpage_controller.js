@@ -78,17 +78,19 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
                 });
             };
 
-            $scope.getSpeciality = function() {
-                return ($rootScope.cards || []).map(function(w) {
-                    return w.speciality;
-                }).filter(function(w, idx, arr) {
-                    return arr.indexOf(w) === idx;
-                });
-            };
+            // $scope.getSpeciality = function() {
+                // return ($rootScope.cards || [])
+				// .map(function(w) {
+                    // return w.speciality;
+                // })
+				// .filter(function(w, idx, arr) {
+                    // return arr.indexOf(w) === idx;
+                // });
+            // };
 
 
             $scope.filterByArea = function(a) {
-                return $scope.filter[a.area] || noFilter($scope.filter);
+                return $rootScope.filter[a.area] || noFilter($rootScope.filter);
             };
 
             function noFilter(filterObj) {
@@ -178,11 +180,28 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
 
     /*************Search by Speciality function ***********/
 
-
+	
+	
 });
 /**************************************************end of controllers related to SEARCH RESULT page*********************************************************/
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/
 
+(function(angular) {
+  'use strict';
+angular.module('anchorScrollExample', [])
+  .controller('ScrollController', ['$scope', '$location', '$anchorScroll',
+    function ($scope, $location, $anchorScroll) {
+      $scope.gotoBottom = function() {
+        // set the location.hash to the id of
+        // the element you wish to scroll to.
+        $location.hash('bottom');
+
+        // call $anchorScroll()
+        $anchorScroll();
+      };
+    }]);
+});
+	
 
 
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/

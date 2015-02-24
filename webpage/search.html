@@ -60,7 +60,7 @@
 					
 					<tr>
 					
-						<div style="padding-left:10px;" ng-repeat="spl in getSpeciality()">
+						<div style="padding-left:10px;"> 
 							<b><input type="checkbox" ng-model="filter[spl]" /> {{spl}}</b>
 						</div> 
 						
@@ -75,8 +75,8 @@
 					 <input type="checkbox" ng-model="filter[area]" /> {{area}}</b>
 					 </th>
 					 <br> --> 
-					    <div style="padding-left:10px;" ng-repeat="area in getArea()">
-							<b><input type="checkbox" ng-model="filter[area]" /> {{area}}</b>
+					    <div style="padding-left:10px;" ng-repeat="areaa in getArea()">
+							<b><input type="checkbox" ng-model="filter[areaa]" /> {{areaa}}</b>
 						</div> 
 					</tr>
 				</div>
@@ -129,7 +129,7 @@
 		  <div ng-controller="doctor_search">
 		  
 		  
-			<div class="card animate-repeat" dir-paginate="card in cards |orderBy: predicate:reverse | filter:filterByArea | itemsPerPage : 7" >
+			<div class="card animate-repeat" ng-repeat="card in filtered = (cards | filter:filterByArea )" >
                 <div class="[ panel1 panel1-default ] panel1-google-plus" >
 						<div class="dropdown">
 							<span class="dropdown-toggle" type="button" style="cursor:pointer" title="Options" data-toggle="dropdown">
@@ -217,6 +217,22 @@
 					</div>
 				</div>
 					
+					<!-- <div class="[ panel1 panel1-default ] panel1-google-plus" style="height:300px;">
+							
+						<div style="background-color:blue;height:200px">
+						
+						</div>
+						
+						<div style="background-color:black;height:200px">
+						
+						</div>
+						
+						<div style="background-color:green;height:200px">
+						
+						</div>
+					</div> -->
+					
+					
 					<!-- drop down -->
 					<div class="[ panel1 panel1-default ] panel1-google-plus"  ng-show="dropdown" >
 						<!-- <h5> {{card.name}}<h5>
@@ -230,7 +246,7 @@
 									  <thead>
 										<img class="img-responsive" src="images/Timestrip.png" />
 									  </thead>
-									  <tbody >
+									  <tbody style="overflow: auto;">
 										<center><loading></loading><center>
 										<tr ng-repeat="(key , prop) in slots">
 										  <td>
