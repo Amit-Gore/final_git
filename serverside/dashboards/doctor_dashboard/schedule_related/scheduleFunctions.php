@@ -182,6 +182,11 @@
  		$res=$db->getResult();
         $db->disconnect();
  	}
+ 	if($repeat['type']=="mwd")//day-wise monthly repeat
+ 	{
+ 		$dates=monthly_weekday_date_range($repeat['from'],$repeat['to'],$repeat['month_weekday_Array']);
+ 		
+ 	}
 
  }
  
@@ -309,6 +314,8 @@
  
  
  
+ 
+ 
   /*
   * Description: This function is supposed to return the slots
   * 
@@ -316,17 +323,17 @@
   * @doc_id : Doctor ID
   * @counter: Usage Reasoning::At search result page,if user clicks on "show next availability" we need to provide a counter to this function  
   * */
- function availableSchedule($doc_id,$window=3,$offset=0)
+ function availableSchedule($schedule,$window=3,$offset=0)
  {
  	date_default_timezone_set('Asia/Kolkata');
 	$current_hour=date('H');
  	
  	$window_clone=$window;
- 	$db=new Database();
+ 	/*$db=new Database();
  	$db->connect();
  	$db->select('doctor_info','schedule',NULL,'doc_id="'.$doc_id.'"');
-	$res=$db->getResult();
-	$input_schedule=$res[0]['schedule']; // got the schedule from database
+	$res=$db->getResult();*/
+	$input_schedule=$schedule; // got the schedule from database
 	#echo $input_schedule;exit();
 	$input_schedule=json_decode($input_schedule,true);//convert it to associative array
 	$Numberof_available_dates=count($input_schedule);

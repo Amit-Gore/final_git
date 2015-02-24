@@ -5,7 +5,7 @@ function sendPassword($to,$subject,$FirstName,$password)
 {
     //echo $to;exit();
  
-	include_once 'PHPMailer/PHPMailerAutoload.php';
+	//include_once 'PHPMailer/PHPMailerAutoload.php';
  
     $mail = new PHPMailer();
  

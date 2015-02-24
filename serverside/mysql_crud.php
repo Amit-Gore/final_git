@@ -188,7 +188,7 @@ class Database
 			//echo"table exists";
 			$this->connect();
             $sql           = 'INSERT INTO `' . $table . '` (`' . implode('`, `', array_keys($params)) . '`) VALUES ("' . implode('", "', $params) . '")';
-            //echo $sql;
+            echo $sql;
             $this->myQuery = $sql; // Pass back the SQL
             // Make the query to insert to the database
 			//echo $sql;

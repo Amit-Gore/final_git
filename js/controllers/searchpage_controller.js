@@ -1,4 +1,5 @@
 /**************************************************CONTROLLERS RELATED TO SEARCH RESULT PAGE*********************************************************/
+
 app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http, $location) {
 
     var doc_name = $routeParams.param11;
@@ -17,90 +18,90 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
             $scope.result = data;
 
             var mapOptions = {
-                zoom: 9,
-                center: new google.maps.LatLng(18.5203, 73.8567),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                mapTypeControl: false,
-                mapTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
-                },
-                navigationControl: true,
-                navigationControlOptions: {
-                    style: google.maps.NavigationControlStyle.SMALL
-                }
-            }
 
-            var bounds = new google.maps.LatLngBounds();
+					zoom: 9,
+					center: new google.maps.LatLng(18.5203,73.8567),
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					mapTypeControl: false,
+							 mapTypeControlOptions: {
+							 style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+							 },
+							 navigationControl: true,
+							 navigationControlOptions: {
+							 style: google.maps.NavigationControlStyle.SMALL
+							 }
+				}
+				
+				var bounds = new google.maps.LatLngBounds();
+				
+				$scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-            $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+				$scope.markers = [];
+				
+				var infoWindow = new google.maps.InfoWindow();
+				var createMarker = function (info){
+					
+					var marker = new google.maps.Marker({
+						map: $scope.map,
+						position: new google.maps.LatLng(info.lat, info.lng),
+						
+						title: info.city
+					});
+					marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+					bounds.extend( marker.position);
+					// map.fitBounds(bounds.extend);
+					//console.log(bounds);	
+					google.maps.event.addListener(marker, 'click', function(){
+						infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+						infoWindow.open($scope.map, marker);
+					});
+					
+					$scope.markers.push(marker);
+					
+				}  
+				
+				console.log($rootScope);
+				
+				for (i = 0; i < $rootScope.cards.length; i++)
+				{
+					createMarker($rootScope.cards[i]);
+				}
+				$scope.map.fitBounds(bounds);		
+						
+				
+			
+			
+			  $scope.filter = {};
 
-            $scope.markers = [];
-
-            var infoWindow = new google.maps.InfoWindow();
-            var createMarker = function(info) {
-
-                var marker = new google.maps.Marker({
-                    map: $scope.map,
-                    position: new google.maps.LatLng(info.lat, info.lng),
-
-                    title: 'Dr. '+info.FirstName+' '+info.LastName
-                });
-                marker.content = '<div class="infoWindowContent">' + info.address + '</div>';
-                bounds.extend(marker.position);
-                // map.fitBounds(bounds);
-                //console.log(bounds);	
-                google.maps.event.addListener(marker, 'click', function() {
-                    infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-                    infoWindow.open($scope.map, marker);
-                });
-
-                $scope.markers.push(marker);
-
-            }
-
-            console.log($rootScope);
-
-            for (i = 0; i < $rootScope.cards.length; i++) {
-                createMarker($rootScope.cards[i]);
-            }
-
-            $scope.map.fitBounds(bounds);
-
-
-
-            $scope.filter = {};
-
-            $scope.getArea = function() {
-                return ($rootScope.cards || []).map(function(w) {
-                    return w.area;
-                }).filter(function(w, idx, arr) {
-                    return arr.indexOf(w) === idx;
-                });
-            };
-
-            // $scope.getSpeciality = function() {
-                // return ($rootScope.cards || [])
-				// .map(function(w) {
-                    // return w.speciality;
-                // })
-				// .filter(function(w, idx, arr) {
-                    // return arr.indexOf(w) === idx;
-                // });
-            // };
-
-
-            $scope.filterByArea = function(a) {
-                return $rootScope.filter[a.area] || noFilter($rootScope.filter);
-            };
-
-            function noFilter(filterObj) {
-                for (var key in filterObj) {
-                    if (filterObj[key]) {
-                        return false;
-                    }
-                }
-                return true;
-            }
+				$scope.getArea = function () {
+					return ($rootScope.cards || []).map(function (w) {
+						return w.area;
+					}).filter(function (w, idx, arr) {
+						return arr.indexOf(w) === idx;
+					});
+				};
+				
+				$scope.getSpeciality = function () {
+					return ($rootScope.cards || []).map(function (w) {
+						return w.speciality;
+					}).filter(function (w, idx, arr) {
+						return arr.indexOf(w) === idx;
+					});
+				};
+				
+				
+				$scope.filterByArea = function (a) {
+					return $scope.filter[a.area] || noFilter($scope.filter);
+				};
+				
+				function noFilter(filterObj) {
+					for (var key in filterObj) {
+						if (filterObj[key]) {
+							return false;
+						}
+					}
+					return true;
+				} 
 
 
 
@@ -180,8 +181,7 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
 
     /*************Search by Speciality function ***********/
 
-	
-	
+
 });
 /**************************************************end of controllers related to SEARCH RESULT page*********************************************************/
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/

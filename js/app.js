@@ -837,9 +837,10 @@ app.directive('loading', function () {
 
 
 
-app.controller("doctor_registration",["$scope",function($scope){
+app.controller("doctor_registration",["$scope","$http",function($scope,$http){
 
-
+    $scope.save_to_database_url='serverside/registration/doctor_registration/wrapper_registration.php';
+	
 	$scope.submitForm = function(){
 	
 	var doctor_data = {
@@ -860,9 +861,18 @@ app.controller("doctor_registration",["$scope",function($scope){
 	
 	};
 	
-	console.log(doctor_data);
-		}
+	$http.post($scope.save_to_database_url,doctor_data,{})
+	.success(function(dataFromServer, status, headers, config) {
+		    console.log(dataFromServer);
+			$scope.loading = false;
+       })
+    
+    .error(function(data, status, headers, config) {
+          alert("Submitting form failed!");
+       });
 
+	}
+	
 }]);		
 		
 		

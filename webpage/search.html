@@ -201,7 +201,7 @@
 										
 										
 										<button  type="button" class="btn btn-primary btn-xs pull-right"
-										 ng-class="{ active: dropdown }" ng-click="(dropdown = !dropdown) ;show_calandar(card.doc_id) ">
+										 ng-class="{ active: dropdown }" ng-click="(dropdown = !dropdown) ">
 										
 										<span style="color:white" class="fa fa-send">
 										</span> Book Appointment 
@@ -248,10 +248,10 @@
 									  </thead>
 									  <tbody style="overflow: auto;">
 										<center><loading></loading><center>
-										<tr ng-repeat="(key , prop) in slots">
+										<tr ng-repeat="(key , prop) in card.docCalandar">
 										  <td>
 											<center>
-											  <span style="font-size:12px;border-radius:10px;padding:7px;margin:2px">
+											  <span style="font-size:12px;border-radius:10px;padding:7px;margin:2px" >
 												{{prop.day}}  
 											  </span>
 											  <br>
