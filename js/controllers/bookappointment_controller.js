@@ -19,7 +19,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 		$scope.doc_data = data;
 				
 		var mapOptions = {
-					zoom: 14,
+					zoom: 12,
 					center: new google.maps.LatLng(18.5203,73.8567),
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
 					mapTypeControl: false,
@@ -67,7 +67,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 					createMarker($scope.doc_data[i]);
 				}
 				
-
+				 $scope.map.fitBounds(bounds);
 		
 	}).
 	error(function(data,status){

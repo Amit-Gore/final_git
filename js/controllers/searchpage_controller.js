@@ -1,22 +1,23 @@
 /**************************************************CONTROLLERS RELATED TO SEARCH RESULT PAGE*********************************************************/
-app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$location){
-	
-	$scope.results;
-	var doc_name = $routeParams.param11;
-	
-	$scope.url= 'serverside/search/search_result.php'; // The url of php file which is intended to populate $scope with the help of AJAX call
-	
-	 var search_by_url=function(doc_name){
-		    //Creating the http post request here
-			$http.post($scope.url,{"data" : doc_name}).
-			success(function(data,status){
-				//alert('success');
-				$scope.status=status;
-				$rootScope.cards = data;
-				console.log($rootScope.cards);
-				$scope.result= data;
-				
-				var mapOptions = {
+
+app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http, $location) {
+
+    var doc_name = $routeParams.param11;
+
+    $scope.url = 'serverside/search/search_result.php'; // The url of php file which is intended to populate $scope with the help of AJAX call
+
+    var search_by_url = function(doc_name) {
+        //Creating the http post request here
+        $http.post($scope.url, {
+            "data": doc_name
+        }).
+        success(function(data, status) {
+            //alert('success');
+            $scope.status = status;
+            $rootScope.cards = data;
+            $scope.result = data;
+
+            var mapOptions = {
 					zoom: 9,
 					center: new google.maps.LatLng(18.5203,73.8567),
 					mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -64,7 +65,7 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 				{
 					createMarker($rootScope.cards[i]);
 				}
-						
+				$scope.map.fitBounds(bounds);		
 						
 				
 			
@@ -100,87 +101,85 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 					}
 					return true;
 				} 	
-				
-				
-				
-				
-				
-				
-			}).
-			error(function(data,status){
-				alert('Failure');
-				$scope.data = data||"Request failed";
-				$scope.status = status;
-			});
-		 }
-	if(doc_name) //if there is a parameter in the url,which would be doctor name
-		{
-		$scope.keywords=doc_name;
-		search_by_url(doc_name);   //call the function 
-		//need to implement logic for this,calling the result two times
-			
-		}
-	
-	$scope.search = function(){
-		//Creating the http post request here
-		$http.post($scope.url,{"data" : $scope.keywords}).
-		success(function(data,status){
-			//alert('success');
-			$scope.status=status;
-			$rootScope.cards = data;
-			$scope.result= data;
-			//console.log($rootScope.cards);
-			
-			window.location.replace('#/search/docname-'+$scope.keywords);
-			//window.location.replace('#/search');
-			//$location.path('#/search');
-			
-	
 
-			
-			
-		}).
-		error(function(data,status){
-			alert('Failure');
-			$scope.data = data||"Request failed";
-			$scope.status = status;
-		});
-	}
-	
-	
-	$scope.show_calandar = function(doc_id){
-		$scope.url='serverside/search/search_result_calandar.php';
-	    //alert(doc_id);
-		//Creating the http post request here
-		 $scope.loading = true;
-		$http.post($scope.url,{"data" :doc_id}).
-		success(function(data,status){
-			//alert('success');
-			$scope.doctor_id = doc_id;
-			$scope.status=status;
-			$scope.slots=data;//check this and if not done upload files and send the link to abhishek
-			//$scope.slots.splice(1,0,doc_id);
-			//angular.extend($scope.results,data);
-			$scope.result=data; 
-			//$scope.results[doc_id].push(data);
-			 $scope.loading = false;
-		}).
-		error(function(data,status){
-			//alert('Failure');
-			$scope.data = data||"Request failed";
-			$scope.status = status;
-		});
-	}
-	
-	
-	/*************Search by Speciality function  ***********/
-	
-	
-	// $scope.searchBySpeciality
-	
-	/*************Search by Speciality function ***********/
-	
-	
+
+
+
+        }).
+        error(function(data, status) {
+            alert('Failure');
+            $scope.data = data || "Request failed";
+            $scope.status = status;
+        });
+    }
+    if (doc_name) //if there is a parameter in the url,which would be doctor name
+    {
+        $scope.keywords = doc_name;
+        search_by_url(doc_name); //call the function 
+        //need to implement logic for this,calling the result two times
+
+    }
+
+    $scope.search = function() {
+        //Creating the http post request here
+        $http.post($scope.url, {
+            "data": $scope.keywords
+        }).
+        success(function(data, status) {
+            //alert('success');
+            $scope.status = status;
+            $rootScope.cards = data;
+            $scope.result = data;
+            //console.log($scope.data);
+
+            window.location.replace('#/search/docname-' + $scope.keywords);
+            //window.location.replace('#/search');
+            //$location.path('#/search');
+
+
+
+
+        }).
+        error(function(data, status) {
+            alert('Failure');
+            $scope.data = data || "Request failed";
+            $scope.status = status;
+        });
+    }
+
+
+    $scope.show_calandar = function(doc_id) {
+        $scope.url = 'serverside/search/search_result_calandar.php';
+        //alert(doc_id);
+        //Creating the http post request here
+        $scope.loading = true;
+        $http.post($scope.url, {
+            "data": doc_id
+        }).
+        success(function(data, status) {
+            // alert('success');
+            var chutiya = doc_id;
+            $scope.status = status;
+            $scope.slots = data; //check this and if not done upload files and send the link to abhishek
+            //$scope.slots.splice(1,0,doc_id);
+            $scope.result = data;
+            $scope.loading = false;
+        }).
+        error(function(data, status) {
+            alert('Failure');
+            $scope.data = data || "Request failed";
+            $scope.status = status;
+        });
+    }
+
+
+    /*************Search by Speciality function  ***********/
+
+
+    // $scope.searchBySpeciality
+
+    /*************Search by Speciality function ***********/
+
 });
 /**************************************************end of controllers related to SEARCH RESULT page*********************************************************/
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/
@@ -188,4 +187,3 @@ app.controller('doctor_search',function($scope,$routeParams,$rootScope,$http,$lo
 
 
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/
-
