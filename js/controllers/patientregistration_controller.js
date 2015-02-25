@@ -11,6 +11,7 @@ app.controller('patient_registration',function($scope,$rootScope,$http,$location
 				fname : $scope.p_registrationform.fname
 				,lname : $scope.p_registrationform.lname
 				,mobile : $scope.p_registrationform.mobile
+				//,email : $scope.p_registrationform.email
 				,password : $scope.p_registrationform.password
 		};
 		console.log(dataObject);$http.post($scope.registration_url,dataObject,{})

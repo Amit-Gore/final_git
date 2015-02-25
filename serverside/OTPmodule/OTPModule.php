@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display-errors','on');
-include_once($_SERVER['DOCUMENT_ROOT'].'/angularFiles/Angularjs-Healthserve.in/serverside/mysql_crud.php');
-include_once('NotificationModuleFunctions.php');
-include_once('github_otp.php');
+//include_once($_SERVER['DOCUMENT_ROOT'].'/angularFiles/Angularjs-Healthserve.in/serverside/mysql_crud.php');
+//include_once('NotificationModuleFunctions.php');
+//include_once('github_otp.php');
 
 /* session_start();
 $_SESSION['userID']=3; // for temporary use. Testing purpose
@@ -35,13 +35,31 @@ function OTPgenerate()
   return $str;
 }
 
+
+function new_api_OTPsend($mobilenumber)
+{
+
+  #echo $mobilenumber;
+  $string=OTPgenerate();
+  /*$r = new HttpRequest('http://apivm.valuemobo.com/SMS/SMS_ApiKey.asmx/SMS_APIKeyNUC?apiKey=KsRsJ0x7Zwjys1E&cellNoList="8149426686"&msgText=HiAmitGore&senderId=HSCCLN', HttpRequest::METH_GET);
+  try {
+    $r->send();
+    
+	 } catch (HttpException $ex) {
+     echo $ex;
+     }*/
+  $ch = curl_init("http://apivm.valuemobo.com/SMS/SMS_ApiKey.asmx/SMS_APIKeyNUC?apiKey=KsRsJ0x7Zwjys1E&cellNoList=".$mobilenumber."&msgText=Your+OTP+is%3A".$string."&senderId=HSCCLN");
+  curl_exec($ch);
+  curl_close($ch);
+  return $string;
+}
 function OTPsend($mobilenumber)
 {
 
   #echo $mobilenumber;
   $string=OTPgenerate();
   //echo $string;
-  SMSNotify_OTP($mobilenumber,$string);
+   SMSNotify_OTP($mobilenumber,$string);
   return $string;
 }
 

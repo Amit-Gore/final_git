@@ -3,6 +3,8 @@
 app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http, $location) {
 
     var doc_name = $routeParams.param11;
+    $scope.speciality=$routeParams.speciality;
+    $scope.area=$routeParams.area;
 
     $scope.url = 'serverside/search/search_result.php'; // The url of php file which is intended to populate $scope with the help of AJAX call
 
@@ -148,6 +150,91 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
         });
     }
 
+    
+    $scope.searchBySpeciality = function() {
+        //Creating the http post request here
+        $http.post($scope.url, {
+            "speciality":$scope.speciality,
+            "area":$scope.area
+        }).
+        success(function(data, status) {
+            //alert('success');
+            $scope.status = status;
+            $rootScope.cards = data;
+            $scope.result = data;
+            //console.log($scope.data);
+
+            window.location.replace('#/search/'+ $scope.speciality+'/'+$scope.area);
+            //window.location.replace('#/search');
+            //$location.path('#/search');
+
+
+
+
+        }).
+        error(function(data, status) {
+            alert('Failure');
+            $scope.data = data || "Request failed";
+            $scope.status = status;
+        });
+    }
+    
+    $scope.searchBySpeciality = function() {
+        //Creating the http post request here
+        $http.post($scope.url, {
+            "speciality":$scope.speciality,
+            "area":$scope.area
+        }).
+        success(function(data, status) {
+            //alert('success');
+            $scope.status = status;
+            $rootScope.cards = data;
+            $scope.result = data;
+            //console.log($scope.data);
+
+            window.location.replace('#/search/'+ $scope.speciality+'/'+$scope.area);
+            //window.location.replace('#/search');
+            //$location.path('#/search');
+
+
+
+
+        }).
+        error(function(data, status) {
+            alert('Failure');
+            $scope.data = data || "Request failed";
+            $scope.status = status;
+        });
+    }
+    
+    
+    if($scope.area||$scope.speciality)
+    	{
+    	  $scope.searchBySpeciality();
+    	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     $scope.show_calandar = function(doc_id) {
         $scope.url = 'serverside/search/search_result_calandar.php';

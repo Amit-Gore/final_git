@@ -11,7 +11,23 @@ include_once("../mysql_crud.php");
 
 $data = file_get_contents("php://input");
 $objData = json_decode($data);
+//print_r($objData);exit();
 //$objData->data="jagtap";
+if(isset($objData->speciality)or isset($objData->area) )
+{
+	if(isset($objData->speciality))
+	$objData->speciality=htmlspecialchars($objData->speciality);
+	if(isset($objData->area))
+	$objData->area=htmlspecialchars($objData->area);
+	
+	$resultArray=SearchBySpecialityAndArea2($objData->speciality,$objData->area,0,100);
+	$resultArray=json_encode($resultArray);
+    print_r($resultArray);
+	exit();
+}
+if(isset($objData->data))
+$objData->data=htmlspecialchars($objData->data);
+
 $resultArray=SearchByName2($objData->data,0,100);
 $resultArray=json_encode($resultArray);
 print_r($resultArray);

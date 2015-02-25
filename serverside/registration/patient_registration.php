@@ -17,7 +17,8 @@ $gender="male";
  include_once('../OTPmodule/OTPModule.php');
  include_once('../mysql_crud.php');
  
- $OTP=OTPsend($mobilenumber);
+ #$OTP=OTPsend($mobilenumber);
+ $OTP=new_api_OTPsend($mobilenumber);
  #echo $OTP;
  $OTP=crypt($OTP);
  $password=crypt($password);

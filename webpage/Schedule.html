@@ -168,6 +168,7 @@
                                  <p>
                                    Select Date From
                                  </p>
+                                 
                                  <div class="input-group ui-datepicker" >
                                    <input type="date" 
                                    class="form-control"
@@ -215,7 +216,7 @@
                            
                            
                            <tab heading="Weekly" select="alertMe_weekly();reset();">
-                             
+                             <input ng-model="type.textw" type="text" ng-hide="1" />
                              <div>
 								<h4  style="color:rgb(67,185,123);text-align:center;cursor:pointer"	>
                                     <i class="fa fa-calendar-o fa-2x"></i>
@@ -323,7 +324,7 @@
 									Monthly
 								  </tab-heading>
                              <div class="row">
-								
+								<input ng-model="type.textm" type="text" ng-hide="1" />
 							 
                                <div class="col-md-6">
 									
@@ -807,7 +808,7 @@
 						
 						    <div style="text-align:center">
                                 <button class="btn btn-info btn-circle" type="button">
-                                      <i tooltip-placement="top" tooltip="Preview Schedule" tooltip-append-to-body="true" ng-click="preview = !preview "  class="fa fa-eye fa-2x">
+                                      <i tooltip-placement="top" tooltip="Preview Schedule" tooltip-append-to-body="true" ng-click="preview = !preview ;validateTimings();"  class="fa fa-eye fa-2x">
                                       </i>
                                 </button>
 								
@@ -830,6 +831,8 @@
 			
 			<div class="panel">
 				<div class="panel-body">
+					
+					<h5 ng-if="validation_bool" style="color:red">{{validation}}</h5>
 					<h4 style="text-align:center"><b>Slots</b></h4>
 					<table class="table table-hover">
 						<thead>
@@ -882,7 +885,7 @@
 				</div>	
 			</div>
 			
-			<div class="panel">
+			<div ng-if="!validation_bool" class="panel">
 				<div class="panel-body">
 				<h4 style="text-align:center"><b>Repeating My Schedule For </b></h4>
 				<hr>
@@ -907,10 +910,10 @@
 			
 				
 			
-		<div class="panel">
+		<div class="panel" ng-if="!validation_bool">
            	<div class="panel-body">
 			    <div style="text-align:center">
-        			<button class="btn btn-success btn-circle" type="submit" ng-click="submit()">
+        			<button   class="btn btn-success btn-circle" type="submit" ng-click="validateTimings_before_submit()">
 						<i tooltip-placement="top" tooltip="Submit" tooltip-append-to-body="true"  class="fa fa-check fa-2x">
                         </i>
                     </button>

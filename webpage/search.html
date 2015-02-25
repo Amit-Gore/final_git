@@ -20,7 +20,11 @@
             </ol>
 			
 			<div class="col-lg-6" ng-controller="doctor_search">
-			<center><h3>Showing  {{cards.length}}  results for "{{keywords}}" </h3></center>
+			<center><h4 ng-if="keywords">Showing  {{cards.length}}  results for "{{keywords}}" </h4></center>
+			<center><h4 ng-if="speciality && area">Showing  {{cards.length}}  results for "{{speciality}}" nearby "{{area}}" </h4></center>
+			<center><h4 ng-if="speciality && !area">Showing  {{cards.length}}  results for speciality "{{speciality}}" </h4></center>
+			<center><h4 ng-if="!speciality && area">Showing  {{cards.length}}  results for area near"{{area}}" </h4></center>
+			
 			</div>
 			<div class="col-lg-3 pull-right">
 			
@@ -75,8 +79,8 @@
 					 <input type="checkbox" ng-model="filter[area]" /> {{area}}</b>
 					 </th>
 					 <br> --> 
-					    <div style="padding-left:10px;" ng-repeat="areaa in getArea()">
-							<b><input type="checkbox" ng-model="filter[areaa]" /> {{areaa}}</b>
+					    <div style="padding-left:10px;" ng-repeat="area in getArea()">
+							<b><input type="checkbox" ng-model="filter[area]" /> {{area}}</b>
 						</div> 
 					</tr>
 				</div>

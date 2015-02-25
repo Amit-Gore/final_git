@@ -104,7 +104,7 @@ app.controller('book_appointment',function($scope,$routeParams,$rootScope,$http)
 		$http.post($scope.save_to_database_url,dataObject,{})
 		.success(function(dataFromServer, status, headers, config) {
 			  //alert("success");
-			 // window.location.replace('#/thankyou');
+			  window.location.replace('#/thankyou');
 	            console.log(dataFromServer);
 				window.location.replace('#/thankyou/'+dataFromServer+'/'+doctor_id);
 				//redirecttoThankYou(dataFromServer);
