@@ -10,7 +10,7 @@
  include_once("../../PHPMailer/PHPMailerAutoload.php");
  include_once("../../notifications/NotificationModuleFunctions.php");
  include_once("../../dashboards/patient_dashboard/PatientDashboardEssentialFunctions.php");
- 
+ include_once("../../dashboards/doctor_dashboard/dashboard_home_related/DoctorDashboardEssentialFunctions.php");
  $data = file_get_contents("php://input");
  $objData = json_decode($data);
  $app_id=$objData->app_id;

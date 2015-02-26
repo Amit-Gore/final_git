@@ -54,18 +54,7 @@
  
  */
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
  
  /*
   * Function Descripton:
@@ -540,8 +529,10 @@
 	 /*Notification related function calls
 	  * */
 	  if(isset($result[0]['contactNumber']))
-	  SMSNotify_AppointmentStatus($result[0]['contactNumber'],$slot,$app_date,$doctor_schedule_displayname[0]['DisplayName'],"Waiting for doctor's confirmation..");
-	  
+	  {
+	  newapi_SMSNotify_AppointmentStatus($result[0]['contactNumber'],$slot,$app_date,$doctor_schedule_displayname[0]['DisplayName'],"Waiting for doctor's confirmation..");
+	  //SMSNotify_AppointmentStatus($result[0]['contactNumber'],$slot,$app_date,$doctor_schedule_displayname[0]['DisplayName'],"Waiting for doctor's confirmation..");
+	  }
 	  if(isset($result[0]['user_email']))
 	  {
 	  $subject="Your request for appointment has been noted.";	
