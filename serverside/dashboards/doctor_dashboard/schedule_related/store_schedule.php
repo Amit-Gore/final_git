@@ -33,14 +33,30 @@ print_r($objData['repeat'][0]['from_w']);exit();*/
 
 	if(isset($objData['repeat'][0]['from_m']))
 	{
-		$repeat['type']="m";
+		$is_datewise=false;
+		for($i=0;$i<31;$i++)
+		{
+			if(isset($objData['repeat'][0]['m_dates'][$i]))
+			$is_datewise=true;
+		}
+		
+		
+		if($is_datewise) {
+			$repeat['type']="m";
+			$repeat['month_dayArray']=$objData['repeat'][0]['m_dates'];
+		}
+		else {
+			$repeat['type']="mwd";
+			$repeat['month_dayArray']=$objData['repeat'][0]['m_days'];
+		}
+		
 		$repeat['from']=$objData['repeat'][0]['from_m'];
 		$repeat['to']=$objData['repeat'][0]['to_m'];
-		$repeat['month_dayArray']=$objData['repeat'][0]['m_dates'];
+		
 		
 	}
 
-  print_r($repeat);
+  //print_r($repeat);
 
 
 #print_r($objData->repeat->type);

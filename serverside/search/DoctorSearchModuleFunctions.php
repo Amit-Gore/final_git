@@ -393,9 +393,18 @@ function SearchByName2($search_string,$offset,$rec_limit)
    if(strlen($search_string)>=1 && $search_string !==' ')
    {
 		 $db=new Database();
-		 $db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+		 /*$db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
 									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
 									',NULL,' FirstName LIKE "%'.$search_string.'%" OR LastName LIKE "%'.$search_string.'%" OR ss_name LIKE "%'.$search_string.'%" GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+           */ 
+           $db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
+									',NULL,' levenshteinE("'.$search_string.'",`FirstName`)
+					 BETWEEN 0 AND 5 OR levenshteinE("'.$search_string.'", `LastName`)
+					 BETWEEN 0 AND 5 OR levenshteinE("'.$search_string.'", `ss_name`)
+					 BETWEEN 0 AND 5 GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+           
+            
             $res = $db->getResult();
 			//echo "<br><br><br><br>";
 			//print_r($res);
@@ -477,20 +486,22 @@ else
 		 $db=new Database();
 		 $db->connect();
 		 
-		 if($speciality=='')
+		 if($speciality!='undefined')
 		 {
 		 	$db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
 									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
 									',NULL,
-					 'speciality LIKE "%'.$speciality.'%" GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+					 'levenshteinE("'.$speciality.'",`speciality`)
+					 BETWEEN 0 AND 5 GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
 		 $res=$db->getResult();
 		 }
-		 else if($area=='')
+		 else if($area!='undefined')
 		 {
 		 	$db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
 									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
 									',NULL,
-					 'area LIKE "%'.$area.'%" GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+					 'levenshteinE("'.$area.'",`area`)
+					 BETWEEN 0 AND 5 GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
 		 $res=$db->getResult();
 		 	
 		 } 

@@ -185,8 +185,19 @@
  	}
  	if($repeat['type']=="mwd")//day-wise monthly repeat
  	{
- 		$dates=monthly_weekday_date_range($repeat['from'],$repeat['to'],$repeat['month_weekday_Array']);
  		
+ 		$dates=monthly_weekday_date_range($repeat['from'],$repeat['to'],$repeat['month_dayArray']);
+ 		foreach($dates as $singleDate){
+ 			$database_storage[$singleDate]=$slots;
+ 		}
+ 		ksort($database_storage);	// sort it by date as a key(ksort is compatible with yyyy-mm-dd date format)
+							 		//There's no need to remove the hyphens, ksort will do an alphanumeric comparison on the string keys, 
+							 		//and the yyyy-mm-dd format works perfectly well as the lexical order is the same as the actual date order.
+ 		$database_storage=json_encode($database_storage);
+ 		#$db->update('doctor_info',array('schedule'=>$database_storage),'doc_id="'.$doc_id.'"');
+ 		$db->sql("UPDATE doctor_info SET schedule='$database_storage' WHERE doc_id=$doc_id");
+ 		$res=$db->getResult();
+        $db->disconnect();
  	}
 
  }
