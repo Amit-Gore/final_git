@@ -1,4 +1,4 @@
-<?php
+<?php 
 /*
  * Created on Feb 9, 2015
  *
@@ -9,13 +9,13 @@
  //echo getcwd() ;exit();
  //include_once("../../../mysql_crud.php");
  #include_once("C:xampp/htdocs/angularFiles/final_git/serverside/mysql_crud.php");
- include_once('C:xampp/htdocs/final_git/serverside/notifications/NotificationModuleFunctions.php');
- include_once("C:xampp/htdocs/final_git/serverside/PHPMailer/PHPMailerAutoload.php");
- include_once('C:xampp/htdocs/final_git/serverside/dashboards/doctor_dashboard/dashboard_home_related/DoctorDashboardEssentialFunctions.php');
- include_once('C:xampp/htdocs/final_git/serverside/bookappointment/AppointmentModuleFunctions.php');
+ include_once('C:xampp/htdocs/angularFiles/final_git/serverside/notifications/NotificationModuleFunctions.php');
+ include_once("C:xampp/htdocs/angularFiles/final_git/serverside/PHPMailer/PHPMailerAutoload.php");
+ include_once('C:xampp/htdocs/angularFiles/final_git/serverside/dashboards/doctor_dashboard/dashboard_home_related/DoctorDashboardEssentialFunctions.php');
+ include_once('C:xampp/htdocs/angularFiles/final_git/serverside/bookappointment/AppointmentModuleFunctions.php');
  
- /*
- $doc_id=3;
+ 
+ /*$doc_id=3;
   $doc_id_array=array(1,2);
   $TriggeringDate="2015-02-15";
   $dateArray=array("2015-02-15");
@@ -40,7 +40,8 @@
   //print_r($repeat['dayArray']);exit();
   $repeat['from']="2015-02-11";
   $repeat['to']="2015-02-28";
-  #daywise_date_range($repeat['from'],$repeat['to'],$repeat['dayArray']);
+  $repeat['dayArray']=array(1,0,0,0,0,0,1);
+ // daywise_date_range($repeat['from'],$repeat['to'],$repeat['dayArray']);
   #print_r($repeat);exit();
  
   #storeSchedule($doc_id,$slots,$repeat);exit();
@@ -51,20 +52,9 @@
    
  //print_r(monthly_date_range($repeat['from'],$repeat['to'],$repeat['month_dayArray']));exit();
  
- 
- 
  */
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
  
  /*
   * Function Descripton:
@@ -184,8 +174,19 @@
  	}
  	if($repeat['type']=="mwd")//day-wise monthly repeat
  	{
- 		$dates=monthly_weekday_date_range($repeat['from'],$repeat['to'],$repeat['month_weekday_Array']);
  		
+ 		$dates=monthly_weekday_date_range($repeat['from'],$repeat['to'],$repeat['month_dayArray']);
+ 		foreach($dates as $singleDate){
+ 			$database_storage[$singleDate]=$slots;
+ 		}
+ 		ksort($database_storage);	// sort it by date as a key(ksort is compatible with yyyy-mm-dd date format)
+							 		//There's no need to remove the hyphens, ksort will do an alphanumeric comparison on the string keys, 
+							 		//and the yyyy-mm-dd format works perfectly well as the lexical order is the same as the actual date order.
+ 		$database_storage=json_encode($database_storage);
+ 		#$db->update('doctor_info',array('schedule'=>$database_storage),'doc_id="'.$doc_id.'"');
+ 		$db->sql("UPDATE doctor_info SET schedule='$database_storage' WHERE doc_id=$doc_id");
+ 		$res=$db->getResult();
+        $db->disconnect();
  	}
 
  }
@@ -528,8 +529,10 @@
 	 /*Notification related function calls
 	  * */
 	  if(isset($result[0]['contactNumber']))
-	  SMSNotify_AppointmentStatus($result[0]['contactNumber'],$slot,$app_date,$doctor_schedule_displayname[0]['DisplayName'],"Waiting for doctor's confirmation..");
-	  
+	  {
+	  newapi_SMSNotify_AppointmentStatus($result[0]['contactNumber'],$slot,$app_date,$doctor_schedule_displayname[0]['DisplayName'],"Waiting for doctor's confirmation..");
+	  //SMSNotify_AppointmentStatus($result[0]['contactNumber'],$slot,$app_date,$doctor_schedule_displayname[0]['DisplayName'],"Waiting for doctor's confirmation..");
+	  }
 	  if(isset($result[0]['user_email']))
 	  {
 	  $subject="Your request for appointment has been noted.";	

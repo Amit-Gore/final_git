@@ -6,6 +6,7 @@
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
  
+ 
 function fetchAppointmentData($patientID)
 {
 $db=new Database();
@@ -33,14 +34,17 @@ function cancelAppointment($app_id)
 		  $db->update('appointment_info',array('AppointmentStatus' => "4"),'AppointmentId = "'.$app_id.'"');
 		 
           //UpdateAppointmentStatistics('rejected',$doc_id);
+          $doc_id=$appData[0]['DoctorId'];
           UpdateAppointmentStatistics('cancelled',$appData[0]['DoctorId']);		 
-		  
-		  
-		 /* if(isset($patientData[0]['user_email'])==true){
-		  StatusChangeVerification($patientData[0]['user_email'],$doc_name,$appData[0]['AppointmentSlot'],$appData[0]['AppointmentDate'],$subject,"Cancelled by the Doctor");
+		  $db->select('doctor_info','DisplayName',NULL,'doc_id='.$doc_id.'');
+		  $doctorData=$db->getResult();
+		  //print_r($doctorData);exit();
+		  if(isset($patientData[0]['user_email'])==true){
+		  StatusChangeVerification($patientData[0]['user_email'],$doctorData[0]['DisplayName'],$appData[0]['AppointmentSlot'],$appData[0]['AppointmentDate'],$subject,"Cancelled by the Doctor");
 		  } 
-		  
-		  SMSNotify_AppointmentStatus($patientData[0]['contactNumber'],$SlotTiming[$appData[0]['AppointmentSlot']],$appData[0]['AppointmentDate'],$doc_name,$Status);
-		 */
+		 
+		 //StatusChangeVerification($result[0]['user_email'],$doctor_schedule_displayname[0]['DisplayName'],$slot,$app_date,$subject,"Waiting for Doctor Confirmation");
+		  newapi_SMSNotify_AppointmentStatus($patientData[0]['contactNumber'],$appData[0]['AppointmentSlot'],$appData[0]['AppointmentDate'],$doctorData[0]['DisplayName'],$Status);
+		 
 }
 ?>

@@ -7,6 +7,7 @@
  #$objData = json_decode($data);
  $OTP=htmlspecialchars($data);
  session_start();
+ //print_r($_SESSION['patient']['contactNumber']);exit();
  if(isset($_SESSION['patient']['contactNumber']))
  {
     	

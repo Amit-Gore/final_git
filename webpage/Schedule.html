@@ -161,397 +161,283 @@
 											  </div>
 										  </div>
 										  
-										 <!--  <div style="text-align:center">
-											<a class="btn btn-primary btn-circle" ng-click="slot1 = !slot1"  >
-											  <i tooltip-placement="top" tooltip="Add Another Slot 1" tooltip-append-to-body="true" class="fa fa-plus fa-2x">
-											  </i>
-											</a>
-										  </div> -->
-								  </div>
-							  </div>
-					  </div>
-					  </div>
-					 
-						<section>
-							<div id="space-for-buttons"></div>
-							<addbuttonsbutton></addbuttonsbutton>
-						</section>
-					 
-					   <!-- Repeat panel -->
-					   <div class="panel">
-						 <div class="panel-body"  >
-						   <div class="col-md-12">
-							 <div class="row">
-							   <div class="divider">
-							   </div>
-							   <h4 ng-click="sch = !sch" style="cursor:pointer;color:#292827;text-align:center">
-								 Repeat My Schedule For
-							   </h4>
+
+                                          <div class="row">
+                                            <h4>
+                                              Select Time 
+                                            </h4>
+                                            <div class="col-md-6">
+                                              <p>
+                                                From
+                                              </p>
+                                              <div data-ng-controller="TimepickerDemoCtrl" >
+                                                <div   name="time1" style="display:inline-block;">
+                                                 <!--  <timepicker class="ui-timepicker" required >
+                                                  </timepicker> -->
+												  <input type="time" class="form-control"	ng-model="myForm.mytime1" ng-required="true" 
+														>
+                                                </div>
+                                                
+                                              </div>
+                                            <span style="color:red" ng-show="myForm.time1.$dirty && myForm.time1.$invalid">
+											  <span ng-show="myForm.time1.$error.required">Time is required.</span>
+										    </span>
+                                            </div>
+                                            
+                                            <div class="col-md-6">
+                                              <p>
+                                                To
+                                              </p>
+                                              <div  data-ng-controller="TimepickerDemoCtrl" >
+                                                <div  name="time2" style="display:inline-block;">
+                                                  <input type="time" class="form-control"	ng-model="myForm.mytime2" ng-required="true" 
+														>
+                                                </div>
+                                                
+                                              </div>
+											<span style="color:red" ng-show="myForm.time2.$dirty && myForm.time2.$invalid">
+											  <span ng-show="myForm.time2.$error.required">Time is required.</span>
+										    </span>
+                                            </div>
+                                          </div>
+                                          <br>
+                                          <br>
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                              <p>
+                                                Average Time per Patients
+                                              </p>
+                                              <span class="ui-select" >
+                                                <select class="form-control" required ng-model="myForm.selected1">
+                                                  <option ng-value="15">
+                                                    10 Min
+                                                  </option >
+                                                  <option ng-value="15">
+                                                    15 Min
+                                                  </option>
+                                                  <option ng-value="20">
+                                                    20 Min
+                                                  </option>
+                                                  <option ng-value="30">
+                                                    30 Min
+                                                  </option>
+                                                  <option ng-value="60">
+                                                    60 Min
+                                                  </option>
+                                                </select>
+                                              </span>
+                                            </div>
+                                            
+                                            <div class="col-md-6">
+                                              <p>
+                                                Location
+                                              </p>
+                                              <span class="ui-select" >
+                                                <select  class="form-control" required ng-model="myForm.selected2">
+                                                  <option ng-value="Aundh">Aundh</option>
+                                                  <option ng-value="Koregaon Park">Koregaon Park</option>
+                                                </select>
+                                              </span>
+                                            </div>
+                                          </div>
+                                      </div>
+                                  </div>
+								  
+                                 <!--  <div style="text-align:center">
+                                    <a class="btn btn-primary btn-circle" ng-click="slot1 = !slot1"  >
+                                      <i tooltip-placement="top" tooltip="Add Another Slot 1" tooltip-append-to-body="true" class="fa fa-plus fa-2x">
+                                      </i>
+                                    </a>
+                                  </div> -->
+                          </div>
+                      </div>
+              </div>
+              </div>
+             
+				<section>
+					<div id="space-for-buttons"></div>
+					<addbuttonsbutton></addbuttonsbutton>
+				</section>
+             
+               <!-- Repeat panel -->
+               <div class="panel">
+                 <div class="panel-body"  >
+                   <div class="col-md-12">
+                     <div class="row">
+                       <div class="divider">
+                       </div>
+                       <h4 ng-click="sch = !sch" style="cursor:pointer;color:#292827;text-align:center">
+                         Repeat My Schedule For
+                       </h4>
+                       <br>
+                       <div class="ui-tab-container" collapse="!sch" >
+                         <tabset justified="true" class="ui-tab" >
+                           <tab heading="Daily" select="reset();"  >
+                             <div class="row" >
+                               <div class="col-md-6">
+                                 <p>
+                                   Select Date From
+                                 </p>
+                                 
+                                 <div class="input-group ui-datepicker" >
+                                   <input type="date" 
+                                   class="form-control"
+                                   
+                                   ng-model="scheduleForm.dt1"
+                                   is-open="opened"
+                                   min="minDate"
+                                   max="'2015-06-22'"
+                                   datepicker-options="dateOptions" 
+                                   date-disabled="disabled(date, mode)"
+                                   ng-required="true" 
+                                   close-text="Close">
+                                   <span class="input-group-addon">
+                                     <i class="fa fa-calendar">
+                                     </i>
+                                   </span>
+                                 </div>
+                               </div>
+                               <div class="col-md-6">
+                                 <p>
+                                   Select Date To
+                                 </p>
+                                 <div class="input-group ui-datepicker" >
+                                   <input type="date" 
+                                   class="form-control"
+                                 
+                                   ng-model="scheduleForm.dt2"
+                                   is-open="opened"
+                                   min="minDate"
+                                   max="'2015-06-22'"
+                                   datepicker-options="dateOptions" 
+                                   date-disabled="disabled(date, mode)"
+                                   ng-required="true" 
+                                   close-text="Close">
+                                   <span class="input-group-addon">
+                                     <i class="fa fa-calendar">
+                                     </i>
+                                   </span>
+                                 </div>
+                               </div>
+                               
+                             </div>
+                             
+                           </tab>
+                           
+                           
+                           <tab heading="Weekly" select="alertMe_weekly();reset();">
+                             <input ng-model="type.textw" type="text" ng-hide="1" />
+                             <div>
+								<h4  style="color:rgb(67,185,123);text-align:center;cursor:pointer"	>
+                                    <i class="fa fa-calendar-o fa-2x"></i>
+										Select Days
+								</h4>
 							   <br>
-							   <div class="ui-tab-container" collapse="!sch" >
-								 <tabset justified="true" class="ui-tab" >
-								   <tab heading="Daily" select="reset();"  >
-									 <div class="row" >
-									   <div class="col-md-6">
-										 <p>
-										   Select Date From
-										 </p>
-										 <div class="input-group ui-datepicker" >
-										   <input type="date" 
-										   class="form-control"
-										   
-										   ng-model="scheduleForm.dt1"
-										   is-open="opened"
-										   min="minDate"
-										   max="'2015-06-22'"
-										   datepicker-options="dateOptions" 
-										   date-disabled="disabled(date, mode)"
-										   ng-required="true" 
-										   close-text="Close">
-										   <span class="input-group-addon">
-											 <i class="fa fa-calendar">
-											 </i>
-										   </span>
-										 </div>
-									   </div>
-									   <div class="col-md-6">
-										 <p>
-										   Select Date To
-										 </p>
-										 <div class="input-group ui-datepicker" >
-										   <input type="date" 
-										   class="form-control"
-										 
-										   ng-model="scheduleForm.dt2"
-										   is-open="opened"
-										   min="minDate"
-										   max="'2015-06-22'"
-										   datepicker-options="dateOptions" 
-										   date-disabled="disabled(date, mode)"
-										   ng-required="true" 
-										   close-text="Close">
-										   <span class="input-group-addon">
-											 <i class="fa fa-calendar">
-											 </i>
-										   </span>
-										 </div>
-									   </div>
-									   
-									 </div>
-									 
-								   </tab>
-								   
-								   
-								   <tab heading="Weekly" select="alertMe_weekly();reset();">
-									 
-									 <div>
-										<h4  style="color:rgb(67,185,123);text-align:center;cursor:pointer"	>
-											<i class="fa fa-calendar-o fa-2x"></i>
-												Select Days
-										</h4>
-									   <br>
-									   <dd style="text-align:center">
-										 <label class="ui-checkbox">
-										   <input ng-model="scheduleForm.sunday"  ng-true-value="1"  ng-init="0" type="checkbox"  >
-										   <span>
-											 Sunday
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.monday" ng-init="0" ng-true-value="1"  >
-										   <span>
-											 Monday
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.tuesday" ng-init="0"  ng-true-value="1"  >
-										   <span>
-											 Tuesday
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.wednesday" ng-init="0" ng-true-value="1" >
-										   <span>
-											 Wednesday
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.thursday" ng-init="0" ng-true-value="1"  >
-										   <span>
-											 Thursday
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.friday" ng-init="0" ng-true-value="1"  >
-										   <span>
-											 Friday
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										  <input type="checkbox" ng-model="scheduleForm.satureday" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 Saturday
-										   </span>
-										 </label>
-									   </dd>
-									   <br>
-									 </div>
-									 <br>
-									 <div class="row">
-									   <div class="col-md-6">
-										 <p>
-										   Select Date From
-										 </p>
-										 <div class="input-group ui-datepicker">
-										   <input type="date" 
-										   class="form-control"
-										   
-										   ng-model="scheduleForm.dt3"
-										   is-open="opened"
-										   min="minDate"
-										   max="'2015-06-22'"
-										   datepicker-options="dateOptions" 
-										   date-disabled="disabled(date, mode)"
-										   ng-required="true" 
-										   close-text="Close">
-										   <span class="input-group-addon">
-											 <i class="fa fa-calendar">
-											 </i>
-										   </span>
-										 </div>
-									   </div>
-									   <div class="col-md-6">
-										 <p>
-										   Select Date To
-										 </p>
-										 <div class="input-group ui-datepicker" >
-										   <input type="date" 
-										   class="form-control"
-										   
-										   ng-model="scheduleForm.dt4"
-										   is-open="opened"
-										   min="minDate"
-										   max="'2015-06-22'"
-										   datepicker-options="dateOptions" 
-										   date-disabled="disabled(date, mode)"
-										   ng-required="true" 
-										   close-text="Close">
-										   <span class="input-group-addon">
-											 <i class="fa fa-calendar">
-											 </i>
-										   </span>
-										 </div>
-									   </div>
-									   
-									 </div>
-									 
-								   </tab>
-								   <tab select="alertMe_monthly();reset();">
-										 <tab-heading>
-											Monthly
-										  </tab-heading>
-									 <div class="row">
-										
-									 
-									   <div class="col-md-6">
-											
-										<h4 ng-click="dates = !dates" style="color:rgb(67,185,123);text-align:center;cursor:pointer"	>
-											<i class="fa fa-calendar fa-2x"></i>
-												Select Dates
-											</h4>
-									   <br>
-									   
-										<dd collapse="!dates">
-										 <label class="ui-checkbox">
-										  <input type="checkbox" ng-model="scheduleForm.m1" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 01
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										  <input type="checkbox" ng-model="scheduleForm.m2"  ng-init="0" ng-true-value="1"   >
-										   <span>
-											 02
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										  <input type="checkbox" ng-model="scheduleForm.m3" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 03
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										  <input type="checkbox" ng-model="scheduleForm.m4" ng-init="0" ng-true-value="1"   >
-										   <span>
-											04
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m5" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 05
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m6" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 06
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m7" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 07
-										   </span>
-										 </label><br>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m8" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 08
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m9"ng-init="0" ng-true-value="1"   >
-										   <span>
-											 09
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m10" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 10
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										  <input type="checkbox" ng-model="scheduleForm.m11" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 11
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m12" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 12
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m13" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 13
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										  <input type="checkbox" ng-model="scheduleForm.m14" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 14
-										   </span>
-										 </label><br>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m15" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 15
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m16" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 16
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m17" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 17
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m18" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 18
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m19" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 19
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m20" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 20
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m21" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 21
-										   </span>
-										 </label><br>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m22" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 22
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m23" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 23
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m24" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 24
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m25" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 25
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m26"  ng-init="0" ng-true-value="1"   >
-										   <span>
-											 26
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m27" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 27
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m28" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 28
-										   </span>
-										 </label><br>
-										 <label class="ui-checkbox">
-											<input type="checkbox" ng-model="scheduleForm.m29" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 29
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m30" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 30
-										   </span>
-										 </label>
-										 <label class="ui-checkbox">
-										   <input type="checkbox" ng-model="scheduleForm.m31" ng-init="0" ng-true-value="1"   >
-										   <span>
-											 31
-										   </span>
-										 </label>
-									   </dd>
-									
-											<br><br>
-									   </div>
+							   <dd style="text-align:center">
+                                 <label class="ui-checkbox">
+                                   <input ng-model="scheduleForm.sunday"  ng-true-value="1"  ng-init="0" type="checkbox"  >
+                                   <span>
+                                     Sunday
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="scheduleForm.monday" ng-init="0" ng-true-value="1"  >
+                                   <span>
+                                     Monday
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="scheduleForm.tuesday" ng-init="0"  ng-true-value="1"  >
+                                   <span>
+                                     Tuesday
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="scheduleForm.wednesday" ng-init="0" ng-true-value="1" >
+                                   <span>
+                                     Wednesday
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                   <input type="checkbox" ng-model="scheduleForm.thursday" ng-init="0" ng-true-value="1"  >
+                                   <span>
+                                     Thursday
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                    <input type="checkbox" ng-model="scheduleForm.friday" ng-init="0" ng-true-value="1"  >
+                                   <span>
+                                     Friday
+                                   </span>
+                                 </label>
+                                 <label class="ui-checkbox">
+                                  <input type="checkbox" ng-model="scheduleForm.satureday" ng-init="0" ng-true-value="1"   >
+                                   <span>
+                                     Saturday
+                                   </span>
+                                 </label>
+                               </dd>
+							   <br>
+                             </div>
+                             <br>
+                             <div class="row">
+                               <div class="col-md-6">
+								 <p>
+                                   Select Date From
+                                 </p>
+                                 <div class="input-group ui-datepicker">
+                                   <input type="date" 
+                                   class="form-control"
+                                   
+                                   ng-model="scheduleForm.dt3"
+                                   is-open="opened"
+                                   min="minDate"
+                                   max="'2015-06-22'"
+                                   datepicker-options="dateOptions" 
+                                   date-disabled="disabled(date, mode)"
+                                   ng-required="true" 
+                                   close-text="Close">
+                                   <span class="input-group-addon">
+                                     <i class="fa fa-calendar">
+                                     </i>
+                                   </span>
+                                 </div>
+                               </div>
+                               <div class="col-md-6">
+                                 <p>
+                                   Select Date To
+                                 </p>
+                                 <div class="input-group ui-datepicker" >
+                                   <input type="date" 
+                                   class="form-control"
+                                   
+                                   ng-model="scheduleForm.dt4"
+                                   is-open="opened"
+                                   min="minDate"
+                                   max="'2015-06-22'"
+                                   datepicker-options="dateOptions" 
+                                   date-disabled="disabled(date, mode)"
+                                   ng-required="true" 
+                                   close-text="Close">
+                                   <span class="input-group-addon">
+                                     <i class="fa fa-calendar">
+                                     </i>
+                                   </span>
+                                 </div>
+                               </div>
+                               
+                             </div>
+                             
+                           </tab>
+                           <tab select="alertMe_monthly();reset();">
+								 <tab-heading>
+									Monthly
+								  </tab-heading>
+                             <div class="row">
+								<input ng-model="type.textm" type="text" ng-hide="1" />
+							 
+                               <div class="col-md-6">
+
 									
 
 
@@ -841,6 +727,14 @@
 										
 									</div>
 						
+<<<<<<< HEAD
+=======
+						    <div style="text-align:center">
+                                <button class="btn btn-info btn-circle" type="button">
+                                      <i tooltip-placement="top" tooltip="Preview Schedule" tooltip-append-to-body="true" ng-click="preview = !preview ;validateTimings();"  class="fa fa-eye fa-2x">
+                                      </i>
+                                </button>
+>>>>>>> 803d4320ea80b7b28e6099b1122563966ec652f6
 								
 							</div>
 					   </div>
@@ -932,19 +826,85 @@
 						
 						
 					</div>
+
+               </div>
+               </div>
+               <!-- Form End panel -->
+		
+		
+			  
+		<div class="col-md-5" collapse="!preview" >  
+			<div class="panel">
+				<div class="panel-body">
+				<h4 style="text-align:center"><b>Date : {{myForm.Sch_date}}</b></h4>
+				</div>	
+			</div>
+			
+			<div class="panel">
+				<div class="panel-body">
 					
+					<h5 ng-if="validation_bool" style="color:red">{{validation}}</h5>
+					<h4 style="text-align:center"><b>Slots</b></h4>
+					<table class="table table-hover">
+						<thead>
+						<th>Slot</th>
+						<th>Avg Time</th>
+						<th>Location</th>
+						</thead>
+						<tbody>
+						<tr>
+							<td>
+							<h5 ng-show="myForm.mytime1"> {{myForm.mytime1}} - {{myForm.mytime2}}</h5>
+							<h5 ng-show="myForm.mytimefrom1"> {{myForm.mytimefrom1}} - {{myForm.mytimeto1}}</h5>
+							<h5 ng-show="myForm.mytimefrom2"> {{myForm.mytimefrom2}} - {{myForm.mytimeto2}}</h5>
+							<h5 ng-show="myForm.mytimefrom3"> {{myForm.mytimefrom3}} - {{myForm.mytimeto3}}</h5>
+							<h5 ng-show="myForm.mytimefrom4"> {{myForm.mytimefrom4}} - {{myForm.mytimeto4}}</h5>
+							<h5 ng-show="myForm.mytimefrom5"> {{myForm.mytimefrom5}} - {{myForm.mytimeto5}}</h5>
+							<h5 ng-show="myForm.mytimefrom6"> {{myForm.mytimefrom6}} - {{myForm.mytimeto6}}</h5>
+							<h5 ng-show="myForm.mytimefrom7"> {{myForm.mytimefrom7}} - {{myForm.mytimeto7}}</h5>
+							<h5 ng-show="myForm.mytimefrom8"> {{myForm.mytimefrom8}} - {{myForm.mytimeto8}}</h5>
+							<h5 ng-show="myForm.mytimefrom9"> {{myForm.mytimefrom9}} - {{myForm.mytimeto9}}</h5>
+							</td>
+							<td>
+							<h5 > {{myForm.selected1}} </h5>
+							<h5 > {{myForm.selectedpatient1}} </h5>
+							<h5 > {{myForm.selectedpatient2}} </h5>
+							<h5 > {{myForm.selectedpatient3}} </h5>
+							<h5 > {{myForm.selectedpatient4}} </h5>
+							<h5 > {{myForm.selectedpatient5}} </h5>
+							<h5 > {{myForm.selectedpatient6}} </h5>
+							<h5 > {{myForm.selectedpatient7}} </h5>
+							<h5 > {{myForm.selectedpatient8}} </h5>
+							<h5 > {{myForm.selectedpatient9}} </h5>
+							</td>
+							<td>
+							<h5> {{myForm.selected2}} </h5>
+							<h5> {{myForm.selectedlocation1}} </h5>
+							<h5> {{myForm.selectedlocation2}} </h5>
+							<h5> {{myForm.selectedlocation3}} </h5>
+							<h5> {{myForm.selectedlocation4}} </h5>
+							<h5> {{myForm.selectedlocation5}} </h5>
+							<h5> {{myForm.selectedlocation6}} </h5>
+							<h5> {{myForm.selectedlocation7}} </h5>
+							<h5> {{myForm.selectedlocation8}} </h5>
+							<h5> {{myForm.selectedlocation9}} </h5>
+							</td>
+						</tr>
 						
-					
-				<div class="panel">
-					<div class="panel-body">
-						<div style="text-align:center">
-							<button class="btn btn-success btn-circle" type="submit" ng-click="submit()">
-								<i tooltip-placement="top" tooltip="Submit" tooltip-append-to-body="true"  class="fa fa-check fa-2x">
-								</i>
-							</button>
-						</div>
-					</div>
-				</div>
+						</tbody>
+					</table>
+				</div>	
+			</div>
+			
+			<div ng-if="!validation_bool" class="panel">
+				<div class="panel-body">
+				<h4 style="text-align:center"><b>Repeating My Schedule For </b></h4>
+				<hr>
+				<h5 ><b>Daily </b> <br><br> From : {{scheduleForm.dt1}} - To : {{scheduleForm.dt2}}</h5>
+				
+				
+				<h5 ><b>Weekly </b> <br><br>Selected Days : <span ng-if="scheduleForm.sunday">Sunday </span>  <span ng-if="scheduleForm.monday"> Monday </span>  <span ng-if="scheduleForm.tuesday"> Tuesday </span> <span ng-if="scheduleForm.wednesday"> Wednesday </span> <span ng-if="scheduleForm.thursday"> Thursday </span> <span ng-if="scheduleForm.friday"> Friday </span> <span ng-if="scheduleForm.satureday"> Saturday </span><br><br> From : {{scheduleForm.dt3}} - To : {{scheduleForm.dt4}}</h5>
+
 				
 					
 						
@@ -957,6 +917,32 @@
 				
 				</form>
 			</div>
+
+			
+				
+			
+		<div class="panel" ng-if="!validation_bool">
+           	<div class="panel-body">
+			    <div style="text-align:center">
+        			<button   class="btn btn-success btn-circle" type="submit" ng-click="validateTimings_before_submit()">
+						<i tooltip-placement="top" tooltip="Submit" tooltip-append-to-body="true"  class="fa fa-check fa-2x">
+                        </i>
+                    </button>
+				</div>
+			</div>
+        </div>
+		
+			
+				
+		</div>	
+		
+		
+		
+		
+		
+		
+		</form>
+
     </div>
 	
 	   

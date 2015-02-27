@@ -393,9 +393,18 @@ function SearchByName2($search_string,$offset,$rec_limit)
    if(strlen($search_string)>=1 && $search_string !==' ')
    {
 		 $db=new Database();
-		 $db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+		 /*$db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
 									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
 									',NULL,' FirstName LIKE "%'.$search_string.'%" OR LastName LIKE "%'.$search_string.'%" OR ss_name LIKE "%'.$search_string.'%" GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+           */ 
+           $db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
+									',NULL,' levenshteinE("'.$search_string.'",`FirstName`)
+					 BETWEEN 0 AND 5 OR levenshteinE("'.$search_string.'", `LastName`)
+					 BETWEEN 0 AND 5 OR levenshteinE("'.$search_string.'", `ss_name`)
+					 BETWEEN 0 AND 5 GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+           
+            
             $res = $db->getResult();
 			//echo "<br><br><br><br>";
 			//print_r($res);
@@ -472,25 +481,39 @@ else
 	 //print_r($area);
 	 if( !($speciality ==''&& $area==''))
 	 {
+		 
+		 
 		 $db=new Database();
-		 //$db->connect();
-		 $db->select('doctor_info','doctor_info.doc_id,count(doctor_info.doc_id) as usedSlot,
-									ai.AppointmentDate,ai.AppointmentSlot, doctor_info.FirstName,doctor_info.LastName,
-									doctor_info.speciality,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee,
-									sc.MonSlots ,sc.TuesSlots,sc.WedSlots,sc.ThurSlots,sc.FriSlots,sc.SatSlots,sc.SunSlots,
-									ai.AppointmentId',
-					        'doctor_schedule sc ON doctor_info.doc_id = sc.DoctorId 
-							LEFT JOIN appointment_info ai ON doctor_info.doc_id = ai.DoctorId 
-													   AND (ai.AppointmentDate BETWEEN CURDATE() AND CURDATE()+6)',
-					 'speciality LIKE "%'.$speciality.'%" OR area LIKE "%'.$area.'%" LIMIT '.$offset.','.$rec_limit.'',NULL);
+		 $db->connect();
+		 
+		 if($speciality!='undefined')
+		 {
+		 	$db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
+									',NULL,
+					 'levenshteinE("'.$speciality.'",`speciality`)
+					 BETWEEN 0 AND 5 GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
 		 $res=$db->getResult();
-		 $db->disconnect();
+		 }
+		 else if($area!='undefined')
+		 {
+		 	$db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
+									',NULL,
+					 'levenshteinE("'.$area.'",`area`)
+					 BETWEEN 0 AND 5 GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+		 $res=$db->getResult();
+		 	
+		 } 
+		 else{ 
+		 $db->select('doctor_info','doctor_info.schedule,doctor_info.doc_id,doctor_info.FirstName,doctor_info.LastName,
+									doctor_info.speciality,doctor_info.DocImage,doctor_info.area,doctor_info.address,doctor_info.lat,doctor_info.lng,doctor_info.fee
+									',NULL,
+					 'speciality LIKE "%'.$speciality.'%" OR area LIKE "%'.$area.'%" GROUP BY doctor_info.doc_id LIMIT '.$offset.','.$rec_limit.'',NULL);
+		 $res=$db->getResult();
+		 }
 	if($res){
-			        $NumberofTuples= count($res, COUNT_RECURSIVE)/20;
-					/*  echo $NumberofTuples;
-					 echo"<br><br>";
-					 print_r($res);
-					 echo"<br><br>"; */
+			       
 					 $specialityRel = 0.6; # speciality weight percentage
 					 $areaRel = 0.4; # area weight percentage
 					 //return $res;
@@ -523,35 +546,23 @@ else
 						$i=0;
 						foreach($relTbl as $key => $value)
 						{
-						/* echo"<br>";
-						echo $key;
-						echo" and ";
-						echo $value;
-						echo "<br />". $res[$key]['FirstName'] . "". $res[$key]['LastName'] ." ". $res[$key]['address'] ." (". round($value, 3) ."%)";
-						echo"<br>"; */
+						
+						$resultArray[$i]['docCalandar']=availableSchedule($res[$key]['schedule'],3,0);
 						$resultArray[$i]['doc_id']=$res[$key]['doc_id'];
-						$resultArray[$i]['usedSlot']=$res[$key]['usedSlot'];
-						$resultArray[$i]['AppointmentDate']=$res[$key]['AppointmentDate'];
-						$resultArray[$i]['AppointmentSlot']=$res[$key]['AppointmentSlot'];
+						$resultArray[$i]['schedule']=$res[$key]['schedule'];
 						$resultArray[$i]['FirstName']=$res[$key]['FirstName'];
 						$resultArray[$i]['LastName']=$res[$key]['LastName'];
 						$resultArray[$i]['address']=$res[$key]['address'];
+						$resultArray[$i]['area']=$res[$key]['area'];
 						$resultArray[$i]['speciality']=$res[$key]['speciality'];
+						$resultArray[$i]['DocImage']=$res[$key]['DocImage'];
 						$resultArray[$i]['fee']=$res[$key]['fee'];
 						$resultArray[$i]['lat']=$res[$key]['lat'];
 						$resultArray[$i]['lng']=$res[$key]['lng'];
-						$resultArray[$i]['MonSlots']=$res[$key]['MonSlots'];
-						$resultArray[$i]['TuesSlots']=$res[$key]['TuesSlots'];
-						$resultArray[$i]['WedSlots']=$res[$key]['WedSlots'];
-						$resultArray[$i]['ThurSlots']=$res[$key]['ThurSlots'];
-						$resultArray[$i]['FriSlots']=$res[$key]['FriSlots'];
-						$resultArray[$i]['SatSlots']=$res[$key]['SatSlots'];
-						$resultArray[$i]['SunSlots']=$res[$key]['SunSlots'];
-						$resultArray[$i]['AppointmentId']=$res[$key]['AppointmentId'];
+						
 						$i++;
 						}
-						//echo'<br><br><br>';
-						//print_r($resultArray);
+						
 						return $resultArray;
 						/*Now make a return statement to return this $resultArray*/
 			 

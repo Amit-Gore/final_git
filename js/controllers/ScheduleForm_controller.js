@@ -1,11 +1,13 @@
 app.controller('ScheduleForm', function($scope, $http, $window) {
     $scope.count = 0;
     $scope.schedule_form_url = "serverside/dashboards/doctor_dashboard/schedule_related/store_schedule.php";
-
+    $scope.validate_slot_time_url="serverside/dashboards/doctor_dashboard/schedule_related/validate_slot_time.php";
+    //$scope.scheduleForm.repeatType;
+    $scope.validation_bool=1;
    
     $scope.submit = function() {
-
-        console.log("inside form");
+        
+    	var type=$scope.myForm.type;
         // var Weekly_CheckBoxes = {;$scope.myForm.sunday,};
         var dataObject = {
             slots: {
@@ -100,23 +102,20 @@ app.controller('ScheduleForm', function($scope, $http, $window) {
             },
             TriggerringDate: $scope.myForm.Sch_date,
             repeat: [
-				{//type:$scope.myForm.repeatType,
-                type: 'd',
-                from: $scope.scheduleForm.dt1,
-                to: $scope.scheduleForm.dt2
-				},
-				{//type:$scope.scheduleForm.repeatType,
-                type: 'w',
-				days : [$scope.scheduleForm.sunday,$scope.scheduleForm.monday,$scope.scheduleForm.tuesday,$scope.scheduleForm.wednesday,$scope.scheduleForm.thursday,$scope.scheduleForm.friday,$scope.scheduleForm.satureday],
-                from: $scope.scheduleForm.dt3,
-                to: $scope.scheduleForm.dt4
-				},
-				{//type:$scope.scheduleForm.repeatType,
-                type: 'm',
+				{
+				//type:$scope.scheduleForm.repeatType,
+                //type: 'w',
+                from_d: $scope.scheduleForm.dt1,
+                to_d: $scope.scheduleForm.dt2,
+                from_w: $scope.scheduleForm.dt3,
+                to_w: $scope.scheduleForm.dt4,
+                from_m: $scope.scheduleForm.dt5,
+                to_m: $scope.scheduleForm.dt6,
+                w_days : [$scope.scheduleForm.sunday,$scope.scheduleForm.monday,$scope.scheduleForm.tuesday,$scope.scheduleForm.wednesday,$scope.scheduleForm.thursday,$scope.scheduleForm.friday,$scope.scheduleForm.satureday],
 				m_dates : [$scope.scheduleForm.m1,$scope.scheduleForm.m2,$scope.scheduleForm.m3,$scope.scheduleForm.m4,$scope.scheduleForm.m5,$scope.scheduleForm.m6,$scope.scheduleForm.m7, $scope.scheduleForm.m8,$scope.scheduleForm.m9,$scope.scheduleForm.m10,$scope.scheduleForm.m11,$scope.scheduleForm.m12,$scope.scheduleForm.m13,$scope.scheduleForm.m14, $scope.scheduleForm.m15,$scope.scheduleForm.m16,$scope.scheduleForm.m17,$scope.scheduleForm.m18,$scope.scheduleForm.m19,$scope.scheduleForm.m20,$scope.scheduleForm.m21,  $scope.scheduleForm.m22,$scope.scheduleForm.m23,$scope.scheduleForm.m24,$scope.scheduleForm.m25,$scope.scheduleForm.m26,$scope.scheduleForm.m27,$scope.scheduleForm.m28, $scope.scheduleForm.m29,$scope.scheduleForm.m30,$scope.scheduleForm.m31],
-				m_days : [$scope.scheduleForm.mo1,$scope.scheduleForm.t1,$scope.scheduleForm.w1,$scope.scheduleForm.th1,$scope.scheduleForm.f1,$scope.scheduleForm.s1,$scope.scheduleForm.sun1, $scope.scheduleForm.mo2,$scope.scheduleForm.t2,$scope.scheduleForm.w2,$scope.scheduleForm.th2,$scope.scheduleForm.f2,$scope.scheduleForm.s2,$scope.scheduleForm.sun2, $scope.scheduleForm.mo3,$scope.scheduleForm.t3,$scope.scheduleForm.w3,$scope.scheduleForm.th3,$scope.scheduleForm.f3,$scope.scheduleForm.s3,$scope.scheduleForm.sun3,  $scope.scheduleForm.mo4,$scope.scheduleForm.t4,$scope.scheduleForm.w4,$scope.scheduleForm.th4,$scope.scheduleForm.f4,$scope.scheduleForm.s4,$scope.scheduleForm.sun4],
-                from: $scope.scheduleForm.dt5,
-                to: $scope.scheduleForm.dt6
+				m_days : [$scope.scheduleForm.mo1,$scope.scheduleForm.t1,$scope.scheduleForm.w1,$scope.scheduleForm.th1,$scope.scheduleForm.f1,$scope.scheduleForm.s1,$scope.scheduleForm.sun1, $scope.scheduleForm.mo2,$scope.scheduleForm.t2,$scope.scheduleForm.w2,$scope.scheduleForm.th2,$scope.scheduleForm.f2,$scope.scheduleForm.s2,$scope.scheduleForm.sun2, $scope.scheduleForm.mo3,$scope.scheduleForm.t3,$scope.scheduleForm.w3,$scope.scheduleForm.th3,$scope.scheduleForm.f3,$scope.scheduleForm.s3,$scope.scheduleForm.sun3,  $scope.scheduleForm.mo4,$scope.scheduleForm.t4,$scope.scheduleForm.w4,$scope.scheduleForm.th4,$scope.scheduleForm.f4,$scope.scheduleForm.s4,$scope.scheduleForm.sun4]
+                
+				
 				}
             ]
 
@@ -132,40 +131,107 @@ app.controller('ScheduleForm', function($scope, $http, $window) {
         .error(function(data, status, headers, config) {
             alert("Submitting form failed!");
         });
-
-        /* var dataObject2 = {
-				// Sch_date : $scope.myForm.Sch_date,
-				
-				//slots1 : slots,	
-				
-				
-				// slot_StartTime2: $scope.myForm.mytime3,
-				// slot_EndTime2: $scope.myForm.mytime4,
-				// slot_AvgPatientTime2: $scope.myForm.selected3,
-				// slot_Location2: $scope.myForm.selected4,
-				
-				// slot_StartTime3: $scope.myForm.mytime5,
-				// slot_EndTime3: $scope.myForm.mytime6,
-				// slot_AvgPatientTime3: $scope.myForm.selected5,
-				// slot_Location3: $scope.myForm.selected6,
-				
-				 RepeatDaily_StartDate : $scope.myForm.dt1,
-				 RepeatDaily_EndDate : $scope.myForm.dt2,
-				
-				 RepeatWeekly_StartDate : $scope.myForm.dt3,
-				 RepeatWeekly_Days : [$scope.myForm.sunday,$scope.myForm.monday,$scope.myForm.tuesday,$scope.myForm.wednesday,$scope.myForm.thursday,$scope.myForm.friday,$scope.myForm.satureday],
-				 RepeatWeekly_EndDate : $scope.myForm.dt4,
-				
-				 Repeatmonthly_StartDate : $scope.myForm.dt5,
-				 Repeatmonthly_Dates : [$scope.myForm.m1,$scope.myForm.m2,$scope.myForm.m3,$scope.myForm.m4,$scope.myForm.m5,$scope.myForm.m6,$scope.myForm.m7, $scope.myForm.m8,$scope.myForm.m9,$scope.myForm.m10,$scope.myForm.m11,$scope.myForm.m12,$scope.myForm.m13,$scope.myForm.m14, $scope.myForm.m15,$scope.myForm.m16,$scope.myForm.m17,$scope.myForm.m18,$scope.myForm.m19,$scope.myForm.m20,$scope.myForm.m21,  $scope.myForm.m22,$scope.myForm.m23,$scope.myForm.m24,$scope.myForm.m25,$scope.myForm.m26,$scope.myForm.m27,$scope.myForm.m28, $scope.myForm.m29,$scope.myForm.m30,$scope.myForm.m31],
-				
-				 Repeatmonthly_Days : [$scope.myForm.mo1,$scope.myForm.t1,$scope.myForm.w1,$scope.myForm.th1,$scope.myForm.f1,$scope.myForm.s1,$scope.myForm.sun1, $scope.myForm.mo2,$scope.myForm.t2,$scope.myForm.w2,$scope.myForm.th2,$scope.myForm.f2,$scope.myForm.s2,$scope.myForm.sun2, $scope.myForm.mo3,$scope.myForm.t3,$scope.myForm.w3,$scope.myForm.th3,$scope.myForm.f3,$scope.myForm.s3,$scope.myForm.sun3,  $scope.myForm.mo4,$scope.myForm.t4,$scope.myForm.w4,$scope.myForm.th4,$scope.myForm.f4,$scope.myForm.s4,$scope.myForm.sun4],
-				
-				Repeatmonthly_EndDate : $scope.myForm.dt6
-				
-				 };
-				 console.log(dataObject2);*/
+    	
+    	
     }
+    
+    $scope.validateTimings=function(){
+        var dataObject={
+    	from1:$scope.myForm.mytime1,
+    	to1:$scope.myForm.mytime2,
+    	from2:$scope.myForm.mytimefrom1,
+    	to2:$scope.myForm.mytimeto1,
+		from3:$scope.myForm.mytimefrom2,
+		to3:$scope.myForm.mytimeto2,
+		from4:$scope.myForm.mytimefrom3,
+		to4:$scope.myForm.mytimeto3,
+		from5:$scope.myForm.mytimefrom4,
+		to5:$scope.myForm.mytimeto4,
+		from6:$scope.myForm.mytimefrom5,
+		to6:$scope.myForm.mytimeto5,
+		from7:$scope.myForm.mytimefrom6,
+		to7:$scope.myForm.mytimeto6,
+		from8:$scope.myForm.mytimefrom7,
+		to8:$scope.myForm.mytimeto7,
+		from9:$scope.myForm.mytimefrom8,
+		to9:$scope.myForm.mytimeto8,
+		from10:$scope.myForm.mytimefrom9,
+		to10:$scope.myForm.mytimeto9
+        };
+    	console.log(dataObject);
+    	
+    	
+    	 $http.post($scope.validate_slot_time_url, dataObject, {})
+         .success(function(dataFromServer, status, headers, config) {
+
+             console.log(dataFromServer);
+             if(dataFromServer==1)
+            	 {
+            	 $scope.validation_bool=1;
+            	 $scope.validation="Your time slots are overlaping, please check out";
+            	 return false;
+            	 }
+             else
+            	 {
+            	 $scope.validation_bool=0;
+            	 return true;
+            	 }
+         })
+
+	     .error(function(data, status, headers, config) {
+	         alert("Submitting form failed!");
+	     });
+    };
+    
+    $scope.validateTimings_before_submit=function(){
+        var dataObject={
+    	from1:$scope.myForm.mytime1,
+    	to1:$scope.myForm.mytime2,
+    	from2:$scope.myForm.mytimefrom1,
+    	to2:$scope.myForm.mytimeto1,
+		from3:$scope.myForm.mytimefrom2,
+		to3:$scope.myForm.mytimeto2,
+		from4:$scope.myForm.mytimefrom3,
+		to4:$scope.myForm.mytimeto3,
+		from5:$scope.myForm.mytimefrom4,
+		to5:$scope.myForm.mytimeto4,
+		from6:$scope.myForm.mytimefrom5,
+		to6:$scope.myForm.mytimeto5,
+		from7:$scope.myForm.mytimefrom6,
+		to7:$scope.myForm.mytimeto6,
+		from8:$scope.myForm.mytimefrom7,
+		to8:$scope.myForm.mytimeto7,
+		from9:$scope.myForm.mytimefrom8,
+		to9:$scope.myForm.mytimeto8,
+		from10:$scope.myForm.mytimefrom9,
+		to10:$scope.myForm.mytimeto9
+        };
+    	console.log(dataObject);
+    	
+    	
+    	 $http.post($scope.validate_slot_time_url, dataObject, {})
+         .success(function(dataFromServer, status, headers, config) {
+
+             console.log(dataFromServer);
+             if(dataFromServer==1)
+            	 {
+            	 $scope.validation_bool=1;
+            	 $scope.validation="Your time slots are overlaping, please check out";
+            	 alert("Time Slots overlapping,please click on preview before submit");
+            	 }
+             else
+            	 {
+            	 $scope.validation_bool=0;
+            	 $scope.submit();
+            	 }
+         })
+
+	     .error(function(data, status, headers, config) {
+	         alert("Submitting form failed!");
+	     });
+    };
+    
+    
 	
 	 $scope.master123 = {};
 	
@@ -173,23 +239,24 @@ app.controller('ScheduleForm', function($scope, $http, $window) {
         setTimeout(function() {
             $window.alert('You\'ve selected the daily tab! Your rest data will be deleted');
         });
-		
+        //$scope.scheduleForm.repeatType="d";
 		
     };
 	
 	$scope.alertMe_weekly = function() {
         $window.alert('You\'ve selected the weekly tab! Your rest data will be deleted');
-    
+        //$scope.scheduleForm.repeatType="w";
 	};
 	
 	$scope.alertMe_monthly = function() {
         setTimeout(function() {
             $window.alert('You\'ve selected the Monthly tab! Your rest data will be deleted');
         });
+        //$scope.scheduleForm.repeatType="m";
     };
 	$scope.reset = function() {
         $scope.scheduleForm = angular.copy($scope.master123);
     };
-	$scope.reset();
+	//$scope.reset();
 
 })

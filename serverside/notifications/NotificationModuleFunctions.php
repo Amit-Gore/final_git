@@ -145,84 +145,22 @@ curl_close($ch);
 //echo $curl_scraped_page; 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-function SMSNotify($number)
+function newapi_SMSNotify_AppointmentStatus($number,$apptime,$appdate,$Doctor,$Status)
 {
-$request =""; //initialise the request variable
-$param[method]= "sendMessage";
-$param[send_to] = $number;
-$param[msg] = "Hi Again! 15 mins left for your test. Pls submit a zip file of your code & CV to codetest@healthserve.in";
-$param[userid] = "2000126936";
-$param[password] = "healthserve";
-$param[v] = "1.1";
-$param[msg_type] = "TEXT"; //Can be "FLASHâ€�/"UNICOD E_TEXT"/â€�BINARYâ€�
-$param[auth_scheme] = "PLAIN";
-//Have to URL encode the values 114986
-foreach($param as $key=>$val) {
-$request.= $key."=".urlencode($val);
-//we have to urlencode the values
-$request.= "&";
-//append the ampersand (&) sign after each parameter/value pair
-}
-$request = substr($request, 0, strlen($request)-1);
-//remove final (&) sign from the request
-$url =
-"http://enterprise.smsgupshup.com/GatewayAPI/rest?"
-.$request;
-echo $request;
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$curl_scraped_page = curl_exec($ch);
-curl_close($ch);
-echo $curl_scraped_page; 
+  $number=urlencode($number);
+  $apptime=urlencode($apptime);
+  $appdate=urlencode($appdate);
+  $Doctor=urlencode($Doctor);
+  $Status=urlencode($Status);
+  
+  $ch = curl_init("http://apivm.valuemobo.com/SMS/SMS_ApiKey.asmx/SMS_APIKeyNUC?apiKey=KsRsJ0x7Zwjys1E&cellNoList=".$number."&msgText=Your%20Appointment%20details%20%3A%0ADate%3A".$appdate."%0ATime%3A".$apptime."%0ADoctor%3A".$Doctor."%0AStatus%3A".$Status."&senderId=HSCCLN");
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  $curl_scraped_page = curl_exec($ch);
+  curl_close($ch);
+  echo $curl_scraped_page;//contains response message for http request we made
+	
 }
 
-
-function SMSNotify_registration($number,$password)
-{
-$request =""; //initialise the request variable
-$param['method']= "sendMessage";
-$param['send_to'] = $number;
-$hash=$password;
-//$param[login]=$hash;
-$param['msg'] = "Hey Good Luck! You have been registered for the UI/UX test @HealthServe.Your login credentials: 
-password:$hash";
-$param['userid'] = "2000126936";
-$param['password'] = "healthserve";
-$param['v'] = "1.1";
-$param['msg_type'] = "TEXT"; //Can be "FLASHâ€�/"UNICOD E_TEXT"/â€�BINARYâ€�
-$param['auth_scheme'] = "PLAIN";
-//Have to URL encode the values 114986
-foreach($param as $key=>$val) {
-$request.= $key."=".urlencode($val);
-//we have to urlencode the values
-$request.= "&";
-//append the ampersand (&) sign after each parameter/value pair
-}
-$request = substr($request, 0, strlen($request)-1);
-//remove final (&) sign from the request
-$url =
-"http://enterprise.smsgupshup.com/GatewayAPI/rest?"
-.$request;
-echo $request;
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$curl_scraped_page = curl_exec($ch);
-curl_close($ch);
-//echo $curl_scraped_page; 
-}
 
 function SMSNotify_OTP($number,$otp)
 {

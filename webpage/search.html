@@ -10,11 +10,14 @@
                 <li class="active">Search</li>
             </ol>
 			
-			<div class="col-lg-6" >
+
+			<div class="col-lg-6" ng-controller="doctor_search">
+			<center><h4 ng-if="keywords">Showing  {{cards.length}}  results for "{{keywords}}" </h4></center>
+			<center><h4 ng-if="speciality && area">Showing  {{cards.length}}  results for "{{speciality}}" nearby "{{area}}" </h4></center>
+			<center><h4 ng-if="speciality && !area">Showing  {{cards.length}}  results for speciality "{{speciality}}" </h4></center>
+			<center><h4 ng-if="!speciality && area">Showing  {{cards.length}}  results for area near"{{area}}" </h4></center>
 			
-			
-			
-			<center><h3>Showing  {{cards.length}}  results for "{{keywords}}" </h3></center>
+
 			</div>
 			<div class="col-lg-3 pull-right">
 			

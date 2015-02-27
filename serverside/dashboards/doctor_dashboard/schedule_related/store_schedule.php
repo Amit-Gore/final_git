@@ -10,12 +10,58 @@ include_once('../../../mysql_crud.php');
 include_once('scheduleFunctions.php');
 $data = file_get_contents("php://input");
 $objData = json_decode($data,true);
-#print_r($objData);exit();
+$repeat=array();
+
+/*if(isset($objData['repeat'][0]['from_m']))print_r("month wise is available");
+if(isset($objData['repeat'][0]['from_d']))print_r("weekvise is available");
+print_r($objData['repeat'][0]['from_w']);exit();*/
+
+	if(isset($objData['repeat'][0]['from_w']))
+	{
+		$repeat['type']="w";
+		$repeat['dayArray']=$objData['repeat'][0]['w_days'];
+		$repeat['from']=$objData['repeat'][0]['from_w'];
+		$repeat['to']=$objData['repeat'][0]['to_w'];
+	
+	}
+	if(isset($objData['repeat'][0]['from_d']))
+	{
+		$repeat['type']="d";
+		$repeat['from']=$objData['repeat'][0]['from_d'];
+		$repeat['to']=$objData['repeat'][0]['to_d'];
+	}
+
+	if(isset($objData['repeat'][0]['from_m']))
+	{
+		$is_datewise=false;
+		for($i=0;$i<31;$i++)
+		{
+			if(isset($objData['repeat'][0]['m_dates'][$i]))
+			$is_datewise=true;
+		}
+		
+		
+		if($is_datewise) {
+			$repeat['type']="m";
+			$repeat['month_dayArray']=$objData['repeat'][0]['m_dates'];
+		}
+		else {
+			$repeat['type']="mwd";
+			$repeat['month_dayArray']=$objData['repeat'][0]['m_days'];
+		}
+		
+		$repeat['from']=$objData['repeat'][0]['from_m'];
+		$repeat['to']=$objData['repeat'][0]['to_m'];
+		
+		
+	}
+
+  //print_r($repeat);
+
+
 #print_r($objData->repeat->type);
 $slots=array();
-$repeat=array();
-$repeat=$objData['repeat'];
-print_r($repeat);
+
 if(isset($objData['slots']['slot1']['to']))
 $slots['slot1']=$objData['slots']['slot1'];
 
