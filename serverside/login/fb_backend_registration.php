@@ -87,9 +87,9 @@ if ($session) {
 			   
 			if(!$mobilecheck_res||$mobilecheck_res[0]['OTPverified']==0)#Mobile Number is not in the database
 			 {
-			   header('Location:/angularFiles/Angularjs-Healthserve.in/#/mobilenumber');exit();
+			   header('Location:/angularFiles/final_git/#/mobilenumber');exit();
 			 }
-		 header('Location:/angularFiles/Angularjs-Healthserve.in/#/');
+		 header('Location:/angularFiles/final_git/#/');
 	   }
 	else{#Not a first login via facebook
 	         /*  if($res[0]['OTPverified']==0)
@@ -105,7 +105,7 @@ if ($session) {
 			   $_SESSION['patient']['PFirstName']=$res[0]['FirstName'];
 			   $_SESSION['patient']['PLastName']=$res[0]['LastName'];
 			   #print_r($_SESSION);
-		  header('Location:/angularFiles/Angularjs-Healthserve.in/#/');
+		  header('Location:/angularFiles/final_git/#/');
 		}
   } catch(FacebookRequestException $e) {
 
