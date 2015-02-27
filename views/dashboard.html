@@ -1,54 +1,99 @@
 <div class="container" data-ng-controller="DashboardCtrl">
-   <br><br>
-   <h2>
-			Doctor {{user_session.DFirstName}} {{user_session.DLastName}}
-   </h2>
-	<br><br><br>
+   
+   
+			
+  
+	<br><br>
     <div class="row">
-	
-				<div class="panel panel-profile">
-					<div class="panel-heading text-center bg-info">
-						<!-- <img alt="" src="images/g1.jpg" class="img-circle img80_80"> -->
-						<h4 style="color:white">My Performance</h4>
-					</div>
-					<div class="list-justified-container">
-						<ul class="list-justified text-center">
-							<li>
-								<p class="size-h3">{{dashboard_data.statistics.enquired}}</p>
-								<p class="text-muted">Enquired</p>
-							</li>
-							<li>
-								<p class="size-h3">{{dashboard_data.statistics.booked}}</p>
-								<p class="text-muted">Booked</p>
-							</li>
-							 <li>
-								<p class="size-h3">{{dashboard_data.statistics.rejected}}</p>
-								<p class="text-muted">Rejected</p>
-							</li> 
-							<li>
-								<p class="size-h3">{{dashboard_data.statistics.cancelled}}</p>
-								<p class="text-muted">Cancelled</p>
-							</li>
-						</ul>
-					</div>
-				</div>
-
+			
+		<div class="col-md-3">
+            <section class="panel panel-box">
+                <div class="panel-top bg-facebook">
+					<svg ng-if="user_session.doctorImage===null" height='100' width='100'>
+						<g>
+							<circle cx='50' cy='50' r='50' stroke='black' stroke-width='0' fill='SteelBlue' /></circle>
+							<text x='50' y='60' style='text-anchor: middle' font-weight='900' font-size='27' fill='white' >{{user_session.DFirstName | limitTo: 1}}{{user_session.DLastName | limitTo: 1}}</text>
+						</g>
+					</svg>
 					
-	
-					<div class="row">
-							<div class="col-sm-3" ng-repeat="re in dashboard_data.ForConfirmation">
-								<div class="panel mini-box">
-									<div class="box-info" ng-controller="patient_request">
-										<p class="size-h3"> <i class="fa fa-user"></i>&nbsp;	{{re.PatientName}} </p>
-										<p class="text-muted">{{re.AppointmentDate}} , {{re.AppointmentSlot}} <br> <span>Reason :</span>  {{re.Reason}}</p>
-										<hr><button class="btn btn-info btn-sm" ng-click="approveAppointment(re.AppointmentId);">Approve</button>&nbsp;<button class="btn btn-danger btn-sm" ng-click="rejectAppointment(re.AppointmentId);">Reject</button>
-									</div>
-								</div>                    
+					<img ng-if="user_session.doctorImage!==null" style="width:80px;height:80px;" class="img-circle" ng-src="images/{{user_session.doctorImage}}" ></i>&nbsp;	
+					<br><br>
+					<p class="size-h4">Dr. {{user_session.DFirstName}} {{user_session.DLastName}}</p>
+                </div>
+				<div class="panel-top">
+					<center>
+					<a ng-href="#/DoctDashBoard"><span style="font-size:16px;font-weight:900"><i class="fa fa-home"></i> Home</span></a><hr>
+					<a ng-href="#/Sch"><span style="font-size:16px;font-weight:900"><i class="fa fa-calendar-o"></i> Set Schedule</span></a>
+					</center>
+                </div>
+            </section>
+        </div>
+			
+		<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-profile">
+							<div class="panel-heading text-center bg-info">
+								<!-- <img alt="" src="images/g1.jpg" class="img-circle img80_80"> -->
+								<h4 style="color:white">My Performance</h4>
+							</div>
+							<div class="list-justified-container">
+								<ul class="list-justified text-center">
+									<li>
+										<p class="size-h3">{{dashboard_data.statistics.enquired}}</p>
+										<p class="text-muted">Enquired</p>
+									</li>
+									<li>
+										<p class="size-h3">{{dashboard_data.statistics.booked}}</p>
+										<p class="text-muted">Booked</p>
+									</li>
+									 <li>
+										<p class="size-h3">{{dashboard_data.statistics.rejected}}</p>
+										<p class="text-muted">Rejected</p>
+									</li> 
+									<li>
+										<p class="size-h3">{{dashboard_data.statistics.cancelled}}</p>
+										<p class="text-muted">Cancelled</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-md-3">
+						<section class="panel panel-box info-box" >
+							<div class="panel-left panel-item1 bg-warning" style="cursor:pointer">
+								<i class="fa fa-warning text-large stat-icon"></i>
+								<a ng-href="#/Sch"><h3>Update Schedule</h3></a>	
 							</div>
 					</div>
-	
-	
+					<div class="col-md-3">
+					
+						</section>
+						<section class="panel panel-box info-box" >
+							<div class="panel-left panel-item1 bg-primary" ng-click="history= !history" style="cursor:pointer" >
+								<i class="fa fa-history text-large stat-icon"></i>
+								<h3>History<br><br></h3>	
+							</div>
+							
+						</section>
+					</div>
+				</div>
+				
 				<div class="row">
+					<div class="col-sm-3" ng-repeat="re in dashboard_data.ForConfirmation">
+						<div class="panel mini-box">
+							<div class="box-info" ng-controller="patient_request">
+									<p class="size-h3"> <i class="fa fa-user"></i>&nbsp;	{{re.PatientName}} </p>
+									<p class="text-muted">{{re.AppointmentDate}} , {{re.AppointmentSlot}} <br> <span>Reason :</span>  {{re.Reason}}</p>
+									<hr><button class="btn btn-info btn-sm" ng-click="approveAppointment(re.AppointmentId);">Approve</button>&nbsp;<button class="btn btn-danger btn-sm" ng-click="rejectAppointment(re.AppointmentId);">Reject</button>
+							</div>
+						</div>                    
+					</div>
+				</div>
+	
+	
+				<div class="row" >
 					<div class="col-sm-6" ng-repeat="conf in dashboard_data.todayAppointments">
 			
                     <section class="panel panel-box">
@@ -73,9 +118,9 @@
 			
 		
                 
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" collapse="!history">
                         <!-- <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Scrollable Box</div> -->
-                        <div class="panel-body ui-map " data-slim-scroll data-scroll-height="100px">
+                        <div class="panel-body  " >
                             <table class="table">
 								<thead><tr><th>Name</th><th>Reason</th><th>Date</th></tr></thead>
 								<tbody>
@@ -88,20 +133,13 @@
                     </div>
                 
        
-		<!-- <div class="col-md-5"></div> -->
+		
         
-			<section class="panel panel-box info-box" >
-                        <div class="panel-left panel-item1 bg-warning" >
-                            <i class="fa fa-warning text-large stat-icon"></i>
-                        </div>
-                        <div class="panel-right panel-item1 bg-reverse">
-                            <p class="size-h4 no-margin"><a href="#" style="text-decoration:none;">Update Schedule</a></p>
-                            <p class="size-h5 no-margin" style="color: #9F6000;"><span>Out of slots for next month</span></p>
-                        </div>
-            </section>
+			
 			
             
        
+		</div>
     </div>
 
 

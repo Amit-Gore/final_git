@@ -1,6 +1,17 @@
 /**************************************************CONTROLLERS RELATED TO SEARCH RESULT PAGE*********************************************************/
 
-app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http, $location) {
+			app.filter('startFrom', function() {
+				return function(input, start) {
+					if(input) {
+						start = +start; //parse to int
+						return input.slice(start);
+					}
+					return [];
+				}
+			});
+
+
+app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http, $location,filterFilter) {
 
     var doc_name = $routeParams.param11;
 
@@ -16,7 +27,24 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
             $scope.status = status;
             $rootScope.cards = data;
             $scope.result = data;
+			
+			
+			
+			
+			$scope.currentPage = 1; //current page
+			$scope.maxSize = 5; //pagination max size
+			$scope.entryLimit = 5; //max rows for data table
 
+			/* init pagination with $scope.list */
+			$scope.noOfPages = Math.ceil($rootScope.cards.length/$scope.entryLimit);
+			
+			$scope.$watch('search', function(term) {
+				// Create $scope.filtered and then calculat $scope.noOfPages, no racing!
+				$scope.filtered = filterFilter($rootScope.cards, term);
+				$scope.noOfPages = Math.ceil($scope.filtered.length/$scope.entryLimit);
+			});
+			
+			
             var mapOptions = {
 
 					zoom: 9,
@@ -45,9 +73,9 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
 						map: $scope.map,
 						position: new google.maps.LatLng(info.lat, info.lng),
 						
-						title: info.city
+						title: 'Dr. '+info.FirstName+' '+info.LastName
 					});
-					marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+					marker.content = '<div class="infoWindowContent">' + info.address + '</div>';
 					bounds.extend( marker.position);
 					// map.fitBounds(bounds.extend);
 					//console.log(bounds);	
@@ -71,6 +99,10 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
 				
 			
 			
+			
+			/******************* Filters *****************************/
+			
+			
 			  $scope.filter = {};
 
 				$scope.getArea = function () {
@@ -90,9 +122,10 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
 				};
 				
 				
-				$scope.filterByArea = function (a) {
-					return $scope.filter[a.area] || noFilter($scope.filter);
+				$scope.filterOver = function (a) {
+					return $scope.filter[a.area]|| $scope.filter[a.speciality] || noFilter($scope.filter);
 				};
+				
 				
 				function noFilter(filterObj) {
 					for (var key in filterObj) {
@@ -103,7 +136,15 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
 					return true;
 				} 
 
-
+			/******************* Filters *****************************/
+			
+			
+			
+			
+			
+			
+		
+			
 
 
         }).
@@ -186,22 +227,73 @@ app.controller('doctor_search', function($scope, $routeParams, $rootScope, $http
 /**************************************************end of controllers related to SEARCH RESULT page*********************************************************/
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/
 
-(function(angular) {
-  'use strict';
-angular.module('anchorScrollExample', [])
-  .controller('ScrollController', ['$scope', '$location', '$anchorScroll',
-    function ($scope, $location, $anchorScroll) {
-      $scope.gotoBottom = function() {
-        // set the location.hash to the id of
-        // the element you wish to scroll to.
-        $location.hash('bottom');
+// (function(angular) {
+  // 'use strict';
+// angular.module('anchorScrollExample', [])
+  // .controller('ScrollController', ['$scope', '$location', '$anchorScroll',
+    // function ($scope, $location, $anchorScroll) {
+      // $scope.gotoBottom = function() {
+        // // set the location.hash to the id of
+        // // the element you wish to scroll to.
+        // $location.hash('bottom');
 
-        // call $anchorScroll()
-        $anchorScroll();
-      };
-    }]);
-});
+        // // call $anchorScroll()
+        // $anchorScroll();
+      // };
+    // }]);
+// });
 	
+ 
 
-
+// app.run(['$anchorScroll', function($anchorScroll) {
+  // $anchorScroll.yOffset = 150;   // always scroll by 50 extra pixels
+// }])
+app.controller('headerCtrl', ['$anchorScroll', '$location', '$scope',
+  function ($anchorScroll, $location, $scope) {
+    $scope.gotoAnchor = function(x) {
+      var newHash = 'anchor' + x;
+      if ($location.hash() !== newHash) {
+        // set the $location.hash to `newHash` and
+        // $anchorScroll will automatically scroll to it
+        $location.hash('anchor' + x);
+      } else {
+        // call $anchorScroll() explicitly,
+        // since $location.hash hasn't changed
+        $anchorScroll();
+      }
+    };
+  }
+]);
+ 
+ 
+ 
 /**************************************************end of controllers related to SEARCH FILTER page*********************************************************/
+function iframe($scope, $timeout) {
+    $scope.frameName = 'foo';
+    $scope.frameUrl = 'test1.html';
+    
+    // The timeout is here to be sure that the DOM is fully loaded.
+    // This is a dirty-as-hell example, please use a directive in a real application.
+    $timeout(function () { console.log(window.frames.foo); }, 1000);
+}
+
+angular.module('anchorScrollOffsetExample', [])
+.run(['$anchorScroll', function($anchorScroll) {
+  $anchorScroll.yOffset = 50;   // always scroll by 50 extra pixels
+}])
+.controller('headerCtrl', ['$anchorScroll', '$location', '$scope',
+  function ($anchorScroll, $location, $scope) {
+    $scope.gotoAnchor = function(x) {
+      var newHash = 'anchor' + x;
+      if ($location.hash() !== newHash) {
+        // set the $location.hash to `newHash` and
+        // $anchorScroll will automatically scroll to it
+        $location.hash('anchor' + x);
+      } else {
+        // call $anchorScroll() explicitly,
+        // since $location.hash hasn't changed
+        $anchorScroll();
+      }
+    };
+  }
+]);

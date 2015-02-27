@@ -1,6 +1,6 @@
 
  var app1 =  angular.module("app",[]); 
-var app = angular.module('mainModule', ['ngRoute','ui.bootstrap','angularUtils.directives.dirPagination','ngAnimate']);
+var app = angular.module('mainModule', ['ngRoute','ui.bootstrap','ngAnimate']);
 var myModule= angular.module('MyServiceModuleOne', ['app']);
 
 /*********************************Services Written by Amit Gore****************************************/
@@ -108,6 +108,15 @@ app.config(['$routeProvider', function ($routeProvider) {
     	 templateUrl: "webpage/thankyou.html", 
     	 controller: "ThankYouPage"
     	 })	
+	.when("/test", {
+    	 templateUrl: "webpage/test.html", 
+    	 controller: ""
+    	 })	
+	
+	// .when("/iframe", {
+    	 // templateUrl: "webpage/test1.html", 
+    	 // controller: "ThankYouPage"
+    	 // })	
 		
 	
 	//.when("/primary_info", {templateUrl: "webpage/about.html", controller: "PageCtrl"})

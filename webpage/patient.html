@@ -38,9 +38,9 @@
 								<div class="box-info" >
 									<p class="size-h3" style="text-align:center" > 
 									 
-									<svg ng-if="appointment.DocImage===null"  height='100' width='100'>
+									<svg ng-if="appointment.DocImage===null"  height='100' width='100' style="margin-top: -27px;">
 											<g>
-											  <circle cx='50' cy='50' r='50' stroke='black' stroke-width='0' fill='SteelBlue' /></circle>
+											  <circle cx='50' cy='50' r='40' stroke='black' stroke-width='0' fill='SteelBlue' /></circle>
 											  <text x='50' y='60' style='text-anchor: middle' font-weight='900' font-size='27' fill='white' >{{appointment.DocFname | limitTo: 1}}{{appointment.DocLname | limitTo: 1}}</text>
 											</g>
 									</svg>
@@ -60,7 +60,7 @@
 								<div class="box-info" collapse="!info"><hr>
 									<p class="size-h4" style="text-align:center" ><span style="font-size:16px;font-weight:600">{{appointment.clinic_name}}</span></p>
 									<p class="text-muted" style="color:black;text-align:center"><b>-: Address :-</b> <br>{{appointment.clinic_address}} <br> <b> Fees : <i class="fa fa-inr"></i> {{appointment.DocFee}}</b></p>
-									<br><center><button class="btn btn-danger btn-xs" data-ng-click="alert('warning')">Cancel Appointment</button></center>
+									<br><center><button class="btn btn-danger btn-xs" data-ng-click="cancelAppointment(appointment.AppointmentId);">Cancel Appointment</button></center>
 								</div>
 							
 							

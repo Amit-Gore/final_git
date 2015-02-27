@@ -1,16 +1,7 @@
 
-<div  >
-		  <!-- <p>{{cards}} is the search result</p> -->
-		  </div>
-
-<!-- 
-<div ng-controller="doctor_search"  >
-		  <p>{{cards}} is the search result</p>
-		  </div>
- -->
 <!-- Page Content -->
 
-<div class="container">
+<div class="container" ng-controller="doctor_search">
 	
     <div class="row visible-on">
 		<br>
@@ -19,7 +10,10 @@
                 <li class="active">Search</li>
             </ol>
 			
-			<div class="col-lg-6" ng-controller="doctor_search">
+			<div class="col-lg-6" >
+			
+			
+			
 			<center><h3>Showing  {{cards.length}}  results for "{{keywords}}" </h3></center>
 			</div>
 			<div class="col-lg-3 pull-right">
@@ -60,8 +54,8 @@
 					
 					<tr>
 					
-						<div style="padding-left:10px;"> 
-							<b><input type="checkbox" ng-model="filter[spl]" /> {{spl}}</b>
+						<div style="padding-left:10px;" ng-repeat="speciality in getSpeciality()"> 
+							<b><input type="checkbox" ng-model="filter[speciality]" /> {{speciality}}</b>
 						</div> 
 						
 					</tr>
@@ -75,8 +69,8 @@
 					 <input type="checkbox" ng-model="filter[area]" /> {{area}}</b>
 					 </th>
 					 <br> --> 
-					    <div style="padding-left:10px;" ng-repeat="areaa in getArea()">
-							<b><input type="checkbox" ng-model="filter[areaa]" /> {{areaa}}</b>
+					    <div style="padding-left:10px;" ng-repeat="area in getArea()">
+							<b><input type="checkbox" ng-model="filter[area]" /> {{area}}</b>
 						</div> 
 					</tr>
 				</div>
@@ -126,10 +120,10 @@
 		<div class="col-md-7" style="bottom-margin:30px" ng-app="animateApp" ng-controller="mainController ">
 		 	
 		  <!-- Starting doctor_search controller defined by Amit -->
-		  <div ng-controller="doctor_search">
+		  <div >
+		 
 		  
-		  
-			<div class="card animate-repeat" ng-repeat="card in filtered = (cards | filter:filterByArea )" >
+			<div class="card animate-repeat" ng-repeat="card in filtered = (cards  | filter:filterOver | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit )" >
                 <div class="[ panel1 panel1-default ] panel1-google-plus" >
 						<div class="dropdown">
 							<span class="dropdown-toggle" type="button" style="cursor:pointer" title="Options" data-toggle="dropdown">
@@ -217,20 +211,9 @@
 					</div>
 				</div>
 					
-					<!-- <div class="[ panel1 panel1-default ] panel1-google-plus" style="height:300px;">
-							
-						<div style="background-color:blue;height:200px">
-						
-						</div>
-						
-						<div style="background-color:black;height:200px">
-						
-						</div>
-						
-						<div style="background-color:green;height:200px">
-						
-						</div>
-					</div> -->
+					
+					
+					
 					
 					
 					<!-- drop down -->
@@ -238,15 +221,16 @@
 						<!-- <h5> {{card.name}}<h5>
 						<h5 class="text-right">{{card.fees | currency :"":2}}</h5>
 						<a href="#/primary_info" type="button" class="btn btn-primary btn-xs"  ><span style="color:white" class="fa fa-send"></span> Book Appointment </a></p> -->
-						 <div style="height:320px;width:100%;padding:1px;padding-top:-1px;"> 
+						 <div style="height:320px;width:100%;padding-top:-1px;"> 
 						
 							<div class="table-container"  > <!-- Adding other controller here:Amit -->
 								<div>
-								<table class="table table-responsive table-hover">
-									  <thead>
 										<img class="img-responsive" src="images/Timestrip.png" />
-									  </thead>
-									  <tbody style="overflow: auto;">
+								</div>
+								<div style="overflow:auto;height:270px;padding-top:2px;">
+								<table class="table table-responsive table-hover">
+									  
+									  <tbody >
 										<center><loading></loading><center>
 										<tr ng-repeat="(key , prop) in card.docCalandar">
 										  <td>
@@ -317,7 +301,10 @@
 								</div> 
 							</div> 
 						</div> 
-						<div> 		
+						<div> 
+								
+								 
+						
 								<!--  	<div style="padding:2px;text-align:center;margin:5px;" id="demo-nav">
 										<dir-pagination-controls template-url="webpage/dirPagination1.html"></dir-pagination-controls>
 									</div>-->	
@@ -326,8 +313,50 @@
 						
 					</div>
             </div>
+					<!-- <style>
+					.anchor {
+						  border: 1px solid white;
+						  padding: 10px 10px 200px 10px;
+						}
+
+						.fixed {
+						  background-color: rgba(0, 0, 0, 0.2);
+						  height: 50px;
+						  position: relative;
+						  top: 0; left: 0; right: 0;
+						}
+
+						.fixed > a {
+						  display: inline-block;
+						  margin: 5px 15px;
+						}
+					</style>
+					
+					
+					<div class="[ panel1 panel1-default ] panel1-google-plus" >
+						<div >
+							<div class="[ panel1 panel1-default ] panel1-google-plus" ng-controller="headerCtrl" style="padding:10px">
+							  <a href="" ng-click="gotoAnchor(x)" ng-repeat="x in [1,2,3,4,5]">
+								Slot {{x}} &nbsp;&nbsp;
+							  </a>
+							</div>
+							<div style="overflow:auto;height:242px;">
+							<div id="anchor{{x}}" class="anchor" ng-repeat="x in [1,2,3,4,5]">
+							  Anchor {{x}} of 5
+							</div>
+							</div>
+						</div>
+					</div>  -->
+						<!-- <div ng-app="anchorScrollOffsetExample" ng-controller="iframe" ng-controller="headerCtrl">
+							<iframe width="100%" height="300px;" name="{{frameName}}" ng-src="{{frameUrl}}"></iframe>
+						</div> -->
+						
+					
+			
+			
 			<br>
-			<center> <dir-pagination-controls template-url="webpage/dirPagination.html"></dir-pagination-controls> </center>
+			<center> <!-- <dir-pagination-controls template-url="webpage/dirPagination.html"></dir-pagination-controls> -->
+			<pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true"></pagination></center>
           </div><!-- Controller 'doctor_search' ends -->
         	
         </div>
@@ -336,17 +365,8 @@
 			
 		<div class="col-md-3">
 			<div class="card1" class="map" >
-				<!--  <iframe class="map" width="100%" height="607px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-						src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=18.5203,73.8567&amp;spn=56.506174,79.013672&amp;t=m&amp;z=11&amp;output=embed"></iframe>
-			  -->
-			 <!-- <myMap id="map-canvas" style="width:200px;height:300px;padding:10px;"></myMap> -->
-			<div ng-controller="doctor_search">
 				<div id="map" ></div>
-				
-			</div>
-			 
-			 
-			 </div> 
+			</div> 
 		</div>
         
 
